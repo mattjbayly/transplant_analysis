@@ -19,7 +19,7 @@ library(plyr)
 rm(list=ls(all=TRUE))
 set.seed(270875)
 
-## Set Directories
+## Set Directories #
 if(Sys.getenv("USERNAME") == "mbayly"){
 path.set="C:/Users/mbayly/Desktop/Projects/transplant/transplant_analysis/Rcode"
 } else {
