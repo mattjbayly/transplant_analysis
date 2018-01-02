@@ -1,0 +1,10 @@
+"","Model","df","logLik","AICc","delta","weight"
+"mod6","z + Region + z * Region + (1 | SiteID)",7,-2598.21,5210.44,0,0.646
+"mod4","z + Year + Region + z * Region + (1 | SiteID)",8,-2598.2,5212.42,1.982,0.24
+"mod2","z + Year + Region + z * Year + z * Region + (1 | SiteID)",9,-2597.94,5213.92,3.475,0.114
+"mod8","z + Region + (1 | SiteID)",5,-2610.28,5230.57,20.132,0
+"mod5","z + Year + Region + (1 | SiteID)",6,-2610.22,5232.45,22.007,0
+"mod3","z + Year + Region + z * Year + (1 | SiteID)",7,-2609.4,5232.83,22.385,0
+"mod10","z + (1 | SiteID)",3,-2616.67,5239.35,28.907,0
+"mod9","z + Year + (1 | SiteID)",4,-2616.63,5241.26,30.819,0
+"mod7","z + Year + z * Year + (1 | SiteID)",5,-2615.84,5241.69,31.253,0

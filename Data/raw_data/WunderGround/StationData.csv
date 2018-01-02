@@ -1,0 +1,945 @@
+Site,SiteStation,location,station,year,month,Var,high,low,avg
+LOOK,1,"Winston, OR",MD6983,2013,1,Temperature,16.1 °C,-5 °C,3.7 °C
+LOOK,1,"Winston, OR",MD6983,2013,1,Dew Point,11.1 °C,-5.6 °C,2.4 °C
+LOOK,1,"Winston, OR",MD6983,2013,1,Humidity,0.99,0.58,0.922
+LOOK,1,"Winston, OR",MD6983,2013,1,Precipitation,49.8 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,2,Temperature,18.3 °C,-0.6 °C,6.2 °C
+LOOK,1,"Winston, OR",MD6983,2013,2,Dew Point,11.7 °C,-1.7 °C,4.1 °C
+LOOK,1,"Winston, OR",MD6983,2013,2,Humidity,0.98,0.54,0.875
+LOOK,1,"Winston, OR",MD6983,2013,2,Precipitation,27.9 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,3,Temperature,25 °C,-2.2 °C,8.8 °C
+LOOK,1,"Winston, OR",MD6983,2013,3,Dew Point,13.9 °C,-73.3 °C,5.8 °C
+LOOK,1,"Winston, OR",MD6983,2013,3,Humidity,0.98,0.23,0.833
+LOOK,1,"Winston, OR",MD6983,2013,3,Precipitation,69.8 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,4,Temperature,27.2 °C,0 °C,11.3 °C
+LOOK,1,"Winston, OR",MD6983,2013,4,Dew Point,13.9 °C,-5 °C,6.3 °C
+LOOK,1,"Winston, OR",MD6983,2013,4,Humidity,0.98,0.19,0.741
+LOOK,1,"Winston, OR",MD6983,2013,4,Precipitation,37.6 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,5,Temperature,29.4 °C,3.9 °C,14.8 °C
+LOOK,1,"Winston, OR",MD6983,2013,5,Dew Point,17.8 °C,-73.3 °C,8.7 °C
+LOOK,1,"Winston, OR",MD6983,2013,5,Humidity,0.98,0.19,0.715
+LOOK,1,"Winston, OR",MD6983,2013,5,Precipitation,38.6 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,6,Temperature,36.7 °C,5 °C,18.7 °C
+LOOK,1,"Winston, OR",MD6983,2013,6,Dew Point,20 °C,2.2 °C,11.3 °C
+LOOK,1,"Winston, OR",MD6983,2013,6,Humidity,0.97,0.18,0.658
+LOOK,1,"Winston, OR",MD6983,2013,6,Precipitation,7.9 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,7,Temperature,37.2 °C,9.4 °C,22 °C
+LOOK,1,"Winston, OR",MD6983,2013,7,Dew Point,20 °C,-73.3 °C,11.4 °C
+LOOK,1,"Winston, OR",MD6983,2013,7,Humidity,0.94,0.18,0.56
+LOOK,1,"Winston, OR",MD6983,2013,7,Precipitation,9.7 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,8,Temperature,35.6 °C,10 °C,20.7 °C
+LOOK,1,"Winston, OR",MD6983,2013,8,Dew Point,18.9 °C,-73.3 °C,12.9 °C
+LOOK,1,"Winston, OR",MD6983,2013,8,Humidity,0.97,0.19,0.663
+LOOK,1,"Winston, OR",MD6983,2013,8,Precipitation,33.5 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,9,Temperature,37.2 °C,5.6 °C,17.4 °C
+LOOK,1,"Winston, OR",MD6983,2013,9,Dew Point,18.3 °C,-73.3 °C,12.1 °C
+LOOK,1,"Winston, OR",MD6983,2013,9,Humidity,0.98,0.22,0.747
+LOOK,1,"Winston, OR",MD6983,2013,9,Precipitation,79 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,10,Temperature,20 °C,20 °C,20 °C
+LOOK,1,"Winston, OR",MD6983,2013,10,Dew Point,11.1 °C,11.1 °C,11.1 °C
+LOOK,1,"Winston, OR",MD6983,2013,10,Humidity,0.56,0.56,0.56
+LOOK,1,"Winston, OR",MD6983,2013,10,Precipitation,0 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,11,Temperature,15 °C,-0.6 °C,4.4 °C
+LOOK,1,"Winston, OR",MD6983,2013,11,Dew Point,11.1 °C,-73.3 °C,3.6 °C
+LOOK,1,"Winston, OR",MD6983,2013,11,Humidity,0.99,0.73,0.954
+LOOK,1,"Winston, OR",MD6983,2013,11,Precipitation,1.8 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2013,12,Temperature,15.6 °C,-10.6 °C,1.9 °C
+LOOK,1,"Winston, OR",MD6983,2013,12,Dew Point,10.6 °C,-73.3 °C,0.9 °C
+LOOK,1,"Winston, OR",MD6983,2013,12,Humidity,0.99,0.61,0.939
+LOOK,1,"Winston, OR",MD6983,2013,12,Precipitation,36.8 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,1,Temperature,15.6 °C,-2.8 °C,4.8 °C
+LOOK,1,"Winston, OR",MD6983,2014,1,Dew Point,11.7 °C,-73.3 °C,3.6 °C
+LOOK,1,"Winston, OR",MD6983,2014,1,Humidity,0.99,0.53,0.934
+LOOK,1,"Winston, OR",MD6983,2014,1,Precipitation,27.4 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,2,Temperature,19.4 °C,-1.1 °C,7.7 °C
+LOOK,1,"Winston, OR",MD6983,2014,2,Dew Point,13.9 °C,-73.3 °C,6 °C
+LOOK,1,"Winston, OR",MD6983,2014,2,Humidity,0.99,0.6,0.898
+LOOK,1,"Winston, OR",MD6983,2014,2,Precipitation,124 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,3,Temperature,24.4 °C,-1.7 °C,9.7 °C
+LOOK,1,"Winston, OR",MD6983,2014,3,Dew Point,14.4 °C,-73.3 °C,5.9 °C
+LOOK,1,"Winston, OR",MD6983,2014,3,Humidity,0.99,0.16,0.805
+LOOK,1,"Winston, OR",MD6983,2014,3,Precipitation,122.9 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,4,Temperature,31.7 °C,0.6 °C,11.6 °C
+LOOK,1,"Winston, OR",MD6983,2014,4,Dew Point,15 °C,-73.3 °C,7 °C
+LOOK,1,"Winston, OR",MD6983,2014,4,Humidity,0.97,0.19,0.763
+LOOK,1,"Winston, OR",MD6983,2014,4,Precipitation,39.1 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,5,Temperature,33.9 °C,4.4 °C,15.3 °C
+LOOK,1,"Winston, OR",MD6983,2014,5,Dew Point,16.7 °C,-73.3 °C,9.7 °C
+LOOK,1,"Winston, OR",MD6983,2014,5,Humidity,0.97,0.27,0.724
+LOOK,1,"Winston, OR",MD6983,2014,5,Precipitation,21.6 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,6,Temperature,37.2 °C,5.6 °C,17.7 °C
+LOOK,1,"Winston, OR",MD6983,2014,6,Dew Point,17.8 °C,-73.3 °C,10.4 °C
+LOOK,1,"Winston, OR",MD6983,2014,6,Humidity,0.97,0.18,0.66
+LOOK,1,"Winston, OR",MD6983,2014,6,Precipitation,686.1mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,7,Temperature,37.2 °C,8.9 °C,22.3 °C
+LOOK,1,"Winston, OR",MD6983,2014,7,Dew Point,18.9 °C,-73.3 °C,13.8 °C
+LOOK,1,"Winston, OR",MD6983,2014,7,Humidity,0.96,0.21,0.626
+LOOK,1,"Winston, OR",MD6983,2014,7,Precipitation,1204.2mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,8,Temperature,38.9 °C,8.9 °C,22 °C
+LOOK,1,"Winston, OR",MD6983,2014,8,Dew Point,17.8 °C,6.7 °C,13.2 °C
+LOOK,1,"Winston, OR",MD6983,2014,8,Humidity,0.95,0.19,0.613
+LOOK,1,"Winston, OR",MD6983,2014,8,Precipitation,0.5 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,9,Temperature,35.6 °C,6.1 °C,18.6 °C
+LOOK,1,"Winston, OR",MD6983,2014,9,Dew Point,18.9 °C,0.6 °C,10.6 °C
+LOOK,1,"Winston, OR",MD6983,2014,9,Humidity,0.98,0.11,0.655
+LOOK,1,"Winston, OR",MD6983,2014,9,Precipitation,29 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,10,Temperature,31.1 °C,4.4 °C,14.5 °C
+LOOK,1,"Winston, OR",MD6983,2014,10,Dew Point,16.7 °C,1.7 °C,10.6 °C
+LOOK,1,"Winston, OR",MD6983,2014,10,Humidity,0.98,0.21,0.807
+LOOK,1,"Winston, OR",MD6983,2014,10,Precipitation,100.1 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,11,Temperature,21.7 °C,0.6 °C,8.6 °C
+LOOK,1,"Winston, OR",MD6983,2014,11,Dew Point,15.6 °C,-0.6 °C,7.3 °C
+LOOK,1,"Winston, OR",MD6983,2014,11,Humidity,0.98,0.59,0.92
+LOOK,1,"Winston, OR",MD6983,2014,11,Precipitation,156 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2014,12,Temperature,18.3 °C,-6.7 °C,7.2 °C
+LOOK,1,"Winston, OR",MD6983,2014,12,Dew Point,15 °C,-7.2 °C,6 °C
+LOOK,1,"Winston, OR",MD6983,2014,12,Humidity,0.98,0.56,0.925
+LOOK,1,"Winston, OR",MD6983,2014,12,Precipitation,154.7 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,1,Temperature,20 °C,-2.2 °C,7.1 °C
+LOOK,1,"Winston, OR",MD6983,2015,1,Dew Point,13.9 °C,-2.8 °C,5.9 °C
+LOOK,1,"Winston, OR",MD6983,2015,1,Humidity,0.98,0.62,0.928
+LOOK,1,"Winston, OR",MD6983,2015,1,Precipitation,49.5 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,2,Temperature,18.9 °C,-3.3 °C,8.5 °C
+LOOK,1,"Winston, OR",MD6983,2015,2,Dew Point,13.9 °C,-4.4 °C,6.3 °C
+LOOK,1,"Winston, OR",MD6983,2015,2,Humidity,0.97,0.28,0.873
+LOOK,1,"Winston, OR",MD6983,2015,2,Precipitation,113.8 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,3,Temperature,23.9 °C,-1.7 °C,10.1 °C
+LOOK,1,"Winston, OR",MD6983,2015,3,Dew Point,15 °C,-2.2 °C,7.1 °C
+LOOK,1,"Winston, OR",MD6983,2015,3,Humidity,0.96,0.34,0.83
+LOOK,1,"Winston, OR",MD6983,2015,3,Precipitation,87.4 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,4,Temperature,27.8 °C,0.6 °C,10.3 °C
+LOOK,1,"Winston, OR",MD6983,2015,4,Dew Point,15.6 °C,-0.6 °C,6.1 °C
+LOOK,1,"Winston, OR",MD6983,2015,4,Humidity,0.95,0.3,0.777
+LOOK,1,"Winston, OR",MD6983,2015,4,Precipitation,0 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,5,Temperature,29.4 °C,5 °C,14.7 °C
+LOOK,1,"Winston, OR",MD6983,2015,5,Dew Point,18.3 °C,1.7 °C,10 °C
+LOOK,1,"Winston, OR",MD6983,2015,5,Humidity,0.94,0.24,0.756
+LOOK,1,"Winston, OR",MD6983,2015,5,Precipitation,0 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,6,Temperature,35.6 °C,7.2 °C,21.1 °C
+LOOK,1,"Winston, OR",MD6983,2015,6,Dew Point,19.4 °C,0.6 °C,11.7 °C
+LOOK,1,"Winston, OR",MD6983,2015,6,Humidity,0.94,0.2,0.589
+LOOK,1,"Winston, OR",MD6983,2015,6,Precipitation,0 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,7,Temperature,40.6 °C,9.4 °C,22.8 °C
+LOOK,1,"Winston, OR",MD6983,2015,7,Dew Point,18.9 °C,5.6 °C,12.6 °C
+LOOK,1,"Winston, OR",MD6983,2015,7,Humidity,0.91,0.15,0.567
+LOOK,1,"Winston, OR",MD6983,2015,7,Precipitation,0 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,8,Temperature,37.8 °C,9.4 °C,21.1 °C
+LOOK,1,"Winston, OR",MD6983,2015,8,Dew Point,17.2 °C,5 °C,12 °C
+LOOK,1,"Winston, OR",MD6983,2015,8,Humidity,0.93,0.19,0.601
+LOOK,1,"Winston, OR",MD6983,2015,8,Precipitation,0 mm,--,--
+LOOK,1,"Winston, OR",MD6983,2015,9,Temperature,36.1 °C,4.4 °C,16.8 °C
+LOOK,1,"Winston, OR",MD6983,2015,9,Dew Point,17.2 °C,2.2 °C,10 °C
+LOOK,1,"Winston, OR",MD6983,2015,9,Humidity,0.95,0.23,0.681
+LOOK,1,"Winston, OR",MD6983,2015,9,Precipitation,0 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,1,Temperature,16.1 °C,-4.7 °C,3.6 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,1,Dew Point,11.3 °C,-6.3 °C,1.5 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,1,Humidity,0.95,0.51,0.868
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,1,Precipitation,58.9 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,2,Temperature,18.8 °C,-1.2 °C,6.7 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,2,Dew Point,10.9 °C,-2.8 °C,3.2 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,2,Humidity,0.94,0.42,0.796
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,2,Precipitation,22.1 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,3,Temperature,26 °C,-2.4 °C,9.5 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,3,Dew Point,13.8 °C,-5.7 °C,4.7 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,3,Humidity,0.94,0.23,0.746
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,3,Precipitation,44.7 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,4,Temperature,22.3 °C,4.4 °C,11.6 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,4,Dew Point,13.7 °C,-2.5 °C,7.1 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,4,Humidity,0.94,0.25,0.762
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,4,Precipitation,19.3 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,5,Temperature,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,5,Dew Point,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,5,Humidity,0,1.01,%
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,5,Precipitation,0 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,6,Temperature,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,6,Dew Point,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,6,Humidity,0,1.01,%
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,6,Precipitation,0 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,7,Temperature,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,7,Dew Point,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,7,Humidity,0,1.01,%
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,7,Precipitation,0 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,8,Temperature,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,8,Dew Point,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,8,Humidity,0,1.01,%
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,8,Precipitation,0 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,9,Temperature,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,9,Dew Point,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,9,Humidity,0,1.01,%
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,9,Precipitation,0 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,10,Temperature,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,10,Dew Point,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,10,Humidity,0,1.01,%
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,10,Precipitation,0 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,11,Temperature,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,11,Dew Point,°C,999.9 °C,°C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,11,Humidity,0,1.01,%
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,11,Precipitation,0 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,12,Temperature,15.3 °C,-9.6 °C,2.2 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,12,Dew Point,8.4 °C,-11.8 °C,0.5 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,12,Humidity,0.94,0.5,0.891
+LOOK,2,"Roseburg, OR",KORROSEB3,2013,12,Precipitation,6.6 mm,--,-
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,1,Temperature,16.7 °C,-3 °C,5.1 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,1,Dew Point,10.5 °C,-4.4 °C,3 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,1,Humidity,0.95,0.36,0.87
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,1,Precipitation,49 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,2,Temperature,20.9 °C,-1.3 °C,8.1 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,2,Dew Point,11.7 °C,-6.6 °C,5.3 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,2,Humidity,0.95,0.45,0.833
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,2,Precipitation,135.6 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,3,Temperature,26 °C,-1.8 °C,10 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,3,Dew Point,13.7 °C,-8 °C,4.8 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,3,Humidity,0.94,0.11,0.734
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,3,Precipitation,115.3 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,4,Temperature,34.2 °C,0.5 °C,12.5 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,4,Dew Point,14.4 °C,-6.9 °C,5.8 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,4,Humidity,0.94,0.14,0.679
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,4,Precipitation,31.8 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,5,Temperature,35.9 °C,2.4 °C,15.5 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,5,Dew Point,14.3 °C,0.1 °C,8.1 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,5,Humidity,0.93,0.15,0.652
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,5,Precipitation,31.5 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,6,Temperature,36.7 °C,6.2 °C,18.5 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,6,Dew Point,16.9 °C,-6.9 °C,8.8 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,6,Humidity,0.93,0.1,0.579
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,6,Precipitation,16.8 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,7,Temperature,37.4 °C,8.8 °C,22.5 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,7,Dew Point,17.4 °C,-2.8 °C,12.3 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,7,Humidity,0.92,0.11,0.578
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,7,Precipitation,4.1 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,8,Temperature,39.9 °C,9.9 °C,22.4 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,8,Dew Point,16.4 °C,-0.4 °C,11.6 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,8,Humidity,0.92,0.14,0.557
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,8,Precipitation,0.8 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,9,Temperature,37.3 °C,7.4 °C,18.9 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,9,Dew Point,16.1 °C,-4.4 °C,9.3 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,9,Humidity,0.93,0.07,0.607
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,9,Precipitation,34 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,10,Temperature,32.2 °C,4.9 °C,14.7 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,10,Dew Point,14.6 °C,0.8 °C,9.8 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,10,Humidity,0.94,0.19,0.76
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,10,Precipitation,102.4mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,11,Temperature,22.2 °C,-0.4 °C,8.8 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,11,Dew Point,14.2 °C,-2.7 °C,6.4 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,11,Humidity,0.94,0.45,0.859
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,11,Precipitation,128.8mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,12,Temperature,18.6 °C,-6.9 °C,7.6 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,12,Dew Point,13.8 °C,-8.7 °C,5.4 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,12,Humidity,0.95,0.42,0.869
+LOOK,2,"Roseburg, OR",KORROSEB3,2014,12,Precipitation,129.5 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,1,Temperature,19.2 °C,-2.8 °C,7.1 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,1,Dew Point,13.1 °C,-4.2 °C,5.3 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,1,Humidity,0.97,0.5,0.889
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,1,Precipitation,41.1 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,2,Temperature,18.9 °C,-3.8 °C,8.8 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,2,Dew Point,14.1 °C,-7.6 °C,5.6 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,2,Humidity,0.98,0.2,0.831
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,2,Precipitation,116.8 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,3,Temperature,25.8 °C,-1.8 °C,10.9 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,3,Dew Point,13.9 °C,-2.9 °C,6.6 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,3,Humidity,0.97,0.18,0.777
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,3,Precipitation,79.8 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,4,Temperature,30.1 °C,0.7 °C,11.1 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,4,Dew Point,14.6 °C,-1.9 °C,5.3 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,4,Humidity,0.95,0.18,0.714
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,4,Precipitation,24.9 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,5,Temperature,31.3 °C,3.6 °C,15.6 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,5,Dew Point,16 °C,-2.8 °C,8.7 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,5,Humidity,0.94,0.15,0.671
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,5,Precipitation,8.9 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,6,Temperature,39.1 °C,8.7 °C,21.8 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,6,Dew Point,18.7 °C,-1.3 °C,10.3 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,6,Humidity,0.94,0.15,0.533
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,6,Precipitation,0.3 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,7,Temperature,42.5 °C,10.6 °C,23.3 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,7,Dew Point,16.8 °C,2.6 °C,11 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,7,Humidity,0.91,0.11,0.513
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,7,Precipitation,0.3 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,8,Temperature,39.3 °C,9.5 °C,21.5 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,8,Dew Point,16.6 °C,2.1 °C,10.7 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,8,Humidity,0.93,0.13,0.554
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,8,Precipitation,6.1 mm,--,--
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,9,Temperature,37.4 °C,6.4 °C,18.6 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,9,Dew Point,16.2 °C,0.3 °C,9.1 °C
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,9,Humidity,0.93,0.15,0.595
+LOOK,2,"Roseburg, OR",KORROSEB3,2015,9,Precipitation,2.5 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,1,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,1,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,1,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,1,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,2,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,2,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,2,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,2,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,3,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,3,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,3,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,3,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,4,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,4,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,4,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,4,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,5,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,5,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,5,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,5,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,6,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,6,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,6,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,6,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,7,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,7,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,7,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,7,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,8,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,8,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,8,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,8,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,9,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,9,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,9,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,9,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,10,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,10,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,10,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,10,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,11,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,11,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,11,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,11,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2013,12,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,12,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2013,12,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2013,12,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,1,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,1,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,1,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,1,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,2,Temperature,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,2,Dew Point,°C,999.9 °C,°C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,2,Humidity,0,1.01,%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,2,Precipitation,0 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,3,Temperature,24.3 °C,-1.6 °C,9.2 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,3,Dew Point,14.4 °C,-2.2 °C,6.1 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,3,Humidity,97%,19%,83%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,3,Precipitation,155.7 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,4,Temperature,31.6 °C,2.5 °C,11.6 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,4,Dew Point,15.6 °C,1.7 °C,7.3 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,4,Humidity,96%,19%,77.80%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,4,Precipitation,59.4 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,5,Temperature,31.8 °C,3.1 °C,14.1 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,5,Dew Point,19.4 °C,2.2 °C,10.1 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,5,Humidity,96%,32%,78.80%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,5,Precipitation,75.9 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,6,Temperature,33.7 °C,5.9 °C,16.5 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,6,Dew Point,20 °C,4.4 °C,11.5 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,6,Humidity,96%,26%,75.40%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,6,Precipitation,23.4 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,7,Temperature,34.9 °C,8.8 °C,20.5 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,7,Dew Point,21.7 °C,7.8 °C,14.8 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,7,Humidity,95%,27%,72.60%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,7,Precipitation,6.9 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,8,Temperature,36.9 °C,9.7 °C,20.4 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,8,Dew Point,20 °C,5 °C,13.9 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,8,Humidity,96%,23%,69.70%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,8,Precipitation,14.5 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,9,Temperature,34.9 °C,5.7 °C,17.3 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,9,Dew Point,17.8 °C,1.1 °C,10.7 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,9,Humidity,96%,12%,70.60%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,9,Precipitation,45.7 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,10,Temperature,29.1 °C,6.7 °C,14.2 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,10,Dew Point,16.7 °C,5.6 °C,11.1 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,10,Humidity,96%,35%,83.50%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,10,Precipitation,128 mm,--,-
+ROCK,1,"Glide, OR",KORGLIDE5,2014,11,Temperature,20.2 °C,-1.1 °C,8.7 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,11,Dew Point,16.1 °C,-3.9 °C,7.2 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,11,Humidity,96%,44%,90.30%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,11,Precipitation,156.2 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2014,12,Temperature,18.3 °C,-5.2 °C,7 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,12,Dew Point,13.9 °C,-6.1 °C,5.8 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2014,12,Humidity,100%,60%,91.80%
+ROCK,1,"Glide, OR",KORGLIDE5,2014,12,Precipitation,86.9 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,1,Temperature,19.5 °C,-3.3 °C,7.6 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,1,Dew Point,12.8 °C,-3.9 °C,5.9 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,1,Humidity,97%,56%,89.50%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,1,Precipitation,50.3 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,2,Temperature,18.8 °C,-1.3 °C,8.6 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,2,Dew Point,13.3 °C,-5 °C,6.1 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,2,Humidity,97%,23%,85.80%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,2,Precipitation,94.7 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,3,Temperature,23.8 °C,-0.4 °C,11 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,3,Dew Point,14.4 °C,-1.7 °C,7.7 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,3,Humidity,97%,29%,81.60%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,3,Precipitation,83.8 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,4,Temperature,26.9 °C,1.9 °C,10.3 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,4,Dew Point,17.2 °C,0 °C,6.6 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,4,Humidity,96%,37%,79.90%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,4,Precipitation,48.3 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,5,Temperature,28.6 °C,3.8 °C,14 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,5,Dew Point,18.3 °C,2.2 °C,9.5 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,5,Humidity,95%,22%,76.60%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,5,Precipitation,28.2 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,6,Temperature,35.5 °C,6.8 °C,16.8 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,6,Dew Point,21.1 °C,3.3 °C,10.9 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,6,Humidity,95%,21%,66.50%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,6,Precipitation,1.8 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,7,Temperature,39.8 °C,8.7 °C,21.4 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,7,Dew Point,20 °C,5.6 °C,13.1 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,7,Humidity,94%,16%,62.80%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,7,Precipitation,6.6 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,8,Temperature,36 °C,7.4 °C,19.9 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,8,Dew Point,17.8 °C,6.1 °C,12.2 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,8,Humidity,95%,23%,64.90%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,8,Precipitation,9.1 mm,--,--
+ROCK,1,"Glide, OR",KORGLIDE5,2015,9,Temperature,34.6 °C,3.5 °C,15.8 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,9,Dew Point,17.8 °C,-2.8 °C,10.4 °C
+ROCK,1,"Glide, OR",KORGLIDE5,2015,9,Humidity,96%,16%,73.50%
+ROCK,1,"Glide, OR",KORGLIDE5,2015,9,Precipitation,14.5 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,1,Temperature,18.9 °C,-10 °C,3 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,1,Dew Point,7.8 °C,-12.2 °C,-0.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,1,Humidity,100%,15%,80.60%
+ROCK,2,"Culp, OR",MGDFO3,2013,1,Precipitation,107.7 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,2,Temperature,18.9 °C,-3.9 °C,3 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,2,Dew Point,9.4 °C,-4.4 °C,0.8 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,2,Humidity,100%,30%,87.20%
+ROCK,2,"Culp, OR",MGDFO3,2013,2,Precipitation,71.6 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,3,Temperature,25 °C,-3.9 °C,6 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,3,Dew Point,10 °C,-6.1 °C,2.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,3,Humidity,100%,22%,83.40%
+ROCK,2,"Culp, OR",MGDFO3,2013,3,Precipitation,112.8 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,4,Temperature,26.7 °C,-2.2 °C,8.1 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,4,Dew Point,10 °C,-12.2 °C,2.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,4,Humidity,100%,9%,73.30%
+ROCK,2,"Culp, OR",MGDFO3,2013,4,Precipitation,109 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,5,Temperature,28.9 °C,-0.6 °C,12.4 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,5,Dew Point,13.9 °C,-73.3 °C,5.5 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,5,Humidity,99%,11%,70%
+ROCK,2,"Culp, OR",MGDFO3,2013,5,Precipitation,107.9 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,6,Temperature,33.3 °C,5 °C,16.2 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,6,Dew Point,20.6 °C,1.7 °C,9.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,6,Humidity,100%,17%,68%
+ROCK,2,"Culp, OR",MGDFO3,2013,6,Precipitation,57.9 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,7,Temperature,37.2 °C,8.9 °C,20.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,7,Dew Point,21.1 °C,-73.3 °C,9.4 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,7,Humidity,99%,15%,52%
+ROCK,2,"Culp, OR",MGDFO3,2013,7,Precipitation,1 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,8,Temperature,33.9 °C,10 °C,18.8 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,8,Dew Point,16.1 °C,-73.3 °C,10.8 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,8,Humidity,99%,22%,65.40%
+ROCK,2,"Culp, OR",MGDFO3,2013,8,Precipitation,165.9mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,9,Temperature,35 °C,3.3 °C,13.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,9,Dew Point,15.6 °C,-73.3 °C,9.2 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,9,Humidity,99%,15%,78.60%
+ROCK,2,"Culp, OR",MGDFO3,2013,9,Precipitation,205.5mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,10,Temperature,26.1 °C,-1.1 °C,9.8 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,10,Dew Point,10.6 °C,-73.3 °C,3.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,10,Humidity,99%,21%,71.50%
+ROCK,2,"Culp, OR",MGDFO3,2013,10,Precipitation,39.4 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,11,Temperature,17.8 °C,-3.9 °C,6 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,11,Dew Point,11.7 °C,-73.3 °C,1.7 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,11,Humidity,99%,19%,78.90%
+ROCK,2,"Culp, OR",MGDFO3,2013,11,Precipitation,164.6mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2013,12,Temperature,17.2 °C,-13.9 °C,2 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,12,Dew Point,8.9 °C,-73.3 °C,-2 °C
+ROCK,2,"Culp, OR",MGDFO3,2013,12,Humidity,99%,25%,78.10%
+ROCK,2,"Culp, OR",MGDFO3,2013,12,Precipitation,66.3 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,1,Temperature,18.9 °C,-2.8 °C,6.1 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,1,Dew Point,10 °C,-73.3 °C,-0.7 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,1,Humidity,99%,16%,67.40%
+ROCK,2,"Culp, OR",MGDFO3,2014,1,Precipitation,129 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,2,Temperature,20.6 °C,-2.2 °C,4.5 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,2,Dew Point,10 °C,-73.3 °C,2.4 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,2,Humidity,99%,30%,88.70%
+ROCK,2,"Culp, OR",MGDFO3,2014,2,Precipitation,342.9mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,3,Temperature,21.1 °C,-2.8 °C,6.1 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,3,Dew Point,10.6 °C,-73.3 °C,1.6 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,3,Humidity,99%,17%,78.10%
+ROCK,2,"Culp, OR",MGDFO3,2014,3,Precipitation,295.1 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,4,Temperature,30 °C,0.6 °C,9.5 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,4,Dew Point,8.9 °C,-73.3 °C,2.6 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,4,Humidity,98%,8%,69.40%
+ROCK,2,"Culp, OR",MGDFO3,2014,4,Precipitation,122.2 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,5,Temperature,32.2 °C,3.9 °C,13.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,5,Dew Point,14.4 °C,-73.3 °C,6.2 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,5,Humidity,98%,12%,68%
+ROCK,2,"Culp, OR",MGDFO3,2014,5,Precipitation,65.3 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,6,Temperature,35 °C,4.4 °C,15.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,6,Dew Point,15 °C,-73.3 °C,7.2 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,6,Humidity,98%,20%,63.60%
+ROCK,2,"Culp, OR",MGDFO3,2014,6,Precipitation,62.2 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,7,Temperature,36.1 °C,7.2 °C,21.2 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,7,Dew Point,18.3 °C,-73.3 °C,11.4 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,7,Humidity,98%,16%,57.90%
+ROCK,2,"Culp, OR",MGDFO3,2014,7,Precipitation,23.1 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,8,Temperature,36.1 °C,8.9 °C,20 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,8,Dew Point,18.3 °C,1.1 °C,10.4 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,8,Humidity,100%,3%,58.40%
+ROCK,2,"Culp, OR",MGDFO3,2014,8,Precipitation,27.9 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,9,Temperature,35 °C,5 °C,17.7 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,9,Dew Point,15.6 °C,-10.6 °C,6.7 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,9,Humidity,99%,6%,56.50%
+ROCK,2,"Culp, OR",MGDFO3,2014,9,Precipitation,57.4 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,10,Temperature,32.2 °C,3.3 °C,12.2 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,10,Dew Point,13.9 °C,-0.6 °C,6.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,10,Humidity,98%,14%,75.70%
+ROCK,2,"Culp, OR",MGDFO3,2014,10,Precipitation,264.4mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,11,Temperature,20 °C,-3.9 °C,6.1 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,11,Dew Point,15 °C,-12.2 °C,3.4 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,11,Humidity,99%,22%,85%
+ROCK,2,"Culp, OR",MGDFO3,2014,11,Precipitation,347.2mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2014,12,Temperature,15 °C,-8.3 °C,4.7 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,12,Dew Point,10.6 °C,-10 °C,2.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2014,12,Humidity,100%,37%,88.80%
+ROCK,2,"Culp, OR",MGDFO3,2014,12,Precipitation,328.2mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,1,Temperature,21.7 °C,-1.1 °C,6.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,1,Dew Point,10.6 °C,-5 °C,3 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,1,Humidity,99%,28%,78.40%
+ROCK,2,"Culp, OR",MGDFO3,2015,1,Precipitation,95 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,2,Temperature,20.6 °C,-3.3 °C,7.1 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,2,Dew Point,10.6 °C,-19.4 °C,1.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,2,Humidity,99%,11%,71.90%
+ROCK,2,"Culp, OR",MGDFO3,2015,2,Precipitation,156.5 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,3,Temperature,22.8 °C,-1.7 °C,7 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,3,Dew Point,7.8 °C,-5 °C,1 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,3,Humidity,98%,18%,68.80%
+ROCK,2,"Culp, OR",MGDFO3,2015,3,Precipitation,0 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,4,Temperature,28.3 °C,-1.1 °C,8.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,4,Dew Point,10.6 °C,-3.9 °C,2.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,4,Humidity,98%,15%,71.20%
+ROCK,2,"Culp, OR",MGDFO3,2015,4,Precipitation,0 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,5,Temperature,28.3 °C,1.7 °C,12.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,5,Dew Point,14.4 °C,-2.2 °C,6.7 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,5,Humidity,99%,20%,73.30%
+ROCK,2,"Culp, OR",MGDFO3,2015,5,Precipitation,0 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,6,Temperature,37.2 °C,7.8 °C,20.3 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,6,Dew Point,18.9 °C,0 °C,9.4 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,6,Humidity,98%,18%,53.30%
+ROCK,2,"Culp, OR",MGDFO3,2015,6,Precipitation,0 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,7,Temperature,38.9 °C,8.9 °C,21.2 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,7,Dew Point,16.7 °C,1.7 °C,9.6 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,7,Humidity,100%,11%,53.40%
+ROCK,2,"Culp, OR",MGDFO3,2015,7,Precipitation,0 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,8,Temperature,37.2 °C,9.4 °C,19.9 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,8,Dew Point,16.1 °C,-0.6 °C,8.6 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,8,Humidity,99%,12%,52.80%
+ROCK,2,"Culp, OR",MGDFO3,2015,8,Precipitation,0 mm,--,--
+ROCK,2,"Culp, OR",MGDFO3,2015,9,Temperature,35.6 °C,4.4 °C,15.2 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,9,Dew Point,13.9 °C,-1.1 °C,7.4 °C
+ROCK,2,"Culp, OR",MGDFO3,2015,9,Humidity,99%,14%,64.90%
+ROCK,2,"Culp, OR",MGDFO3,2015,9,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,1,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,1,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,1,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,1,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,2,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,2,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,2,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,2,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,3,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,3,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,3,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,3,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,4,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,4,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,4,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,4,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,5,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,5,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,5,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,5,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,6,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,6,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,6,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,6,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,7,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,7,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,7,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,7,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,8,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,8,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,8,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,8,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,9,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,9,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,9,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,9,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,10,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,10,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,10,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,10,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,11,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,11,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,11,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,11,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,12,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,12,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,12,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2013,12,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,1,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,1,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,1,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,1,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,2,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,2,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,2,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,2,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,3,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,3,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,3,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,3,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,4,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,4,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,4,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,4,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,5,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,5,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,5,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,5,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,6,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,6,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,6,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,6,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,7,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,7,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,7,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,7,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,8,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,8,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,8,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,8,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,9,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,9,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,9,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,9,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,10,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,10,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,10,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,10,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,11,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,11,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,11,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,11,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,12,Temperature,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,12,Dew Point,°C,999.9 °C,°C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,12,Humidity,0,1.01,%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2014,12,Precipitation,0 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,1,Temperature,22 °C,-0.7 °C,6.5 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,1,Dew Point,15.3 °C,-1 °C,5.7 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,1,Humidity,98%,48%,93.90%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,1,Precipitation,100.8mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,2,Temperature,21.5 °C,-17.8 °C,7.7 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,2,Dew Point,15 °C,-23.8 °C,4.7 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,2,Humidity,98%,5%,86%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,2,Precipitation,124.2mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,3,Temperature,27.5 °C,-3.5 °C,9.9 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,3,Dew Point,15.6 °C,-3.9 °C,6.3 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,3,Humidity,98%,27%,82%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,3,Precipitation,102.9mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,4,Temperature,30.8 °C,-1.6 °C,9.7 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,4,Dew Point,15 °C,-2 °C,5.2 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,4,Humidity,98%,30%,78.10%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,4,Precipitation,55.6 mm,--,-
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,5,Temperature,32.3 °C,2.2 °C,14.1 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,5,Dew Point,18 °C,-1.6 °C,9.2 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,5,Humidity,98%,14%,76.90%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,5,Precipitation,50.8 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,6,Temperature,38.1 °C,5.1 °C,19.7 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,6,Dew Point,21.5 °C,-4.6 °C,11.4 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,6,Humidity,98%,11%,64.40%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,6,Precipitation,1.8 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,7,Temperature,43.1 °C,8.2 °C,21.7 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,7,Dew Point,18.7 °C,-21.7 °C,11 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,7,Humidity,98%,2%,58.30%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,7,Precipitation,0.3 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,8,Temperature,37.9 °C,6.6 °C,20.2 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,8,Dew Point,17 °C,2.8 °C,10.7 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,8,Humidity,98%,14%,60.20%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,8,Precipitation,12.7 mm,--,--
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,9,Temperature,36.4 °C,4.6 °C,15.2 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,9,Dew Point,16.3 °C,2.9 °C,9.3 °C
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,9,Humidity,98%,21%,73%
+COAST,1,"Wilson Crk, OR",KORCOTTA11,2015,9,Precipitation,25.4 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,1,Temperature,13.3 °C,-7.2 °C,2.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,1,Dew Point,10.7 °C,-7.9 °C,1.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,1,Humidity,100%,67%,94.80%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,1,Precipitation,70.6 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,2,Temperature,17.6 °C,-2.6 °C,5.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,2,Dew Point,11.8 °C,-3 °C,4 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,2,Humidity,99%,54%,91.70%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,2,Precipitation,51.1 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,3,Temperature,24.2 °C,-3.5 °C,7.5 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,3,Dew Point,14.7 °C,-4.1 °C,5.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,3,Humidity,99%,28%,87.70%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,3,Precipitation,76.5 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,4,Temperature,26.5 °C,-2.4 °C,9.8 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,4,Dew Point,14.1 °C,-6.8 °C,5.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,4,Humidity,98%,16%,79.40%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,4,Precipitation,82.3 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,5,Temperature,29.9 °C,0.6 °C,13.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,5,Dew Point,17.4 °C,-0.6 °C,8.5 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,5,Humidity,97%,19%,75%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,5,Precipitation,57.7 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,6,Temperature,33.7 °C,4.5 °C,16.8 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,6,Dew Point,22 °C,1.9 °C,11.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,6,Humidity,97%,19%,73.80%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,6,Precipitation,21.8 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,7,Temperature,33.9 °C,5.1 °C,19.1 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,7,Dew Point,22.2 °C,3.6 °C,11.4 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,7,Humidity,97%,17%,66.10%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,7,Precipitation,0 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,8,Temperature,32.7 °C,7.3 °C,18.9 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,8,Dew Point,20.1 °C,6.7 °C,13.2 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,8,Humidity,97%,21%,73.50%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,8,Precipitation,7.6 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,9,Temperature,32.3 °C,4.4 °C,15.1 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,9,Dew Point,19.4 °C,3.9 °C,11.9 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,9,Humidity,98%,29%,83.60%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,9,Precipitation,145.3mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,10,Temperature,25.2 °C,-3.7 °C,8.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,10,Dew Point,15.5 °C,-4.3 °C,6.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,10,Humidity,98%,27%,88.80%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,10,Precipitation,19.6 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,11,Temperature,17.2 °C,-7.1 °C,5.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,11,Dew Point,15 °C,-7.8 °C,4.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,11,Humidity,99%,49%,93.80%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,11,Precipitation,91.2 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,12,Temperature,14.3 °C,-19.1 °C,0.1 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,12,Dew Point,11.2 °C,-20.6 °C,-0.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,12,Humidity,100%,54%,95.10%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2013,12,Precipitation,37.1 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,1,Temperature,14.2 °C,-4.9 °C,3.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,1,Dew Point,11.9 °C,-5.3 °C,3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,1,Humidity,100%,59%,95.80%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,1,Precipitation,96.8 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,2,Temperature,17.4 °C,-5.3 °C,5.9 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,2,Dew Point,14.7 °C,-8.6 °C,4.9 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,2,Humidity,100%,66%,93.50%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,2,Precipitation,229.4mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,3,Temperature,23.2 °C,-4 °C,8.1 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,3,Dew Point,15.1 °C,-4.6 °C,5.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,3,Humidity,100%,25%,87.10%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,3,Precipitation,239 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,4,Temperature,32.1 °C,-1.8 °C,10.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,4,Dew Point,16.8 °C,-2.5 °C,6.4 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,4,Humidity,98%,18%,80.20%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,4,Precipitation,96.5 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,5,Temperature,28.3 °C,0.1 °C,13.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,5,Dew Point,16.3 °C,-0.5 °C,9.1 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,5,Humidity,98%,29%,78.60%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,5,Precipitation,64.5 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,6,Temperature,34.4 °C,3.9 °C,15.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,6,Dew Point,18.9 °C,1.3 °C,10.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,6,Humidity,97%,23%,75.20%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,6,Precipitation,37.8 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,7,Temperature,34.6 °C,7 °C,19.8 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,7,Dew Point,19.6 °C,6.3 °C,13.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,7,Humidity,97%,24%,72%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,7,Precipitation,6.6 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,8,Temperature,37.5 °C,6.4 °C,19.8 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,8,Dew Point,18.8 °C,3.9 °C,12.9 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,8,Humidity,97%,20%,68.90%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,8,Precipitation,0 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,9,Temperature,33.2 °C,3.9 °C,15.8 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,9,Dew Point,17.7 °C,1.7 °C,10.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,9,Humidity,98%,17%,76.70%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,9,Precipitation,41.4 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,10,Temperature,30.1 °C,3.1 °C,12.8 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,10,Dew Point,18.2 °C,2.3 °C,10.4 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,10,Humidity,99%,31%,87.90%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,10,Precipitation,138.9mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,11,Temperature,20.5 °C,-4.9 °C,6.5 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,11,Dew Point,16.1 °C,-5.4 °C,5.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,11,Humidity,100%,44%,94.30%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,11,Precipitation,79.8 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,12,Temperature,19.2 °C,-8.8 °C,6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,12,Dew Point,14.8 °C,-9.4 °C,5.2 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,12,Humidity,100%,49%,95%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2014,12,Precipitation,63 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,1,Temperature,19.4 °C,-6.1 °C,5.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,1,Dew Point,14.6 °C,-6.6 °C,5.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,1,Humidity,100%,69%,97.60%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,1,Precipitation,67.6 mm,--,-
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,2,Temperature,19.1 °C,-6.4 °C,7.4 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,2,Dew Point,14.3 °C,-9.9 °C,5.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,2,Humidity,100%,21%,90.40%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,2,Precipitation,155.2 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,3,Temperature,23.4 °C,-4.4 °C,9 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,3,Dew Point,15 °C,-5 °C,6.4 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,3,Humidity,100%,29%,86.50%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,3,Precipitation,95.8 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,4,Temperature,28.1 °C,-1.7 °C,8.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,4,Dew Point,17.5 °C,-2.2 °C,5.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,4,Humidity,99%,32%,83.10%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,4,Precipitation,51.6 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,5,Temperature,29.3 °C,0.6 °C,13.4 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,5,Dew Point,18.9 °C,0.1 °C,9.7 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,5,Humidity,98%,21%,80.70%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,5,Precipitation,41.1 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,6,Temperature,35.6 °C,4.3 °C,18.8 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,6,Dew Point,21.7 °C,2.4 °C,12 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,6,Humidity,98%,21%,69%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,6,Precipitation,2 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,7,Temperature,38.9 °C,6.4 °C,20.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,7,Dew Point,18.3 °C,1.6 °C,12 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,7,Humidity,96%,12%,63.80%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,7,Precipitation,1 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,8,Temperature,34.9 °C,5.3 °C,18.6 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,8,Dew Point,17.2 °C,4.1 °C,11.3 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,8,Humidity,96%,21%,67%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,8,Precipitation,7.6 mm,--,--
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,9,Temperature,33.6 °C,-0.1 °C,14.2 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,9,Dew Point,16.5 °C,-0.8 °C,9.2 °C
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,9,Humidity,98%,26%,75.70%
+COAST,2,"Cottage Grove, OR",KORCOTTA5,2015,9,Precipitation,15 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,1,Temperature,12.3 °C,-5.7 °C,2.3 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,1,Dew Point,9.3 °C,-7.3 °C,1 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,1,Humidity,97%,63%,91.30%
+WILEY,1,Sweet Home,KORSWEET5,2013,1,Precipitation,114.6 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,2,Temperature,17.7 °C,-1.8 °C,5.3 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,2,Dew Point,11.8 °C,-3.1 °C,3.4 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,2,Humidity,96%,57%,88%
+WILEY,1,Sweet Home,KORSWEET5,2013,2,Precipitation,71.6 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,3,Temperature,22.4 °C,-2.9 °C,7.8 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,3,Dew Point,13.6 °C,-4.5 °C,4.9 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,3,Humidity,95%,42%,83%
+WILEY,1,Sweet Home,KORSWEET5,2013,3,Precipitation,67.1 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,4,Temperature,25.7 °C,-0.8 °C,10.1 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,4,Dew Point,12.9 °C,-3.1 °C,5.5 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,4,Humidity,93%,24%,75.70%
+WILEY,1,Sweet Home,KORSWEET5,2013,4,Precipitation,75.7 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,5,Temperature,29.7 °C,-0.8 °C,13.5 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,5,Dew Point,16.9 °C,-3.1 °C,8.2 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,5,Humidity,93%,16%,73.30%
+WILEY,1,Sweet Home,KORSWEET5,2013,5,Precipitation,88.1 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,6,Temperature,33.3 °C,6.2 °C,16.7 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,6,Dew Point,21.9 °C,4.2 °C,11.2 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,6,Humidity,95%,27%,72.10%
+WILEY,1,Sweet Home,KORSWEET5,2013,6,Precipitation,63.5 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,7,Temperature,34.7 °C,7.8 °C,19.3 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,7,Dew Point,22.2 °C,4.9 °C,11.7 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,7,Humidity,89%,20%,64.60%
+WILEY,1,Sweet Home,KORSWEET5,2013,7,Precipitation,0.5 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,8,Temperature,34.4 °C,9.1 °C,19.7 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,8,Dew Point,19.5 °C,4.8 °C,13.3 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,8,Humidity,92%,21%,69.40%
+WILEY,1,Sweet Home,KORSWEET5,2013,8,Precipitation,12.2 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,9,Temperature,32.1 °C,5.2 °C,15.8 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,9,Dew Point,20.5 °C,3.5 °C,12.1 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,9,Humidity,96%,34%,80.30%
+WILEY,1,Sweet Home,KORSWEET5,2013,9,Precipitation,204.7mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,10,Temperature,26.2 °C,-0.7 °C,9.1 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,10,Dew Point,14.2 °C,-2.7 °C,6.2 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,10,Humidity,94%,28%,82.90%
+WILEY,1,Sweet Home,KORSWEET5,2013,10,Precipitation,22.9 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2013,11,Temperature,14.3 °C,-5.8 °C,6.3 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,11,Dew Point,13.1 °C,-7.6 °C,4.3 °C
+WILEY,1,Sweet Home,KORSWEET5,2013,11,Humidity,96%,53%,87.80%
+WILEY,1,Sweet Home,KORSWEET5,2013,11,Precipitation,79.8 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,1,Temperature,18.3 °C,-4.4 °C,5.5 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,1,Dew Point,13.1 °C,-6.4 °C,4.1 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,1,Humidity,97%,65%,90.90%
+WILEY,1,Sweet Home,KORSWEET5,2015,1,Precipitation,63.2 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,2,Temperature,17.6 °C,-3.4 °C,7 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,2,Dew Point,12.2 °C,-7.6 °C,4.1 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,2,Humidity,97%,30%,83.40%
+WILEY,1,Sweet Home,KORSWEET5,2015,2,Precipitation,96.8 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,3,Temperature,22.1 °C,-3.4 °C,9 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,3,Dew Point,13.3 °C,-5.7 °C,5.1 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,3,Humidity,94%,32%,78.50%
+WILEY,1,Sweet Home,KORSWEET5,2015,3,Precipitation,79.5 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,4,Temperature,25.4 °C,-0.6 °C,9 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,4,Dew Point,16.5 °C,-2.4 °C,4.8 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,4,Humidity,92%,36%,76.50%
+WILEY,1,Sweet Home,KORSWEET5,2015,4,Precipitation,80.5 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,5,Temperature,27.9 °C,2.9 °C,13.3 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,5,Dew Point,17.1 °C,0.4 °C,8.9 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,5,Humidity,92%,29%,76.20%
+WILEY,1,Sweet Home,KORSWEET5,2015,5,Precipitation,57.4 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,6,Temperature,35.9 °C,6.1 °C,18.8 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,6,Dew Point,20.4 °C,1.3 °C,11.2 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,6,Humidity,92%,27%,64.10%
+WILEY,1,Sweet Home,KORSWEET5,2015,6,Precipitation,21.8 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,7,Temperature,39.8 °C,8.8 °C,20.8 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,7,Dew Point,19.1 °C,5.1 °C,11.4 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,7,Humidity,87%,14%,58.80%
+WILEY,1,Sweet Home,KORSWEET5,2015,7,Precipitation,6.6 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,8,Temperature,36.9 °C,6.9 °C,19.4 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,8,Dew Point,17.6 °C,3.7 °C,10.6 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,8,Humidity,91%,18%,60.10%
+WILEY,1,Sweet Home,KORSWEET5,2015,8,Precipitation,12.2 mm,--,--
+WILEY,1,Sweet Home,KORSWEET5,2015,9,Temperature,32.9 °C,1.4 °C,14.5 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,9,Dew Point,16.2 °C,-1.1 °C,8.6 °C
+WILEY,1,Sweet Home,KORSWEET5,2015,9,Humidity,92%,28%,70.30%
+WILEY,1,Sweet Home,KORSWEET5,2015,9,Precipitation,20.1 mm,--,--
+WILEY,2,Sweet Home,KORSWEET4,2013,1,Temperature,13.4 °C,-5.3 °C,3 °C
+WILEY,2,Sweet Home,KORSWEET4,2013,1,Dew Point,10.2 °C,-6.3 °C,1.9 °C
+WILEY,2,Sweet Home,KORSWEET4,2013,1,Humidity,100%,57%,93%
+WILEY,2,Sweet Home,KORSWEET4,2013,1,Precipitation,109.5mm,--,--
+WILEY,2,Sweet Home,KORSWEET4,2013,6,Temperature,33.3 °C,6.9 °C,17.7 °C
+WILEY,2,Sweet Home,KORSWEET4,2013,6,Dew Point,21.5 °C,2.6 °C,11.8 °C
+WILEY,2,Sweet Home,KORSWEET4,2013,6,Humidity,96%,22%,70.90%
+WILEY,2,Sweet Home,KORSWEET4,2013,6,Precipitation,44.2 mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,1,Temperature,19.2 °C,2 °C,8.4 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,1,Dew Point,10 °C,-1.2 °C,4.7 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,1,Humidity,99%,36%,76.40%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,1,Precipitation,8.4 mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,2,Temperature,17.9 °C,-0.9 °C,8.6 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,2,Dew Point,11.1 °C,-16.3 °C,3.2 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,2,Humidity,99%,12%,74.10%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,2,Precipitation,134.6mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,3,Temperature,22.4 °C,-0.9 °C,10.2 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,3,Dew Point,12.6 °C,-10.9 °C,4.8 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,3,Humidity,99%,27%,72.50%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,3,Precipitation,146.8mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,4,Temperature,26.9 °C,-0.4 °C,8.4 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,4,Dew Point,12.8 °C,-3.4 °C,3.9 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,4,Humidity,99%,29%,76.70%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,4,Precipitation,57.9 mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,5,Temperature,°C,999.9 °C,°C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,5,Dew Point,°C,999.9 °C,°C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,5,Humidity,0%,101%,%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,5,Precipitation,0 mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,6,Temperature,°C,999.9 °C,°C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,6,Dew Point,°C,999.9 °C,°C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,6,Humidity,0%,101%,%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,6,Precipitation,0 mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,7,Temperature,41.7 °C,8.1 °C,22.9 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,7,Dew Point,15 °C,1.8 °C,9.1 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,7,Humidity,99%,10%,47.50%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,7,Precipitation,1.5 mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,8,Temperature,40.3 °C,8.2 °C,20.8 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,8,Dew Point,15.8 °C,2.4 °C,10.2 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,8,Humidity,99%,12%,56.10%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,8,Precipitation,19.6 mm,--,--
+THOMAS,1,McCully Mtn,KORLYONS6,2015,9,Temperature,32.6 °C,5.6 °C,15.9 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,9,Dew Point,16.1 °C,0.1 °C,9.3 °C
+THOMAS,1,McCully Mtn,KORLYONS6,2015,9,Humidity,99%,25%,68.50%
+THOMAS,1,McCully Mtn,KORLYONS6,2015,9,Precipitation,37.6 mm,--,--
+THOMAS,2,Forecast for Lyons,MSYNO3,2013,1,Temperature,12.8 °C,-6.1 °C,2.1 °C
+THOMAS,2,Forecast for Lyons,MSYNO3,2013,1,Dew Point,9.4 °C,-7.2 °C,1.3 °C
+THOMAS,2,Forecast for Lyons,MSYNO3,2013,1,Humidity,100%,63%,94.70%
+THOMAS,2,Forecast for Lyons,MSYNO3,2013,1,Precipitation,163.8mm,--,--
+THOMAS,2,Forecast for Lyons,MSYNO3,2013,6,Temperature,32.2 °C,5.6 °C,16.6 °C
+THOMAS,2,Forecast for Lyons,MSYNO3,2013,6,Dew Point,20.6 °C,3.9 °C,11.3 °C
+THOMAS,2,Forecast for Lyons,MSYNO3,2013,6,Humidity,100%,26%,73.90%
+THOMAS,2,Forecast for Lyons,MSYNO3,2013,6,Precipitation,82 mm,--,--
+THOMAS,1,Scio,KORSCIO4,2013,10,Temperature,22.3 °C,-2.4 °C,6.2 °C
+THOMAS,1,Scio,KORSCIO4,2013,10,Dew Point,14.1 °C,-73.3 °C,-0.4 °C
+THOMAS,1,Scio,KORSCIO4,2013,10,Humidity,100%,38%,82.20%
+THOMAS,1,Scio,KORSCIO4,2013,10,Precipitation,5.3 mm,--,--
+THOMAS,1,Scio,KORSCIO4,2013,11,Temperature,15.8 °C,-6.6 °C,6.8 °C
+THOMAS,1,Scio,KORSCIO4,2013,11,Dew Point,14.4 °C,-73.3 °C,5.2 °C
+THOMAS,1,Scio,KORSCIO4,2013,11,Humidity,100%,37%,90.40%
+THOMAS,1,Scio,KORSCIO4,2013,11,Precipitation,70.4 mm,--,--
+THOMAS,1,Scio,KORSCIO4,2013,12,Temperature,13.5 °C,-15.3 °C,1.6 °C
+THOMAS,1,Scio,KORSCIO4,2013,12,Dew Point,12.2 °C,-16.7 °C,0.7 °C
+THOMAS,1,Scio,KORSCIO4,2013,12,Humidity,100%,44%,93.60%
+THOMAS,1,Scio,KORSCIO4,2013,12,Precipitation,53.6 mm,--,--
+HUNTER,1,DALLAS,KORDALLA4,2013,1,Temperature,13.6 °C,-6.1 °C,2.1 °C
+HUNTER,1,DALLAS,KORDALLA4,2013,1,Dew Point,10.3 °C,-7.1 °C,0.7 °C
+HUNTER,1,DALLAS,KORDALLA4,2013,1,Humidity,99%,57%,91.30%
+HUNTER,1,DALLAS,KORDALLA4,2013,1,Precipitation,26.4 mm,--,--
+HUNTER,1,DALLAS,KORDALLA4,2013,1,Temperature,32.9 °C,5.9 °C,16.3 °C
+HUNTER,1,DALLAS,KORDALLA4,2013,1,Dew Point,21.1 °C,4.7 °C,11.1 °C
+HUNTER,1,DALLAS,KORDALLA4,2013,1,Humidity,98%,35%,73.70%
+HUNTER,1,DALLAS,KORDALLA4,2013,1,Precipitation,26.9 mm,--,--

@@ -1,0 +1,30 @@
+Nov 21, 2013
+
+
+Hi Matthew,
+
+Here it is!
+Column names correspond to 2010-2012 (ending _10 = 2010, etc.)
+Class: A (adult), J (juvenile), D (dead), E (excluded), ? (not visited)
+PercFr: proportion of flowers maturing a fruit
+TotFr: total fruit #
+TotFl: total flower #
+TotNFStLn: total nonflowering stem length
+TotFlStLn: total flowering stem length
+TotStLn: total nonflowering stem length + total flowering stem length
+Surv1011: survival from 2010 to 2011
+Surv1112: survival from 2011 to 2012
+
+I created a probability of flowering column afterwards in R, basically setting
+probability of flowering = 1 when Class = adult and 0 when Class = Juvenile.
+
+Let me know if you have any questions or problems!
+
+Seema
+______________________________________
+Seema N. Sheth
+Department of Biology
+Colorado State University
+Fort Collins, CO 80523
+E-mail: seema.sheth@colostate.edu
+http://wp.natsci.colostate.edu/ssheth/<http://rydberg.biology.colostate.edu/sites/ssheth/>
