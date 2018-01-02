@@ -27,19 +27,17 @@ path.set="C:/Users/mbayly/Desktop/Projects/transplant/transplant_analysis/Rcode"
 }
 
 ## working directory must be set here, so the source()'s below run
-	setwd("C:/Users/DW/Desktop/transplant_analysis/Planning_Docs/2.IPM_tutorials/Rees_2014_how to IPM/Reese example")
-## run the utility functions
-	source("./Standard Graphical Pars.R")
-## run the ungulate IBM
-	source("./Ungulate Demog Funs.R") # but will not use these. 
+	#setwd(paste0(path.funct, "/reese_et_al_2014"))
+	#r.functions = list.files(pattern="*.R"); sapply(r.functions,source,.GlobalEnv)
+	
+	
 		
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## IMPORT CARDINALIS DATA
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-### SET DIRECTORIES & LOAD FILES ###
-	path.set="C:/Users/DW/Desktop/transplant_analysis/Rcode"	
+### SET DIRECTORIES & LOAD FILES ###	setwd(path.set)
 	setwd(path.set)
-	source("00_SetDirectories.R") # directory script (edit for your own computer). 
+  source("00_SetDirectories.R") # directory script (edit for your own computer). 
 	setwd(path.dat); setwd(path.dat.raw); setwd(path.code); setwd(path.fig); setwd(path.obj)
 	# Open 2015/2014 plant datafiles 
 	setwd(path.dat); dir()
@@ -174,6 +172,8 @@ path.set="C:/Users/mbayly/Desktop/Projects/transplant/transplant_analysis/Rcode"
 	setwd(path.code)
 	#source("04.2.4_Fecundity.R") # only run this once on the first time (takes a while)
 	setwd(path.obj)
+	#devtools::install_github("bbolker/glmmadmb")
+	library(glmmADMB)
 	Fec_model <- get(load("FecMod_NB.rda")) # load in top reproductive glm mixed model 
 	# don't swap estimated values as we did above. 
 	fixef(Fec_model)
@@ -314,6 +314,7 @@ path.set="C:/Users/mbayly/Desktop/Projects/transplant/transplant_analysis/Rcode"
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 require(fields)
 	setwd(path.fig)
+	library(IPMpack)
 	pdf(file="02.1_IPMbasicALL.pdf", width=11, height=8.5)
 
 	# Run a loop through all sites & separate IPM model for each site 

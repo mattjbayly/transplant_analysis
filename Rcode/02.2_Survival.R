@@ -47,14 +47,18 @@
 	library(plyr)
 	rm(list=ls(all=TRUE))
 	set.seed(270875)
-	## working directory must be set here, so the source()'s below run
-	setwd("C:/Users/DW/Desktop/transplant_analysis/Planning_Docs/2.IPM_tutorials/Rees_2014_how to IPM/Reese example")
-	## run the utility functions
-	source("./Standard Graphical Pars.R")
-	## run the ungulate IBM
-	source("./Ungulate Demog Funs.R") # but will not use these. 		
-	### SET DIRECTORIES & LOAD FILES ###
-	path.set="C:/Users/DW/Desktop/transplant_analysis/Rcode"	
+	
+	# USER PROJECT WORKING DIRECTORY
+	## Set Directories #
+	if(Sys.getenv("USERNAME") == "mbayly"){
+	  path.set="C:/Users/mbayly/Desktop/Projects/transplant/transplant_analysis/Rcode"
+	} else {
+	  path.set=choose.dir()
+	}
+	setwd(path.set)
+	
+	
+	
 	setwd(path.set)
 	source("00_SetDirectories.R") # directory script (edit for your own computer). 
 	setwd(path.dat); setwd(path.dat.raw); setwd(path.code); setwd(path.fig); setwd(path.obj)
