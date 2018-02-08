@@ -1,6 +1,3 @@
-###
-testing
-
 # File: 00_SetDirectories.R 
 ######################################################
 # SETUP DIRECTORIES & FILE PATHWAYS
