@@ -2,7 +2,7 @@
 #### PURPOSE: Perform model selection for each vital rate for subsequent use in IPMs
 ############# Vital rates include survival, growth, flowering, and fruit count
 ############# Fixed effects: size, site; Random effects: plot
-#### AUTHOR: modified from Seema Sheth
+#### AUTHOR: modified from Seema Sheth (Sheth & Angert 2018 PNAS)
 #### DATE LAST MODIFIED: 20180220
 
 # remove objects and clear workspace
