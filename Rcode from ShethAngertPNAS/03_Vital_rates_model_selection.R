@@ -23,9 +23,11 @@ require(dplyr)
 require(tidyverse)
 
 # set working directory
-setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
+# setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
 
-# import Matthew's file
+#*******************************************************************************
+#### 1. Import and format data ###
+#*******************************************************************************
 
 data <- read_csv("Data/IPMData_transplant.csv")
 head(data)
