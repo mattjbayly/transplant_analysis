@@ -82,12 +82,24 @@ s5=glmer(Surv~z+SiteID+(z|PlotID),data=data,family=binomial,control=glmerControl
 # D. main effects size + site; random intercepts & constant slope for Plot
 s6=glmer(Surv~z+SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
+# E. interaction size x site; random intercepts & random slopes for Plot nested within Site
+s7=glmer(Surv~z*SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# F. interaction size x site; random intercepts & constant slope for Plot nested within Site
+s8=glmer(Surv~z*SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# G. main effects size + site; random intercepts & random slopes for Plot nested within Site
+s9=glmer(Surv~z+SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# H. main effects size + site; random intercepts & constant slope for Plot nested within Site
+s10=glmer(Surv~z+SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
 # Compare models
-anova(s3, s4, s5, s6)
+anova(s3, s4, s5, s6, s7, s8, s9, s10)
 
-AICc(s3, s4, s5, s6) 
+AICc(s3, s4, s5, s6, s7, s8, s9, s10) 
 
-model.sel(s3, s4, s5, s6) 
+model.sel(s3, s4, s5, s6, s7, s8, s9, s10) 
 
 # PREFERRED MODEL IS s6
 
@@ -115,12 +127,25 @@ g5=lmer(z1~z+SiteID+(z|PlotID),data=data,control=lmerControl(optimizer = "bobyqa
 # D. main effects Site + Size; random intercepts & constant slope for Plot
 g6=lmer(z1~z+SiteID+(1|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
 
+# E. interaction Site x Size; random intercepts & random slopes for Plot nested within Site
+g7=lmer(z1~z*SiteID+(z|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) # warnings
+
+# F. interaction Site x Size; random intercepts & random slopes for Plot nested within Site
+g8=lmer(z1~z*SiteID+(1|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+# G. main effects Site + Size; random intercepts & random slopes for Plot nested within Site
+g9=lmer(z1~z+SiteID+(z|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000)))
+# warnings
+
+# H. main effects Site + Size; random intercepts & constant slope for Plot nested within Site
+g10=lmer(z1~z+SiteID+(1|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+# warnings
+
 # Compare models
-anova(g3, g4, g5, g6)
+anova(g3, g4, g5, g6, g7, g8, g9, g10)
 
-AICc(g3, g4, g5, g6) 
+AICc(g3, g4, g5, g6, g7, g8, g9, g10) 
 
-model.sel(g3, g4, g5, g6) 
+model.sel(g3, g4, g5, g6, g7, g8, g9, g10) 
 
 # PREFERRED MODEL IS g6
 
@@ -148,12 +173,25 @@ fl5=glmer(Repr~z+SiteID+(z|PlotID),data=data,family=binomial,control=glmerContro
 # D. main effects Site + Size; random intercepts & constant slope for Plot
 fl6=glmer(Repr~z+SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
 
+# E. interaction Site x Size; random intercepts & random slopes for Plot nested within Site
+fl7=glmer(Repr~z*SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# F. interaction Site x Size; random intercepts & constant slope for Plot nested within Site
+fl8=glmer(Repr~z*SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# G. main effects Site + Size; random intercepts & random slopes for Plot nested within Site
+fl9=glmer(Repr~z+SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
+
+# H. main effects Site + Size; random intercepts & constant slope for Plot nested within Site
+fl10=glmer(Repr~z+SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+# warning
+
 # Compare models
-anova(fl3, fl4, fl5, fl6)
+anova(fl3, fl4, fl5, fl6, fl7, fl8, fl9, fl10)
 
-AICc(fl3, fl4, fl5, fl6) 
+AICc(fl3, fl4, fl5, fl6, fl7, fl8, fl9, fl10) 
 
-model.sel(fl3, fl4,fl5,fl6) 
+model.sel(fl3, fl4,fl5,fl6, fl7, fl8, fl9, fl10) 
 
 # PREFERRED MODEL IS fl6
 
@@ -196,10 +234,22 @@ save(fl6, file='Robjects/flowering.reg.rda')
 		# D. main effects of Size + Site; random intercepts & constant slope for Plot
 		fr9=glmmadmb(Fec~z+SiteID+(1|PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log")
 		
-		# Compare models	
-		AICc(fr6,fr7,fr8,fr9) 
+		# E. interaction of Size x Site; random intercepts & random slopes for Plot nested within Site
+		fr10=glmmadmb(Fec~z*SiteID+(z|SiteID/PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
 		
-		model.sel(fr6,fr7,fr8,fr9)
+		# F. interaction of Size x Site; random intercepts & constant slope for Plot nested within Site
+		fr11=glmmadmb(Fec~z*SiteID+(1|SiteID/PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
+		
+		# G. main effects of Size + Site; random intercepts & random slopes for Plot nested within Site
+		fr12=glmmadmb(Fec~z+SiteID+(z|SiteID/PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
+		
+		# H. main effects of Size + Site; random intercepts & constant slope for Plot nested within Site
+		fr13=glmmadmb(Fec~z+SiteID+(1|SiteID/PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log")
+
+				# Compare models	
+		AICc(fr6,fr7,fr8,fr9,fr10,fr11,fr12,fr13) 
+		
+		model.sel(fr6,fr7,fr8,fr9,fr10,fr11,fr12,fr13)
 		
 		# PREFERRED MODEL IS fr9
 		
