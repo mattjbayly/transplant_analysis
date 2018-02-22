@@ -71,6 +71,11 @@ s1=glm(Surv~z,data=data,family=binomial)
 s2=glm(Surv~1,data=data,family=binomial)
 model.sel(s1,s2) # model w/ size is preferred
 
+# site as fixed or random
+sf=glm(Surv~SiteID,data=data,family=binomial)
+sr=glmer(Surv~(1|SiteID),data=data,family=binomial)
+model.sel(sf,sr) # fixed is preferred (is this a legit comparison??)
+
 # A. interaction size x site; random intercepts & random slopes for Plot
 s3=glmer(Surv~z*SiteID+(z|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
