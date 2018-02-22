@@ -1,7 +1,7 @@
-#### PROJECT: Mimulus cardinalis demography 2010-2014
+#### PROJECT: Mimulus cardinalis northern transplant 2015-2016
 #### PURPOSE: Create data frame of vital rate parameters and build integral projection models 
-############# Obtain estimates of lambda for each of 32 populations
-#### AUTHOR: Seema Sheth
+############# Obtain estimates of lambda for each transplant site
+#### AUTHOR: modified from Seema Sheth (Sheth & Angert 2018 PNAS)
 #### DATE LAST MODIFIED: 20171110
 
 # remove objects and clear workspace
@@ -14,39 +14,56 @@ require(plyr)
 require(dplyr)
 
 # set working directory
-setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
+# setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
 
 #*******************************************************************************
-#### 1. run data_prep.R script to clean up data ###
+#### 1. import and format data
+#*******************************************************************************
+#*******************************************************************************
+#### 1. Import and format data ###
 #*******************************************************************************
 
-source("R_scripts/data_prep.R")
+data <- read_csv("Data/IPMData_transplant.csv")
+head(data)
+
+# log-transform size
+data <- data %>% mutate(z = log(z), z1 = log(z1))
+
+# make sure plot and site are recognized as factors
+data$PlotID = as.factor(data$PlotID)
+data$SiteID = as.factor(data$SiteID)
 
 # Variables are: 
 
-# Site: population
+# Surv: survival (1) or not (0) of individuals between time = t and time = t+1 
+# z (= Seema's logSize): total stem length of the individual
+# z1 (= Seema's logSizeNext): same as "logSize" above, for t+1
+# Repr (= Seema's Fec0): Flowering yes (1) or no (0)
+# Fec (= Seema's Fec1): Total number of fruits per individual   
+# SiteID: population
+# PlotID: plot
+# Region: within or beyond northern range edge
 # ID: unique identifier for each individual
-# Region: latitudinal region that population is nested within
+# NewPlot_13: don't know what this is
+# NewPlot_14: ditto
+# Year: annual transition 
+
+# Not included in Matt's file but could bind in from other sources?
+
 # Latitude: latitude of population
 # Longitude: longitude of population
 # Elevation: elevation of population
-# Class: stage class (juvenile, adult, or NA) of plant at time = t
-# Fec1: Total number of fruits per individual   
-# logSize: total stem length of the individual
-# ClassNext: stage class (juvenile, adult, dead, or NA) of plant at time = t+1
-# logSizeNext: same as "logSize" above, for t+1
-# Surv: survival (1) or not (0) of individuals between time = t and time = t+1
-# Year: annual transition of the long-term data at time = t (2010-2013)
-# Fec0: Probability of flowering (1 if Class=="A" for adult, 0 if Class=="J" for juvenile)
-# RegionRank: ordinal rank of regions from south to north
 # SeedCt: mean seed count, rounded to the nearest integer, for each site
+# ClassNext: stage class (juvenile, adult, dead, or NA) of plant at time = t+1 
+
+
 
 #*******************************************************************************
 #### 2. Create global survival, growth and fecundity models using data from all sites ###
 #*******************************************************************************
 
-# Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
-site=unique(data$Site)
+# Create a vector of unique Site names for subsetting 
+site=unique(data$SiteID)
 
 # Set up data frame of model parameters
 params=c()
@@ -55,13 +72,16 @@ params=c()
   ### 3A. Survival ###
   #*******************************************************************************
 
-  # Read in top survival model output (Formula: Surv ~ logSize + (logSize | Site) + (logSize | Year))
-  surv.reg=load("R_output/surv.reg.rda")
+  # Read in top survival model output (Formula: Surv ~ logSize + (1 | Plot))
+  surv.reg=load("Robjects/surv.reg.rda")
 
+  # Get model coefficients
+  fixef(s6)
+  
   # Store model coefficients
-  params$surv.int=coefficients(s3)$Site[,1] 
-  params$surv.slope=coefficients(s3)$Site[,2] 
-  params$Site=rownames(coefficients(s3)$Site)
+  params$surv.int=fixef(s6)[1] 
+  params$surv.slope=fixef(s6)[2] 
+  params$site=rownames(coefficients(s6)$SiteID)
   
   #*******************************************************************************
   ### 3B. Growth ###
