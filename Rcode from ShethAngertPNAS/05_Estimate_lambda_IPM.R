@@ -12,13 +12,11 @@ require(lme4)
 require(glmmADMB)
 require(plyr)
 require(dplyr)
+require(tidyverse)
 
 # set working directory
 # setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
 
-#*******************************************************************************
-#### 1. import and format data
-#*******************************************************************************
 #*******************************************************************************
 #### 1. Import and format data ###
 #*******************************************************************************
@@ -62,7 +60,7 @@ data$SiteID = as.factor(data$SiteID)
 #### 2. Create global survival, growth and fecundity models using data from all sites ###
 #*******************************************************************************
 
-# Create a vector of unique Site names for subsetting 
+# Create a vector of unique Site names for subsetting (n=8)
 site=unique(data$SiteID)
 
 # Set up data frame of model parameters
@@ -72,28 +70,31 @@ params=c()
   ### 3A. Survival ###
   #*******************************************************************************
 
-  # Read in top survival model output (Formula: Surv ~ logSize + (1 | Plot))
+  # Read in top survival model output (Formula: Surv ~ logSize + Site + (1 | Plot))
   surv.reg=load("Robjects/surv.reg.rda")
 
   # Get model coefficients
   fixef(s6)
   
   # Store model coefficients
-  params$surv.int=fixef(s6)[1] 
+  params$site=site
   params$surv.slope=fixef(s6)[2] 
-  params$site=rownames(coefficients(s6)$SiteID)
+  params$surv.globint=fixef(s6)[1] 
+  params$surv.siteint=c(0,fixef(s6)[3:9])
   
+  
+    
   #*******************************************************************************
   ### 3B. Growth ###
   #*******************************************************************************
   
-  # Read in top growth model output (Formula: logSizeNext ~ logSize + (logSize | Site) + (1 | Year))
-  growth.reg=load("R_output/growth.reg.rda")
+  # Read in top growth model output (Formula: logSizeNext ~ logSize + Site + (1 | Plot)
+  growth.reg=load("Robjects/growth.reg.rda")
   
   # Store model coefficients
-  params$growth.int=coefficients(g4)$Site[,1] 
-  params$growth.slope=coefficients(g4)$Site[,2] 
-  params$growth.sd=rep(sigma(g4),times=length(site)) 
+  params$growth.int=coefficients(g6)$Site[,1] 
+  params$growth.slope=coefficients(g6)$Site[,2] 
+  params$growth.sd=rep(sigma(g6),times=length(site)) 
   
   #*******************************************************************************
   ### 3C. Flowering ###
