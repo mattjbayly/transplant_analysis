@@ -13,48 +13,9 @@ require(glmmADMB)
 require(plyr)
 require(dplyr)
 require(tidyverse)
+require(stringr)
 
-# set working directory
-# setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
-
-#*******************************************************************************
-#### 1. Import and format data ###
-#*******************************************************************************
-
-data <- read_csv("Data/IPMData_transplant.csv")
-head(data)
-
-# log-transform size
-data <- data %>% mutate(z = log(z), z1 = log(z1))
-
-# make sure plot and site are recognized as factors
-data$PlotID = as.factor(data$PlotID)
-data$SiteID = as.factor(data$SiteID)
-
-# Variables are: 
-
-# Surv: survival (1) or not (0) of individuals between time = t and time = t+1 
-# z (= Seema's logSize): total stem length of the individual
-# z1 (= Seema's logSizeNext): same as "logSize" above, for t+1
-# Repr (= Seema's Fec0): Flowering yes (1) or no (0)
-# Fec (= Seema's Fec1): Total number of fruits per individual   
-# SiteID: population
-# PlotID: plot
-# Region: within or beyond northern range edge
-# ID: unique identifier for each individual
-# NewPlot_13: don't know what this is
-# NewPlot_14: ditto
-# Year: annual transition 
-
-# Not included in Matt's file but could bind in from other sources?
-
-# Latitude: latitude of population
-# Longitude: longitude of population
-# Elevation: elevation of population
-# SeedCt: mean seed count, rounded to the nearest integer, for each site
-# ClassNext: stage class (juvenile, adult, dead, or NA) of plant at time = t+1 
-
-
+# (deleted 1. import and format data; we are using saved models)
 
 #*******************************************************************************
 #### 2. Create global survival, growth and fecundity models using data from all sites ###
@@ -78,11 +39,9 @@ params=c()
   
   # Store model coefficients
   params$site=site
-  params$surv.slope=fixef(s6)[2] 
   params$surv.globint=fixef(s6)[1] 
   params$surv.siteint=c(0,fixef(s6)[3:9])
-  
-  
+  params$surv.slope=fixef(s6)[2] 
     
   #*******************************************************************************
   ### 3B. Growth ###
@@ -91,62 +50,60 @@ params=c()
   # Read in top growth model output (Formula: logSizeNext ~ logSize + Site + (1 | Plot)
   growth.reg=load("Robjects/growth.reg.rda")
   
+  # Get model coefficients
+  fixef(g6)
+  
   # Store model coefficients
-  params$growth.int=coefficients(g6)$Site[,1] 
-  params$growth.slope=coefficients(g6)$Site[,2] 
+  params$growth.globint=fixef(g6)[1] 
+  params$growth.siteint=c(0,fixef(g6)[3:9])
+  params$growth.slope=fixef(g6)[2] 
   params$growth.sd=rep(sigma(g6),times=length(site)) 
   
   #*******************************************************************************
   ### 3C. Flowering ###
   #*******************************************************************************
   
-  # Read in top flowering model output (Formula: Fec0 ~ logSize + (logSize | Site) + (logSize | Year))
-  flowering.reg=load("R_output/flowering.reg.rda")
+  # Read in top flowering model output (Formula: Fec0 ~ logSize + Site + (1 | Plot))
+  flowering.reg=load("Robjects/flowering.reg.rda")
 
   # Store model coefficients
-  params$flowering.int=coefficients(fl3)$Site[,1] 
-  params$flowering.slope=coefficients(fl3)$Site[,2] 
+  params$flowering.globint=fixef(fl6)[1] 
+  params$flowering.siteint=c(0,fixef(fl6)[3:9])
+  params$flowering.slope=fixef(fl6)[2] 
   
   #*******************************************************************************
   ### 3D. Fruit number (untransformed) using negative binomial regression ###
   #*******************************************************************************
   
-  # Read in top model output for fruit.reg (Formula: Fec0 ~ logSize + (logSize | Site) + (logSize | Year))   
-  fruit.reg=load("R_output/fruit.reg.rda")
+  # Read in top model output for fruit.reg (Formula: Fec0 ~ logSize + Site + (1 | Plot))   
+  fruit.reg=load("Robjects/fruit.reg.rda")
 
   # Store model coefficients
-  params$fruit.int=fixef(fr6)[1]+ranef(fr6)$Site[,1] 
-  params$fruit.slope=fixef(fr6)[2]+ranef(fr6)$Site[,2] 
-
-  #*******************************************************************************
-  ### 3E. Size distribution of recruits ###
-  #*******************************************************************************
-  recruit.size.mean=tapply(data$logSizeNext[is.na(data$logSize)],data$Site[is.na(data$logSize)],FUN="mean") %>% data.frame()
-  recruit.size.sd=tapply(data$logSizeNext[is.na(data$logSize)],data$Site[is.na(data$logSize)],FUN="sd") %>% data.frame()
+  params$fruits.globint=fixef(fr9)[1] 
+  params$fruits.siteint=c(0,fixef(fr9)[3:9])
+  params$fruits.slope=fixef(fr9)[2] 
   
-  params$recruit.logSize.mean=recruit.size.mean[,1]  
-  params$recruit.logSize.sd=recruit.size.sd[,1]  
-  
-  params$recruit.logSize.mean[is.na(params$recruit.logSize.mean)]=0
-  params$recruit.logSize.sd[is.na(params$recruit.logSize.sd)]=0
-
   #*******************************************************************************
-  ### 3F. Create data frame of site-specific parameter estimates ###
+  ### 3E. Create data frame of site-specific parameter estimates ###
   #*******************************************************************************
   
   params=data.frame(params)
 
   #*******************************************************************************
-  ### 3G. Number of seeds per fruit ###
+  ### 3F. Number of seeds per fruit (constant across sites) ###
   #*******************************************************************************
   
-  seeds.per.site=tapply(data$SeedCt,data$Site,FUN=min,na.rm=T) # obtain mean seed counts per fruit per site
-  seeds.per.site=data.frame(seeds.per.site,rownames(seeds.per.site)) # make into a data frame
-  colnames(seeds.per.site)=c("seed.ct","Site") # define column names for merging
-  params=merge(params,seeds.per.site,by.x="Site",by.y="Site") # site-specific seed counts; note that this only works because both data frames are ordered in the same way!
+  # from demography data
+  seeds <- read_csv("Data/Amy_wild_demo_data/fec2.seed.per.fruit.2010.2011.2012.csv")
+  
+  seeds.sources <- seeds %>% 
+    filter(site=="Coast Fork of Williamette"|site=="Rock Creek") %>% 
+    summarize(seeds.per.fruit = mean(newgrandmean))  
+  
+  params$seeds.per.fruit = seeds.sources$seeds.per.fruit
 
   #*******************************************************************************
-  ### 3H. Establishment probability ###
+  ### 3G. Establishment probability (constant across sites) ###
   #*******************************************************************************
   
   # Obtain number of new recruits per site
@@ -165,8 +122,24 @@ params=c()
   # Set establishment probability as 0 for Hauser Creek (was calculated as NA because Hauser creek has 0 new recruits)
   params$establishment.prob[is.na(params$establishment.prob)]=0	
 
-  # Store parameters in .csv file for later use
-  write.csv(params,"R_output/vital_rate_coefficients.csv",row.names=FALSE)
+  #*******************************************************************************
+  ### 3H. Size distribution of recruits (constant across sites) ###
+  #*******************************************************************************
+  
+  # from the demography dataset 
+  Rec_dist <- read_csv("Robjects/lnormFecKern.csv")
+  
+  N_Rec_dist <- Rec_dist %>% 
+    filter(Reg=="N") %>% 
+    summarize(recruit.size.mean=mean(meanlog),
+              recruit.size.sd=mean(sdlog))
+  
+  params$recruit.logSize.mean=N_Rec_dist$recruit.size.mean
+  params$recruit.logSize.sd=N_Rec_dist$recruit.size.sd
+
+
+#### Store parameters in .csv file for later use
+write.csv(params,"R_output/vital_rate_coefficients.csv",row.names=FALSE)
   
 #*******************************************************************************
 ### 4. Create site-specific IPMs parameterized by site-specific parameters derived from global vital rates models 
