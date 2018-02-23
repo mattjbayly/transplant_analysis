@@ -7,7 +7,7 @@
 #### DATE LAST MODIFIED: 20171110
 
 #read in data
-data=read.csv("Data/Mcard_demog_data_2010-2013.csv") #17660 rows of data
+data=read.csv("Data/Amy_wild_demo/Mcard_demog_data_2010-2013.csv") #17660 rows of data
 
 #*******************************************************************************
 #### 1) Convert certain columns to factors and sort in order of descending latitude
