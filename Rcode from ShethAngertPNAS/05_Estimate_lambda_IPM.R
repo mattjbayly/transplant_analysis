@@ -97,7 +97,7 @@ params=c()
   seeds <- read_csv("Data/Amy_wild_demo_data/fec2.seed.per.fruit.2010.2011.2012.csv")
   
   seeds.sources <- seeds %>% 
-    filter(site=="Coast Fork of Williamette"|site=="Rock Creek") %>% 
+    filter(site=="Coast Fork of Williamette"|site=="Rock Creek"|site=="Canton Creek") %>% 
     summarize(seeds.per.fruit = mean(newgrandmean))  
   
   params$seeds.per.fruit = seeds.sources$seeds.per.fruit
