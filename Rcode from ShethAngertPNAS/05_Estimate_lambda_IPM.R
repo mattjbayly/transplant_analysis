@@ -209,7 +209,7 @@ write.csv(params,"Robjects/vital_rate_coefficients.csv",row.names=FALSE)
     site.lambda=data.frame(Site,lambda)
     
 #*******************************************************************************
-### 5. Merge site information with lambda estimates and save to .csv file
+### 5. Merge site information with vital and lambda estimates and save to .csv files
 #*******************************************************************************
 
 # Read in site info
@@ -217,9 +217,15 @@ site.info=read_csv("Data/raw_data/WunderGround/sites.csv")
     
 # merge site info with lambda estimates
 site.lambda=left_join(site.lambda, site.info, by=c("Site" = "ID2"))
+site.vitals=left_join(params, site.info, by=c("site" = "ID2"))
 
 plot(lambda ~ lat, data=site.lambda) # looks qualitatively the same as in Matt's thesis
+plot(surv.int ~ lat, data=site.vitals) # 
+plot(growth.int ~ lat, data=site.vitals) # 
+plot(flowering.int ~ lat, data=site.vitals) # 
+plot(fruits.int ~ lat, data=site.vitals) # 
 
 # save to .csv file 
 write.csv(site.lambda,"Robjects/site.lambda.csv",row.names=FALSE)
+write.csv(site.vitals,"Robjects/site.vitals.csv",row.names=FALSE)
 
