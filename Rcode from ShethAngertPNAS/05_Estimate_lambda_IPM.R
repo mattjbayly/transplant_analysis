@@ -15,14 +15,48 @@ require(dplyr)
 require(tidyverse)
 require(stringr)
 
-# (deleted 1. import and format data; we are using saved models)
+#*******************************************************************************
+#### 1. Import and format data ###
+#*******************************************************************************
+# these data are used to fill in the gap from fruits to recruits
+# from Sheth and Angert 2018 from survey of natural populations
+
+# individual-level data
+# run data prep script to clean up and import data
+source("Rcode/data_prep.R")
+head(demo.data)
+head(site_fruit_count_data)
+
+# filter to northern sites only
+demo.dat.north <- demo.data %>% 
+  filter(Site=="Rock Creek"|Site=="Canton Creek"|Site=="Coast Fork of Williamette") %>% 
+  droplevels()
+head(demo.dat.north)
+
+site_fruit_count_north <- site_fruit_count_data %>% 
+  filter(Site=="Rock Creek"|Site=="Canton Creek"|Site=="Coast Fork of Williamette") %>% 
+  droplevels()
+head(site_fruit_count_north)
+
+# seeds per fruit
+seeds <- read_csv("Data/Amy_wild_demo_data/fec2.seed.per.fruit.2010.2011.2012.csv")
+head(seeds)
+
+# filter to northern sites only
+seeds.north <- seeds %>% 
+  filter(site=="Coast Fork of Williamette"|site=="Rock Creek"|site=="Canton Creek") %>% 
+  droplevels()
+
+# these are Matt's transplant data
+# only need them here to get site name vector
+matt_dat <- read_csv("Data/IPMData_transplant.csv")
 
 #*******************************************************************************
-#### 2. Create global survival, growth and fecundity models using data from all sites ###
+#### 2. Read in global survival, growth and fecundity models using data from all sites ###
 #*******************************************************************************
 
 # Create a vector of unique Site names for subsetting (n=8)
-site=unique(data$SiteID)
+site=unique(matt_dat$SiteID)
 
 # Set up data frame of model parameters
 params=c()
@@ -93,53 +127,41 @@ params=c()
   ### 3F. Number of seeds per fruit (constant across sites) ###
   #*******************************************************************************
   
-  # from demography data
-  seeds <- read_csv("Data/Amy_wild_demo_data/fec2.seed.per.fruit.2010.2011.2012.csv")
+  seeds.north.mean <- seeds.north %>% 
+    summarize(seeds.per.fruit = mean(newgrandmean)) 
   
-  seeds.sources <- seeds %>% 
-    filter(site=="Coast Fork of Williamette"|site=="Rock Creek"|site=="Canton Creek") %>% 
-    summarize(seeds.per.fruit = mean(newgrandmean))  
-  
-  params$seeds.per.fruit = seeds.sources$seeds.per.fruit
+  params$seeds.per.fruit = seeds.north.mean$seeds.per.fruit
 
   #*******************************************************************************
   ### 3G. Establishment probability (constant across sites) ###
   #*******************************************************************************
   
-  # Obtain number of new recruits per site
-  recruit.number=tapply(data$logSizeNext[is.na(data$logSize)],data$Site[is.na(data$logSize)],FUN="length") %>% data.frame()
-  colnames(recruit.number)="recruit.number"
+  # Obtain number of new recruits per 3 northern sites
+  recruit.number.per.site=tapply(demo.dat.north$logSizeNext[is.na(demo.dat.north$logSize)],demo.dat.north$Site[is.na(demo.dat.north$logSize)],FUN="length") %>% data.frame()
+  colnames(recruit.number.per.site)="recruit.number"
   
-  # Obtain total fruit count per site 
-  fruits.per.site=tapply(site_fruit_count_data$Fec1[!is.na(site_fruit_count_data$Fec1)],site_fruit_count_data$Site[!is.na(site_fruit_count_data$Fec1)],sum)
-  
+  # Obtain total fruit count per 3 northern sites 
+  fruits.per.site=tapply(demo.dat.north$Fec1[!is.na(demo.dat.north$Fec1)],demo.dat.north$Site[!is.na(demo.dat.north$Fec1)],sum)
+
   # Obtain total seed count per site (= # fruits per site * # seeds per fruit per site)
-  total.seeds.per.site=fruits.per.site*seeds.per.site$seed.ct	
+  total.seeds.per.site=fruits.per.site*seeds.north$newgrandmean	
   
   # Estimate establishment probability as # of new recruits/# of seeds
-  params$establishment.prob=recruit.number$recruit.number/total.seeds.per.site
+  params$establishment.prob=mean(recruit.number.per.site$recruit.number/total.seeds.per.site)
   
-  # Set establishment probability as 0 for Hauser Creek (was calculated as NA because Hauser creek has 0 new recruits)
-  params$establishment.prob[is.na(params$establishment.prob)]=0	
-
   #*******************************************************************************
   ### 3H. Size distribution of recruits (constant across sites) ###
   #*******************************************************************************
   
-  # from the demography dataset 
-  Rec_dist <- read_csv("Robjects/lnormFecKern.csv")
+  recruit.size.mean=mean(demo.dat.north$logSizeNext[is.na(demo.dat.north$logSize)])
+  recruit.size.sd=sd(demo.dat.north$logSizeNext[is.na(demo.dat.north$logSize)])
   
-  N_Rec_dist <- Rec_dist %>% 
-    filter(Reg=="N") %>% 
-    summarize(recruit.size.mean=mean(meanlog),
-              recruit.size.sd=mean(sdlog))
+  params$recruit.logSize.mean=recruit.size.mean  
+  params$recruit.logSize.sd=recruit.size.sd  
   
-  params$recruit.logSize.mean=N_Rec_dist$recruit.size.mean
-  params$recruit.logSize.sd=N_Rec_dist$recruit.size.sd
-
 
 #### Store parameters in .csv file for later use
-write.csv(params,"R_output/vital_rate_coefficients.csv",row.names=FALSE)
+write.csv(params,"Robjects/vital_rate_coefficients.csv",row.names=FALSE)
   
 #*******************************************************************************
 ### 4. Create site-specific IPMs parameterized by site-specific parameters derived from global vital rates models 
@@ -162,7 +184,7 @@ write.csv(params,"R_output/vital_rate_coefficients.csv",row.names=FALSE)
     ### 4B. Create survival, growth, and fecundity functions and build IPM by running integral_projection_model.R script
     #*******************************************************************************
     
-    source("R_scripts/integral_projection_model.R")
+    source("Rcode/integral_projection_model.R")
     
     #*******************************************************************************
     ### 4C. Obtain lambda estimate for site f
