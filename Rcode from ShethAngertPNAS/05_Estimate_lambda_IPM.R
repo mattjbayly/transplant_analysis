@@ -2,7 +2,7 @@
 #### PURPOSE: Create data frame of vital rate parameters and build integral projection models 
 ############# Obtain estimates of lambda for each transplant site
 #### AUTHOR: modified from Seema Sheth (Sheth & Angert 2018 PNAS)
-#### DATE LAST MODIFIED: 20171110
+#### DATE LAST MODIFIED: 20180224
 
 # remove objects and clear workspace
 rm(list = ls(all=TRUE))
