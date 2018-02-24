@@ -30,8 +30,8 @@ p.flower.x=function(x,params1) {
 
 f.yx=function(xp,x,params1) {
   p.flower.x(x,params1)*
-    exp(params1$fruit.int+params1$fruit.slope*x)*
-    params1$seed.ct*
+    exp(params1$fruits.int+params1$fruits.slope*x)*
+    params1$seeds.per.fruit*
     params1$establishment.prob*
     dnorm(xp,mean=params1$recruit.logSize.mean,sd=params1$recruit.logSize.sd) }
 
