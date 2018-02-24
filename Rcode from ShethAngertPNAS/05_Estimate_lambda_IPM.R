@@ -48,8 +48,16 @@ seeds.north <- seeds %>%
   droplevels()
 
 # these are Matt's transplant data
-# only need them here to get site name vector
+# need them here to get site name vector
+# also, they are used by source file 'integral_projection_model.R' below
 matt_dat <- read_csv("Data/IPMData_transplant.csv")
+
+# log-transform size
+matt_dat <- matt_dat %>% mutate(logSize = log(z), logSizeNext = log(z1), Fec0 = Repr, Fec1 = Fec)
+
+# make sure plot and site are recognized as factors
+matt_dat$PlotID = as.factor(matt_dat$PlotID)
+matt_dat$SiteID = as.factor(matt_dat$SiteID)
 
 #*******************************************************************************
 #### 2. Read in global survival, growth and fecundity models using data from all sites ###
@@ -75,7 +83,8 @@ params=c()
   params$site=site
   params$surv.globint=fixef(s6)[1] 
   params$surv.siteint=c(0,fixef(s6)[3:9])
-  params$surv.slope=fixef(s6)[2] 
+  params$surv.slope=fixef(s6)[2]
+  params$surv.int = params$surv.globint + params$surv.siteint
     
   #*******************************************************************************
   ### 3B. Growth ###
@@ -92,6 +101,7 @@ params=c()
   params$growth.siteint=c(0,fixef(g6)[3:9])
   params$growth.slope=fixef(g6)[2] 
   params$growth.sd=rep(sigma(g6),times=length(site)) 
+  params$growth.int = params$growth.globint + params$growth.siteint
   
   #*******************************************************************************
   ### 3C. Flowering ###
@@ -104,6 +114,7 @@ params=c()
   params$flowering.globint=fixef(fl6)[1] 
   params$flowering.siteint=c(0,fixef(fl6)[3:9])
   params$flowering.slope=fixef(fl6)[2] 
+  params$flowering.int = params$flowering.globint + params$flowering.siteint
   
   #*******************************************************************************
   ### 3D. Fruit number (untransformed) using negative binomial regression ###
@@ -116,6 +127,7 @@ params=c()
   params$fruits.globint=fixef(fr9)[1] 
   params$fruits.siteint=c(0,fixef(fr9)[3:9])
   params$fruits.slope=fixef(fr9)[2] 
+  params$fruits.int = params$fruits.globint + params$fruits.siteint
   
   #*******************************************************************************
   ### 3E. Create data frame of site-specific parameter estimates ###
@@ -176,9 +188,9 @@ write.csv(params,"Robjects/vital_rate_coefficients.csv",row.names=FALSE)
   Site=character()
   
   for (f in 1:length(site)) {
-    data1=subset(data,Site==site[f])
-    params1=subset(params,Site==site[f])
-    params1=subset(params1,select=-Site)
+    data1=subset(matt_dat,SiteID==site[f])
+    params1=subset(params,site==site[f])
+    params1=subset(params1,select=-c(site,surv.globint, surv.siteint, growth.globint, growth.siteint, flowering.globint, flowering.siteint, fruits.globint, fruits.siteint))
     
     #*******************************************************************************
     ### 4B. Create survival, growth, and fecundity functions and build IPM by running integral_projection_model.R script
@@ -201,12 +213,14 @@ write.csv(params,"Robjects/vital_rate_coefficients.csv",row.names=FALSE)
 ### 5. Merge site information with lambda estimates and save to .csv file
 #*******************************************************************************
 
-# Create data frame of Site, Latitude, Longitude, Region, and Elevation for hypothesis testing
-site.info=subset(data,select=c(Site,Latitude,Longitude,Elevation,Region,RegionRank)) %>% unique() %>% arrange(-Latitude)
+# Read in site info
+site.info=read_csv("Data/raw_data/WunderGround/sites.csv")
     
 # merge site info with lambda estimates
-site.info=join(site.info,site.lambda)
+site.lambda=left_join(site.lambda, site.info, by=c("Site" = "ID2"))
+
+plot(lambda ~ lat, data=site.lambda) # looks qualitatively the same as in Matt's thesis
 
 # save to .csv file 
-write.csv(site.info,"R_output/site.lambda.csv",row.names=FALSE)
+write.csv(site.lambda,"Robjects/site.lambda.csv",row.names=FALSE)
 
