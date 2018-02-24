@@ -33,7 +33,7 @@ data <- read_csv("Data/IPMData_transplant.csv")
 head(data)
 
 # log-transform size
-data <- data %>% mutate(z = log(z), z1 = log(z1))
+data <- data %>% mutate(logSize = log(z), logSizeNext = log(z1), Fec0 = Repr, Fec1 = Fec)
 
 # make sure plot and site are recognized as factors
 data$PlotID = as.factor(data$PlotID)
@@ -42,8 +42,8 @@ data$SiteID = as.factor(data$SiteID)
 # Variables are: 
 
 # Surv: survival (1) or not (0) of individuals between time = t and time = t+1 
-# z (= Seema's logSize): total stem length of the individual
-# z1 (= Seema's logSizeNext): same as "logSize" above, for t+1
+# logSize: total stem length of the individual at time t
+# logSizeNext: total stem length of the individual at time t+1
 # Repr (= Seema's Fec0): Flowering yes (1) or no (0)
 # Fec (= Seema's Fec1): Total number of fruits per individual   
 # SiteID: population
@@ -67,7 +67,7 @@ data$SiteID = as.factor(data$SiteID)
 #*******************************************************************************
 
 # fixed effects model w/ and w/out size
-s1=glm(Surv~z,data=data,family=binomial)
+s1=glm(Surv~logSize,data=data,family=binomial)
 s2=glm(Surv~1,data=data,family=binomial)
 model.sel(s1,s2) # model w/ size is preferred
 
@@ -77,29 +77,30 @@ sr=glmer(Surv~(1|SiteID),data=data,family=binomial)
 model.sel(sf,sr) # fixed is preferred (is this a legit comparison??)
 
 # A. interaction size x site; random intercepts & random slopes for Plot
-s3=glmer(Surv~z*SiteID+(z|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+s3=glmer(Surv~logSize*SiteID+(logSize|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # B. interaction size x site; random intercepts & constant slope for Plot
-s4=glmer(Surv~z*SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+s4=glmer(Surv~logSize*SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # C. main effects size + site; random intercepts & random slopes for Plot
-s5=glmer(Surv~z+SiteID+(z|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+s5=glmer(Surv~logSize+SiteID+(logSize|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 # warnings!
 
 # D. main effects size + site; random intercepts & constant slope for Plot
-s6=glmer(Surv~z+SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+s6=glmer(Surv~logSize+SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # E. interaction size x site; random intercepts & random slopes for Plot nested within Site
-s7=glmer(Surv~z*SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+s7=glmer(Surv~logSize*SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+# warnings
 
 # F. interaction size x site; random intercepts & constant slope for Plot nested within Site
-s8=glmer(Surv~z*SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+s8=glmer(Surv~logSize*SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # G. main effects size + site; random intercepts & random slopes for Plot nested within Site
-s9=glmer(Surv~z+SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+s9=glmer(Surv~logSize+SiteID+(logSize|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # H. main effects size + site; random intercepts & constant slope for Plot nested within Site
-s10=glmer(Surv~z+SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+s10=glmer(Surv~logSize+SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # Compare models
 anova(s3, s4, s5, s6, s7, s8, s9, s10)
@@ -118,33 +119,34 @@ save(s6, file='Robjects/surv.reg.rda')
 #*******************************************************************************
 
 # fixed effects model w/ and w/out size
-g1=glm(z1~z,data=data[!is.na(data$z),])
-g2=glm(z1~1,data=data[!is.na(data$z),])
+g1=glm(logSizeNext~logSize,data=data[!is.na(data$logSize),])
+g2=glm(logSizeNext~1,data=data[!is.na(data$logSize),])
 model.sel(g1,g2) # model w/ size is preferred
 
 # A. interaction Site x Size; random intercepts & random slopes for Plot
-g3=lmer(z1~z*SiteID+(z|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+g3=lmer(logSizeNext~logSize*SiteID+(logSize|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
 
 # B. interaction Site x Size; random intercepts & random slopes for Plot
-g4=lmer(z1~z*SiteID+(1|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+g4=lmer(logSizeNext~logSize*SiteID+(1|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
 
 # C. main effects Site + Size; random intercepts & random slopes for Plot
-g5=lmer(z1~z+SiteID+(z|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+g5=lmer(logSizeNext~logSize+SiteID+(logSize|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
 
 # D. main effects Site + Size; random intercepts & constant slope for Plot
-g6=lmer(z1~z+SiteID+(1|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+g6=lmer(logSizeNext~logSize+SiteID+(1|PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
 
 # E. interaction Site x Size; random intercepts & random slopes for Plot nested within Site
-g7=lmer(z1~z*SiteID+(z|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) # warnings
+g7=lmer(logSizeNext~logSize*SiteID+(logSize|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) # warnings
 
 # F. interaction Site x Size; random intercepts & random slopes for Plot nested within Site
-g8=lmer(z1~z*SiteID+(1|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+g8=lmer(logSizeNext~logSize*SiteID+(1|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+
 # G. main effects Site + Size; random intercepts & random slopes for Plot nested within Site
-g9=lmer(z1~z+SiteID+(z|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000)))
+g9=lmer(logSizeNext~logSize+SiteID+(logSize|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000)))
 # warnings
 
 # H. main effects Site + Size; random intercepts & constant slope for Plot nested within Site
-g10=lmer(z1~z+SiteID+(1|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
+g10=lmer(logSizeNext~logSize+SiteID+(1|SiteID/PlotID),data=data,control=lmerControl(optimizer = "bobyqa")) 
 # warnings
 
 # Compare models
@@ -164,33 +166,33 @@ save(g6, file='Robjects/growth.reg.rda')
 #*******************************************************************************
 
 # fixed effects model w/ and w/out size
-fl1=glm(Repr~z,data=data,family=binomial)
-fl2=glm(Repr~1,data=data,family=binomial)
+fl1=glm(Fec0~logSize,data=data,family=binomial)
+fl2=glm(Fec0~1,data=data,family=binomial)
 model.sel(fl1,fl2) # model w/ size is preferred
 
 # A. interaction Site x Size; random intercepts & random slopes for Plot
-fl3=glmer(Repr~z*SiteID+(z|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+fl3=glmer(Fec0~logSize*SiteID+(logSize|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # B. interaction Site x Size; random intercepts & constant slope for Plot
-fl4=glmer(Repr~z*SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+fl4=glmer(Fec0~logSize*SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # C. main effects Site + Size; random intercepts & random slopes for Plot
-fl5=glmer(Repr~z+SiteID+(z|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
+fl5=glmer(Fec0~logSize+SiteID+(logSize|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
 
 # D. main effects Site + Size; random intercepts & constant slope for Plot
-fl6=glmer(Repr~z+SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
+fl6=glmer(Fec0~logSize+SiteID+(1|PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
 
 # E. interaction Site x Size; random intercepts & random slopes for Plot nested within Site
-fl7=glmer(Repr~z*SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+fl7=glmer(Fec0~logSize*SiteID+(logSize|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # F. interaction Site x Size; random intercepts & constant slope for Plot nested within Site
-fl8=glmer(Repr~z*SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+fl8=glmer(Fec0~logSize*SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 
 # G. main effects Site + Size; random intercepts & random slopes for Plot nested within Site
-fl9=glmer(Repr~z+SiteID+(z|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
+fl9=glmer(Fec0~logSize+SiteID+(logSize|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
 
 # H. main effects Site + Size; random intercepts & constant slope for Plot nested within Site
-fl10=glmer(Repr~z+SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+fl10=glmer(Fec0~logSize+SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 # warning
 
 # Compare models
@@ -213,8 +215,8 @@ save(fl6, file='Robjects/flowering.reg.rda')
 	   ####5A. Fit fixed effects models (GLMs) only for initial exploratory model selection of variance structure (poisson vs. negative binomial)
 	   #*******************************************************************************
 	  
-	   fr1=glm(Fec~z,data=data,na.action=na.omit,family=poisson) # poisson without 0-inflation 
-	   fr2=glm.nb(Fec~z,data=data,na.action=na.omit) # negative binomial without 0-inflation
+	   fr1=glm(Fec1~logSizeNext,data=data,na.action=na.omit,family=poisson) # poisson without 0-inflation 
+	   fr2=glm.nb(Fec1~logSizeNext,data=data,na.action=na.omit) # negative binomial without 0-inflation
 	   #fr3=zeroinfl(Fec~z,data=data,na.action=na.omit,dist="poisson") # poisson with 0-inflation
 	   #fr4=zeroinfl(Fec~z,data=data,na.action=na.omit,dist="negbin") # negative binomial with 0-inflation
 	   model.sel(fr1,fr2)#,fr3,fr4) 
@@ -222,7 +224,7 @@ save(fl6, file='Robjects/flowering.reg.rda')
 	   
 	   # PREFERRED MODEL IS fr2 (negative binomial w/out 0-inflation)
 	   # fixed effects model w/ and w/out size
-	  	fr5=glm.nb(Fec~1,data=data,na.action=na.omit)
+	  	fr5=glm.nb(Fec1~1,data=data,na.action=na.omit)
 	  	model.sel(fr2,fr5) # model w/ size is preferred
 	  	
 		#*******************************************************************************
@@ -230,28 +232,28 @@ save(fl6, file='Robjects/flowering.reg.rda')
 		#*******************************************************************************
 		
 		# A. interaction of Size x Site; random intercepts & random slopes for Plot
-		fr6=glmmadmb(Fec~z*SiteID+(z|PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
+		fr6=glmmadmb(Fec1~logSize*SiteID+(logSize|PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log") 
 		
 		# B. interaction of Size x Site; random intercepts & constant slope for Plot
-		fr7=glmmadmb(Fec~z*SiteID+(1|PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
+		fr7=glmmadmb(Fec1~logSize*SiteID+(1|PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log") 
 		
 		# C. main effects of Size + Site; random intercepts & random slopes for Plot
-		fr8=glmmadmb(Fec~z+SiteID+(z|PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
+		fr8=glmmadmb(Fec1~logSize+SiteID+(logSize|PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log") 
 		
 		# D. main effects of Size + Site; random intercepts & constant slope for Plot
-		fr9=glmmadmb(Fec~z+SiteID+(1|PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log")
+		fr9=glmmadmb(Fec1~logSize+SiteID+(1|PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
 		
 		# E. interaction of Size x Site; random intercepts & random slopes for Plot nested within Site
-		fr10=glmmadmb(Fec~z*SiteID+(z|SiteID/PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
+		fr10=glmmadmb(Fec1~logSize*SiteID+(logSize|SiteID/PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log") 
 		
 		# F. interaction of Size x Site; random intercepts & constant slope for Plot nested within Site
-		fr11=glmmadmb(Fec~z*SiteID+(1|SiteID/PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
+		fr11=glmmadmb(Fec1~logSize*SiteID+(1|SiteID/PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log") 
 		
 		# G. main effects of Size + Site; random intercepts & random slopes for Plot nested within Site
-		fr12=glmmadmb(Fec~z+SiteID+(z|SiteID/PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log") 
+		fr12=glmmadmb(Fec1~logSize+SiteID+(logSize|SiteID/PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log") 
 		
 		# H. main effects of Size + Site; random intercepts & constant slope for Plot nested within Site
-		fr13=glmmadmb(Fec~z+SiteID+(1|SiteID/PlotID),data=data[!is.na(data$Fec),],family="nbinom",link="log")
+		fr13=glmmadmb(Fec1~logSize+SiteID+(1|SiteID/PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
 
 				# Compare models	
 		AICc(fr6,fr7,fr8,fr9,fr10,fr11,fr12,fr13) 
