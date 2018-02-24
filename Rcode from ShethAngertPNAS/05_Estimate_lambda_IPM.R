@@ -13,7 +13,6 @@ require(glmmADMB)
 require(plyr)
 require(dplyr)
 require(tidyverse)
-require(stringr)
 
 #*******************************************************************************
 #### 1. Import and format data ###
