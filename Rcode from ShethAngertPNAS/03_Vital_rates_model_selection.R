@@ -3,7 +3,7 @@
 ############# Vital rates include survival, growth, flowering, and fruit count
 ############# Fixed effects: size, site; Random effects: plot
 #### AUTHOR: modified from Seema Sheth (Sheth & Angert 2018 PNAS)
-#### DATE LAST MODIFIED: 20180220
+#### DATE LAST MODIFIED: 20180224
 
 # remove objects and clear workspace
 rm(list = ls(all=TRUE))
