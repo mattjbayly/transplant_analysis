@@ -1,7 +1,7 @@
 #### PROJECT: Mimulus cardinalis demography 2010-2014
 #### PURPOSE: Create vital rate functions and build integral projection model to calculate lambda, population growth rate
 #### AUTHOR: Seema Sheth
-#### DATE LAST MODIFIED: 20171110
+#### DATE LAST MODIFIED: 20180224 (by ALA: updated file paths and variable names to match 05_Estimate_lambda_IPM.R)
 
 #*******************************************************************************
 ### 1. Build vital rate functions
