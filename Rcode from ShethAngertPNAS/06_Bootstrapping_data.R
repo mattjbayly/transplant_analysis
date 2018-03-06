@@ -28,7 +28,7 @@ matt_dat <- matt_dat %>% mutate(logSize = log(z), logSizeNext = log(z1), Fec0 = 
 # make sure plot and site are recognized as factors
 matt_dat$PlotID = as.factor(matt_dat$PlotID)
 matt_dat$SiteID = as.factor(matt_dat$SiteID)
-matt_dat$YearID = as.factor(matt_dat$Year)
+matt_dat$Year = as.factor(matt_dat$Year)
 
 # individual-level data
 # run data prep script to clean up and import data
@@ -44,7 +44,7 @@ site_fruit_count_north <- site_fruit_count_data %>%
   filter(Site=="Rock Creek"|Site=="Canton Creek"|Site=="Coast Fork of Williamette") %>% 
   droplevels()
 
-# using demo.dat.north for new recruits
+# get new recruits from demo.dat.north
 recruits <- demo.dat.north %>% filter(is.na(logSize))
  
 # seeds per fruit
@@ -69,9 +69,11 @@ seeds.north[seeds.north$site=="Canton Creek",]$mean2012 = NA
 
 # Obtain a data frame of unique IDs from each Site
 ID.by.Site=unique(matt_dat[,c("SiteID", "ID")])
+# n=573 individuals
 
 # Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
 site=unique(matt_dat$SiteID)
+# n=8 sites
 
 # Create empty list to be filled in loop
 data.boot.rep=list()
@@ -107,7 +109,87 @@ saveRDS(bootstrapped.data,"Robjects/Mcard_transplant_INDIV_BOOTSTRAP_data.rds")
 #### 3. Bootstrap the demography data used for fecundity estimates, sampling with replacement from three northern sites ###
 #*******************************************************************************
 
-# Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
+### Required components:
+# Number of seeds per fruit
+  # draw from normal distribution
+# Probability of recruitment 
+  # for denominator, sample individuals with replacement from site_fruit_count_north
+  # for numerator, sample individuals from demo.dat.north and tally recruits
+# Size distribution of recruits
+  # draw recruits with replacement and calculate size distribution
+
+### Number of seeds per fruit
+seeds.dist <- seeds.north %>% 
+  summarize(seeds.mean = mean(c(mean2010, mean2011, mean2012), na.rm=T),
+         seeds.sd = sd(c(mean2010, mean2011, mean2012), na.rm=T))
+
+# Create empty list to be filled in loop
+data.boot.rep=list()
+id.boot=list()
+
+# Set seed for random sampling to obtain reproducible results
+seed=123
+
+# Set number of bootstrap replicate datasets
+n.boot=2000
+
+# Create loop to obtain replicate bootstrap datasets
+data.boot <- lapply(1:n.boot, function(j) { 
+  set.seed(j+seed)
+  rnorm(1, mean=seeds.dist$seeds.mean, sd=seeds.dist$seeds.sd)}) %>% ldply() # 
+  data.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
+  data.boot.rep[[i]]=data.boot # add each site's dataframe of n.boot bootstrap replicates to list
+
+# Convert list to data frame
+bootstrapped.seeds <- do.call(rbind, data.boot.rep) 
+
+# Write bootstrapped datasets to .rds file
+saveRDS(bootstrapped.seeds,"Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")  
+
+
+### Probability of recruitment
+
+# Create a vector of unique Site names for subsetting 
+site=unique(site_fruit_count_north$Site)
+
+# Create empty list to be filled in loop
+data.boot.rep=list()
+id.boot=list()
+
+# Set seed for random sampling to obtain reproducible results
+seed=123
+
+# Set number of bootstrap replicate datasets
+n.boot=2000
+
+# Create loop to obtain replicate bootstrap datasets
+for (i in 1:length(site)) {
+  data.site=subset(site_fruit_count_north,Site==site[i]) # select data from site i
+  id.boot <- lapply(1:n.boot, function(j) { 
+    set.seed(j+seed)
+    sample_n(data.site,size=nrow(data.site), replace = T)}) %>% ldply() # resample rows of fruiting adults with replacement and size=original dataset for each site and convert list to data frame
+  id.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
+  data.boot=join(id.boot,data.site,type="left",match="all") # merge bootstrapped list of unique IDs to full dataset
+  data.boot.rep[[i]]=data.boot # add each site's dataframe of n.boot bootstrap replicates to list
+}
+
+# Convert list to data frame
+bootstrapped.recruits <- do.call(rbind, data.boot.rep) 
+
+bootstrapped.recruit.dist <- bootstrapped.recruits %>% 
+  group_by(Replicate) %>% 
+  summarize(recruit.size.mean = mean(logSizeNext),
+            recruit.size.sd = sd(logSizeNext))
+
+# Write bootstrapped datasets to .rds file
+saveRDS(bootstrapped.recruits,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_data.rds")  
+saveRDS(bootstrapped.recruit.dist,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_dist.rds") 
+
+
+### Size distribution of recruits
+
+# Create a vector of unique Site names for subsetting 
+# don't need to track IDs because each unique individual can only recruit once
 site=unique(recruits$Site)
 
 # Create empty list to be filled in loop
@@ -123,11 +205,9 @@ n.boot=2000
 # Create loop to obtain replicate bootstrap datasets
 for (i in 1:length(site)) {
   data.site=subset(recruits,Site==site[i]) # select data from site i
-#  id.site=subset(ID.by.Site,SiteID==site[i]) # select list of unique individual IDs from site i
   id.boot <- lapply(1:n.boot, function(j) { 
     set.seed(j+seed)
     sample_n(data.site,size=nrow(data.site), replace = T)}) %>% ldply() # resample rows of recruits with replacement and size=original dataset for each site and convert list to data frame
-  
   id.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
   data.boot=join(id.boot,data.site,type="left",match="all") # merge bootstrapped list of unique IDs to full dataset
   data.boot.rep[[i]]=data.boot # add each site's dataframe of n.boot bootstrap replicates to list
@@ -136,5 +216,11 @@ for (i in 1:length(site)) {
 # Convert list to data frame
 bootstrapped.recruits <- do.call(rbind, data.boot.rep) 
 
+bootstrapped.recruit.dist <- bootstrapped.recruits %>% 
+  group_by(Replicate) %>% 
+  summarize(recruit.size.mean = mean(logSizeNext),
+            recruit.size.sd = sd(logSizeNext))
+
 # Write bootstrapped datasets to .rds file
 saveRDS(bootstrapped.recruits,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_data.rds")  
+saveRDS(bootstrapped.recruit.dist,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_dist.rds")  
