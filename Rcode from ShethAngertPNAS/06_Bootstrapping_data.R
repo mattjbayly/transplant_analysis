@@ -174,16 +174,15 @@ for (i in 1:length(site)) {
 }
 
 # Convert list to data frame
-bootstrapped.recruits <- do.call(rbind, data.boot.rep) 
+bootstrapped.fruits <- do.call(rbind, data.boot.rep) 
 
-bootstrapped.recruit.dist <- bootstrapped.recruits %>% 
+bootstrapped.fruit.sum <- bootstrapped.fruits %>% 
   group_by(Replicate) %>% 
-  summarize(recruit.size.mean = mean(logSizeNext),
-            recruit.size.sd = sd(logSizeNext))
+  summarize(total.fruits = sum(Fec1))
 
 # Write bootstrapped datasets to .rds file
-saveRDS(bootstrapped.recruits,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_data.rds")  
-saveRDS(bootstrapped.recruit.dist,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_dist.rds") 
+saveRDS(bootstrapped.fruits,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_data.rds")  
+saveRDS(bootstrapped.recruit.dist,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_sum.rds") 
 
 
 ### Size distribution of recruits
