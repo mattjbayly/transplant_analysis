@@ -64,8 +64,9 @@ results=foreach(i = 1:n.boot,.export=c('lmer'), .packages=c('lme4')) %dopar% {
   growth.reg[[i]]=lmer(logSizeNext~logSize+SiteID+(1|PlotID),data=subset(bootstrapped.data,Replicate==i),control=lmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000)))   
 } # End loop
 
-# save model output
-saveRDS(results,"Robjects/growth.reg_boot.rds")
+# ****save model output MANUALLY****
+# large files will crash Git - move these out of directory and do not commit to git!!!
+# saveRDS(results,"Robjects/growth.reg_boot.rds")
 
 #*******************************************************************************
 #### 4. Flowering probability ###
@@ -79,8 +80,9 @@ flowering <- function(i) {
 # run mixed effects model for survival on each bootstrapped dataset
 flowering.reg <- lapply(1:2000, flowering)
 
-# save model output
-saveRDS(flowering.reg,"Robjects/flowering.reg_boot.rds") # 50+ convergence warnings
+# ****save model output MANUALLY****
+# large files will crash Git - move these out of directory and do not commit to git!!!
+# saveRDS(flowering.reg,"Robjects/flowering.reg_boot.rds") # 50+ convergence warnings
 
 #*******************************************************************************
 #### 5. Fruit # ###
@@ -94,11 +96,12 @@ results=c()
 results=foreach(i = 1:n.boot,.export=c('glmmadmb'), .packages=c('glmmADMB')) %dopar% {
   
   # Inspect model
-  fruit.reg[[i]]=glmmadmb(Fec1~logSize+SiteID+(1|PlotID),data=subset(bootstrapped.data,Replicate==i&!is.na(Fec1)),family="nbinom",link="log")   
+  fruit.reg[[i]]=glmmadmb(Fec1~logSize+SiteID+(1|PlotID)+(1|Year),data=subset(bootstrapped.data,Replicate==i&!is.na(Fec1)),family="nbinom",link="log")   
 } # End loop
 
-# save model outputs
-saveRDS(results,"Robjects/fruit.reg_boot.rds")
+# ****save model output MANUALLY****
+# large files will crash Git - move these out of directory and do not commit to git!!!
+# saveRDS(results,"Robjects/fruit.reg_boot.rds")
 
 
 
