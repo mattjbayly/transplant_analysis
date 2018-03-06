@@ -28,6 +28,7 @@ matt_dat <- matt_dat %>% mutate(logSize = log(z), logSizeNext = log(z1), Fec0 = 
 # make sure plot and site are recognized as factors
 matt_dat$PlotID = as.factor(matt_dat$PlotID)
 matt_dat$SiteID = as.factor(matt_dat$SiteID)
+matt_dat$YearID = as.factor(matt_dat$Year)
 
 # individual-level data
 # run data prep script to clean up and import data
