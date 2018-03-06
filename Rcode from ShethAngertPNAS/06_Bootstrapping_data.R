@@ -62,10 +62,6 @@ seeds.north <- seeds %>%
 seeds.north[seeds.north$site=="Canton Creek",]$mean2011 = NA
 seeds.north[seeds.north$site=="Canton Creek",]$mean2012 = NA
 
-seeds.dist <- seeds.north %>% 
-  mutate(seeds.mean = mean(c(mean2010, mean2011, mean2012), na.rm=T),
-         seeds.sd = sd(c(mean2010, mean2011, mean2012), na.rm=T))
-
 
 #*******************************************************************************
 #### 2. Create nested loop to obtain replicate bootstrap datasets for each of matt's sites, sampling with replacement ###
