@@ -1,7 +1,5 @@
 #### PROJECT: Mimulus cardinalis northern transplant
-#### PURPOSE: Sample unique individuals from each site with replacement to create bootstrap datasets
-############# From each bootstrapped dataset, vital rate models are created and IPMs are run to obtain bootstrapped lambdas
-############# Replicate bootstrap datasets will be used to obtain confidence intervals around lambda estimates for each site
+#### PURPOSE: From each bootstrapped dataset, vital rate models are created and IPMs are run to obtain bootstrapped lambdas
 #### AUTHOR: Seema Sheth
 #### DATE LAST MODIFIED: 20180306
 
