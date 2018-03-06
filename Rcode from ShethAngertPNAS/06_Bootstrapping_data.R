@@ -181,7 +181,7 @@ bootstrapped.fruit.sum <- bootstrapped.fruits %>%
 
 # Write bootstrapped datasets to .rds file
 saveRDS(bootstrapped.fruits,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_data.rds")  
-saveRDS(bootstrapped.recruit.dist,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_sum.rds") 
+saveRDS(bootstrapped.fruit.sum,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_sum.rds") 
 
 
 ### Size distribution of recruits
