@@ -149,6 +149,8 @@ saveRDS(bootstrapped.seeds,"Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")
 
 ### Probability of recruitment
 
+## Total fruits produced at time t
+
 # Create a vector of unique Site names for subsetting 
 site=unique(site_fruit_count_north$Site)
 
@@ -182,6 +184,45 @@ bootstrapped.fruit.sum <- bootstrapped.fruits %>%
 # Write bootstrapped datasets to .rds file
 saveRDS(bootstrapped.fruits,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_data.rds")  
 saveRDS(bootstrapped.fruit.sum,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_sum.rds") 
+
+## Total recruits observed at time t+1
+
+# Create a vector of unique Site names for subsetting 
+# don't need to track IDs because each unique individual can only recruit once
+site=unique(demo.dat.north$Site)
+            
+# Create empty list to be filled in loop
+data.boot.rep=list()
+id.boot=list()
+
+# Set seed for random sampling to obtain reproducible results
+seed=123
+
+# Set number of bootstrap replicate datasets
+n.boot=10
+
+# Create loop to obtain replicate bootstrap datasets
+for (i in 1:length(site)) {
+  data.site=subset(demo.dat.north,Site==site[i]) # select data from site i
+  data.boot <- lapply(1:n.boot, function(j) { 
+    set.seed(j+seed)
+    sample_n(data.site,size=nrow(data.site), replace = T)}) %>% ldply() # resample rows of recruits with replacement and size=original dataset for each site and convert list to data frame
+  data.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
+  data.boot.rep[[i]]=data.boot # add each site's dataframe of n.boot bootstrap replicates to list
+}
+
+# Convert list to data frame
+bootstrapped.indivs <- do.call(rbind, data.boot.rep) 
+
+# Ok, so how many of these are recruits (as opposed to survivors)?
+bootstrapped.recruit.num <- bootstrapped.indivs %>% 
+  filter(is.na(logSize)) %>% 
+  group_by(Replicate) %>% 
+  summarize(recruit.size.num = n())
+
+# Write bootstrapped datasets to .rds file
+saveRDS(bootstrapped.indivs,"Robjects/Mcard_transplant_DEMOGINDIVS_BOOTSTRAP_data.rds")  
+saveRDS(bootstrapped.recruit.num,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_num.rds")  
 
 
 ### Size distribution of recruits
