@@ -3,7 +3,7 @@
 ############# From each bootstrapped dataset, vital rate models are created and IPMs are run to obtain bootstrapped lambdas
 ############# Replicate bootstrap datasets will be used to obtain confidence intervals around lambda estimates for each site
 #### AUTHOR: Seema Sheth
-#### DATE LAST MODIFIED: 20180224
+#### DATE LAST MODIFIED: 20180306
 
 # remove objects and clear workspace
 rm(list = ls(all=TRUE))
@@ -21,25 +21,31 @@ require(glmmADMB)
 #### 1. Preliminaries ###
 #*******************************************************************************
 
-# Read in & examine bootstrapped data 
+## Read in & examine bootstrapped data 
+# Matt's individual data
 bootstrapped.data=readRDS("Robjects/Mcard_transplant_INDIV_BOOTSTRAP_data.rds")
 str(bootstrapped.data)
 
-# obtain mean seed counts per fruit per site
-# seeds.per.site=tapply(bootstrapped.data$SeedCt,bootstrapped.data$Site,FUN=min,na.rm=T) # obtain mean seed counts per fruit per site
-# seeds.per.site=data.frame(seeds.per.site,rownames(seeds.per.site)) # make into a data frame
-# colnames(seeds.per.site)=c("seed.ct","Site") # define column names for merging
-
-# Read in & examine bootstrapped coefficients from vital rate models
+## Read in & examine bootstrapped coefficients from vital rate models
 surv.reg_boot=readRDS("Robjects/surv.reg_boot.rds")
 growth.reg_boot=readRDS("Robjects/growth.reg_boot.rds")
 flowering.reg_boot=readRDS("Robjects/flowering.reg_boot.rds")
 fruit.reg_boot=readRDS("Robjects/fruit.reg_boot.rds")
 
-# Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
+## Read in and examine other bootstrapped parameters (constants across sites)
+# seeds per fruit
+bootstrapped.seed.num=readRDS("Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")
+
+# recruitment probabilty
+bootstrapped.recruit.prob=readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds")
+
+# recruit size disribution
+bootstrapped.recruit.dist=readRDS("Robjects/Mcard_transplant_RECRUITS_dist.rds")
+
+## Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
 site=unique(bootstrapped.data$SiteID)
 
-# Set number of bootstrap replicate datasets
+## Set number of bootstrap replicate datasets
 n.boot=2
 
 #*******************************************************************************
