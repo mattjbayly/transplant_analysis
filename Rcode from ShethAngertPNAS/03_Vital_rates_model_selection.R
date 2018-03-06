@@ -38,6 +38,7 @@ data <- data %>% mutate(logSize = log(z), logSizeNext = log(z1), Fec0 = Repr, Fe
 # make sure plot and site are recognized as factors
 data$PlotID = as.factor(data$PlotID)
 data$SiteID = as.factor(data$SiteID)
+data$Year = as.factor(data$Year)
 
 # Variables are: 
 
@@ -195,12 +196,37 @@ fl9=glmer(Fec0~logSize+SiteID+(logSize|SiteID/PlotID),data=data,family=binomial,
 fl10=glmer(Fec0~logSize+SiteID+(1|SiteID/PlotID),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
 # warning
 
+# I. main effects Site + Size; random intercepts & constant slope for Plot; random intercepts and random slopes for Year
+fl11=glmer(Fec0~logSize+SiteID+(1|PlotID)+(logSize|Year),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
+
+# J. main effects Site + Size; random intercepts & constant slope for Plot; random intercepts and constant slope for Year
+fl12=glmer(Fec0~logSize+SiteID+(1|PlotID)+(1|Year),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
+
+# K. main effects Site + Size; random intercepts & random slopes for Plot; random intercepts and random slopes for Year
+fl13=glmer(Fec0~logSize+SiteID+(logSize|PlotID)+(logSize|Year),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa")) 
+
+# L. main effects Site + Size; random intercepts & random slopes for Plot; random intercepts and constant slope for Year
+fl14=glmer(Fec0~logSize+SiteID+(logSize|PlotID)+(1|Year),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# M. interaction Site x Size; random intercepts & constant slope for Plot; random intercepts and random slopes for Year
+fl15=glmer(Fec0~logSize*SiteID+(1|PlotID)+(logSize|Year),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# N. interaction Site x Size; random intercepts & constant slope for Plot; random intercepts and constant slope for Year
+fl16=glmer(Fec0~logSize*SiteID+(1|PlotID)+(1|Year),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# O. interaction Site x Size; random intercepts & random slopes for Plot; random intercepts and random slopes for Year
+fl17=glmer(Fec0~logSize*SiteID+(logSize|PlotID)+(logSize|Year),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
+# P. interaction Site x Size; random intercepts & random slopes for Plot; random intercepts and constant slope for Year
+fl18=glmer(Fec0~logSize*SiteID+(logSize|PlotID)+(1|Year),data=data,family=binomial,control=glmerControl(optimizer = "bobyqa", optCtrl=list(maxfun=100000))) 
+
 # Compare models
-anova(fl3, fl4, fl5, fl6, fl7, fl8, fl9, fl10)
+anova(fl3,fl4,fl5,fl6,fl7,fl8,fl9,fl10,fl11,fl12,fl13,fl14,fl15,fl16,fl17,fl18)
 
-AICc(fl3, fl4, fl5, fl6, fl7, fl8, fl9, fl10) 
+AICc(fl3,fl4,fl5,fl6,fl7,fl8,fl9,fl10,fl11,fl12,fl13,fl14,fl15,fl16,fl17,fl18) 
 
-model.sel(fl3, fl4,fl5,fl6, fl7, fl8, fl9, fl10) 
+model.sel(fl3,fl4,fl5,fl6,fl7,fl8,fl9,fl10,fl11,fl12,fl13,fl14,fl15,fl16,fl17,fl18) 
+model.sel(fl6, fl12) 
 
 # PREFERRED MODEL IS fl6
 
@@ -255,13 +281,38 @@ save(fl6, file='Robjects/flowering.reg.rda')
 		# H. main effects of Size + Site; random intercepts & constant slope for Plot nested within Site
 		fr13=glmmadmb(Fec1~logSize+SiteID+(1|SiteID/PlotID),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
 
-				# Compare models	
-		AICc(fr6,fr7,fr8,fr9,fr10,fr11,fr12,fr13) 
+		# I. main effects of Size + Site; random intercepts & constant slope for Plot; random intercepts and random slopes for Year
+		fr14=glmmadmb(Fec1~logSize+SiteID+(1|PlotID)+(logSize|Year),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
 		
-		model.sel(fr6,fr7,fr8,fr9,fr10,fr11,fr12,fr13)
+		# J. main effects of Size + Site; random intercepts & constant slope for Plot; random intercepts and constant slope for Year
+		fr15=glmmadmb(Fec1~logSize+SiteID+(1|PlotID)+(1|Year),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
+
+		# K. main effects of Size + Site; random intercepts & random slopes for Plot; random intercepts and random slopes for Year
+		fr16=glmmadmb(Fec1~logSize+SiteID+(logSize|PlotID)+(logSize|Year),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
 		
-		# PREFERRED MODEL IS fr9
+		# L. main effects of Size + Site; random intercepts & random slopes for Plot; random intercepts and constant slope for Year
+		fr17=glmmadmb(Fec1~logSize+SiteID+(logSize|PlotID)+(1|Year),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
+
+		# M. interaction Size x Site; random intercepts & constant slope for Plot; random intercepts and random slopes for Year
+		fr18=glmmadmb(Fec1~logSize*SiteID+(1|PlotID)+(logSize|Year),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
+		
+		# N. interaction Size x Site; random intercepts & constant slope for Plot; random intercepts and constant slope for Year
+		fr19=glmmadmb(Fec1~logSize*SiteID+(1|PlotID)+(1|Year),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
+		
+		# O. interaction Size x Site; random intercepts & random slopes for Plot; random intercepts and random slopes for Year
+		fr20=glmmadmb(Fec1~logSize*SiteID+(1|PlotID)+(logSize|Year),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
+		
+		# P. intearction Size x Site; random intercepts & random slopes for Plot; random intercepts and constant slope for Year
+		fr21=glmmadmb(Fec1~logSize*SiteID+(1|PlotID)+(1|Year),data=data[!is.na(data$Fec1),],family="nbinom",link="log")
+		
+		# Compare models	
+		AICc(fr6,fr7,fr8,fr9,fr10,fr11,fr12,fr13,fr14,fr15,fr16,fr17,fr18,fr19,fr20,fr21) 
+		
+		model.sel(fr6,fr7,fr8,fr9,fr10,fr11,fr12,fr13,fr14,fr15,fr16,fr17,fr18,fr19,fr20,fr21)
+		model.sel(fr9,fr15)
+		
+		# PREFERRED MODEL IS fr15
 		
 		# Save top fruit # model to .rda file because it takes a long time to run
-		save(fr9, file='Robjects/fruit.reg.rda')   
+		save(fr15, file='Robjects/fruit.reg.rda')   
 		

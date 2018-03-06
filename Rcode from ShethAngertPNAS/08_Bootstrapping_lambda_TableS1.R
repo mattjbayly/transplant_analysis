@@ -1,9 +1,9 @@
-#### PROJECT: Mimulus cardinalis demography 2010-2014
+#### PROJECT: Mimulus cardinalis northern transplant
 #### PURPOSE: Sample unique individuals from each site with replacement to create bootstrap datasets
 ############# From each bootstrapped dataset, vital rate models are created and IPMs are run to obtain bootstrapped lambdas
 ############# Replicate bootstrap datasets will be used to obtain confidence intervals around lambda estimates for each site
 #### AUTHOR: Seema Sheth
-#### DATE LAST MODIFIED: 20171110
+#### DATE LAST MODIFIED: 20180224
 
 # remove objects and clear workspace
 rm(list = ls(all=TRUE))
@@ -15,32 +15,32 @@ require(lme4)
 require(glmmADMB)
 
 # set working directory
-setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
+# setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
 
 #*******************************************************************************
 #### 1. Preliminaries ###
 #*******************************************************************************
 
 # Read in & examine bootstrapped data 
-bootstrapped.data=readRDS("R_output/Mcard_demog_INDIV_BOOTSTRAP_data_2010-2013.rds")
+bootstrapped.data=readRDS("Robjects/Mcard_transplant_INDIV_BOOTSTRAP_data.rds")
 str(bootstrapped.data)
 
 # obtain mean seed counts per fruit per site
-seeds.per.site=tapply(bootstrapped.data$SeedCt,bootstrapped.data$Site,FUN=min,na.rm=T) # obtain mean seed counts per fruit per site
-seeds.per.site=data.frame(seeds.per.site,rownames(seeds.per.site)) # make into a data frame
-colnames(seeds.per.site)=c("seed.ct","Site") # define column names for merging
+# seeds.per.site=tapply(bootstrapped.data$SeedCt,bootstrapped.data$Site,FUN=min,na.rm=T) # obtain mean seed counts per fruit per site
+# seeds.per.site=data.frame(seeds.per.site,rownames(seeds.per.site)) # make into a data frame
+# colnames(seeds.per.site)=c("seed.ct","Site") # define column names for merging
 
 # Read in & examine bootstrapped coefficients from vital rate models
-surv.reg_boot=readRDS("R_output/surv.reg_boot.rds")
-growth.reg_boot=readRDS("R_output/growth.reg_boot.rds")
-flowering.reg_boot=readRDS("R_output/flowering.reg_boot.rds")
-fruit.reg_boot=readRDS("R_output/fruit.reg_boot.rds")
+surv.reg_boot=readRDS("Robjects/surv.reg_boot.rds")
+growth.reg_boot=readRDS("Robjects/growth.reg_boot.rds")
+flowering.reg_boot=readRDS("Robjects/flowering.reg_boot.rds")
+fruit.reg_boot=readRDS("Robjects/fruit.reg_boot.rds")
 
 # Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
-site=unique(bootstrapped.data$Site)
+site=unique(bootstrapped.data$SiteID)
 
 # Set number of bootstrap replicate datasets
-n.boot=2000
+n.boot=2
 
 #*******************************************************************************
 #### 2. Obtain vital rate parameters across all sites for each replicate bootstrap dataset ###
@@ -54,11 +54,7 @@ for (k in 1:n.boot) {
   data.rep=subset(bootstrapped.data,Replicate==k) # select data from replicate k
   
   # Obtain total fruit count for each indivdiual at each site in each year, including monster plants
-  site_fruit_count_data=subset(data.rep,select=c(Site,Fec1)) 
-  
-  # Remove monster plants where individuals were not distinguished
-  #### NOTE: these are plants that A. Angert noted as "not ok, definitely exclude from survival, growth, and fecundity but ok for seed input denominator for recruitment (history of lumping/splitting/relumping; redundant IDs)"
-  data.rep=subset(data.rep,NotAnIndividual!=1|is.na(NotAnIndividual))
+  site_fruit_count_data=subset(data.rep,select=c(SiteID,Fec1)) 
   
   # Set up data frame of model parameters
   params=c()
@@ -71,9 +67,11 @@ for (k in 1:n.boot) {
   surv.reg=surv.reg_boot[[k]]
    
   # Store model coefficients
-  params$surv.int=coefficients(surv.reg)$Site[,1] 
-  params$surv.slope=coefficients(surv.reg)$Site[,2] 
-  params$Site=rownames(coefficients(surv.reg)$Site)
+  params$surv.globint=fixef(surv.reg)[1]
+  params$surv.siteint=c(0,fixef(surv.reg)[3:9]) 
+  params$surv.slope=fixef(surv.reg)[2] 
+  params$surv.int=surv.globint+surv.siteint
+  params$Site=site
   
   # Make into data frame
   params=data.frame(params)
@@ -87,9 +85,11 @@ for (k in 1:n.boot) {
   
   # Store model coefficients
   growth.params=c()
-  growth.params$growth.int=coefficients(growth.reg)$Site[,1]  
-  growth.params$growth.slope=coefficients(growth.reg)$Site[,2]
-  growth.params$Site=rownames(coefficients(growth.reg)$Site)
+  growth.params$growth.globint=fixef(growth.reg)[1]  
+  growth.params$growth.siteint=c(0,fixef(growth.reg)[3:9])
+  growth.params$growth.slope=fixef(growth.reg)[2]
+  growth.params$growth.int=growth.params$growth.globint+growth.params$growth.siteint
+  growth.params$Site=site
   growth.params=data.frame(growth.params)
   params=join(params,growth.params,by="Site")
   params$growth.sd=rep(sigma(growth.reg),times=length(site)) 
@@ -102,8 +102,9 @@ for (k in 1:n.boot) {
   flowering.reg=flowering.reg_boot[[k]]
   
   # Store model coefficients
-  params$flowering.int=coefficients(flowering.reg)$Site[,1] 
-  params$flowering.slope=coefficients(flowering.reg)$Site[,2] 
+  params$flowering.globint=fixef(flowering.reg)[1] 
+  params$flowering.siteint=c(0,fixef(flowering.reg)[3:9]) 
+  params$flowering.slope=fixef(flowering.reg)[2] 
   
   #*******************************************************************************
   ### 3D. Fruit number (untransformed) using negative binomial regression ###
@@ -113,21 +114,16 @@ for (k in 1:n.boot) {
   fruit.reg=fruit.reg_boot[[k]]
   
   # Store model coefficients
-  fruit.int=fixef(fruit.reg)[1]+ranef(fruit.reg)$Site[,1] %>% data.frame()
-  fruit.int$Site=rownames(fruit.int)
-  colnames(fruit.int)=c("fruit.int","Site")
-  fruit.slope=fixef(fruit.reg)[2]+ranef(fruit.reg)$Site[,2] %>% data.frame()
-  fruit.slope$Site=rownames(fruit.slope)
-  colnames(fruit.slope)=c("fruit.slope","Site")
-  params=join(params,fruit.int,by="Site") %>% join(fruit.slope,by="Site")
-  params$fruit.int[is.na(params$fruit.int)]=0
-  params$fruit.slope[is.na(params$fruit.slope)]=0
+  params$fruits.globint=fixef(fruit.reg)[1] 
+  params$fruits.siteint=c(0,fixef(fruit.reg)[3:9]) 
+  params$fruits.int=fruits.globint+fruits.siteint
+  params$fruits.slope=fixef(fruit.reg)[2] 
   
   #*******************************************************************************
   ### 3E. Size distribution of recruits ###
   #*******************************************************************************
-  recruit.size.mean=tapply(data.rep$logSizeNext[is.na(data.rep$logSize)],data.rep$Site[is.na(data.rep$logSize)],FUN="mean") %>% data.frame()
-  recruit.size.sd=tapply(data.rep$logSizeNext[is.na(data.rep$logSize)],data.rep$Site[is.na(data.rep$logSize)],FUN="sd") %>% data.frame()
+  recruit.size.mean=tapply(data.rep$logSizeNext[is.na(data.rep$logSize)],data.rep$SiteID[is.na(data.rep$logSize)],FUN="mean") %>% data.frame()
+  recruit.size.sd=tapply(data.rep$logSizeNext[is.na(data.rep$logSize)],data.rep$SiteID[is.na(data.rep$logSize)],FUN="sd") %>% data.frame()
   
   params$recruit.logSize.mean=recruit.size.mean[,1]  
   params$recruit.logSize.sd=recruit.size.sd[,1]  

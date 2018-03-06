@@ -54,9 +54,10 @@ matt_dat <- read_csv("Data/IPMData_transplant.csv")
 # log-transform size
 matt_dat <- matt_dat %>% mutate(logSize = log(z), logSizeNext = log(z1), Fec0 = Repr, Fec1 = Fec)
 
-# make sure plot and site are recognized as factors
+# make sure plot, site, and year are recognized as factors
 matt_dat$PlotID = as.factor(matt_dat$PlotID)
 matt_dat$SiteID = as.factor(matt_dat$SiteID)
+matt_dat$Year = as.factor(matt_dat$Year)
 
 #*******************************************************************************
 #### 2. Read in global survival, growth and fecundity models using data from all sites ###
@@ -119,13 +120,13 @@ params=c()
   ### 3D. Fruit number (untransformed) using negative binomial regression ###
   #*******************************************************************************
   
-  # Read in top model output for fruit.reg (Formula: Fec0 ~ logSize + Site + (1 | Plot))   
+  # Read in top model output for fruit.reg (Formula: Fec0 ~ logSize + Site + (1 | Plot) + (1|Year))   
   fruit.reg=load("Robjects/fruit.reg.rda")
 
   # Store model coefficients
-  params$fruits.globint=fixef(fr9)[1] 
-  params$fruits.siteint=c(0,fixef(fr9)[3:9])
-  params$fruits.slope=fixef(fr9)[2] 
+  params$fruits.globint=fixef(fr15)[1] 
+  params$fruits.siteint=c(0,fixef(fr15)[3:9])
+  params$fruits.slope=fixef(fr15)[2] 
   params$fruits.int = params$fruits.globint + params$fruits.siteint
   
   #*******************************************************************************
