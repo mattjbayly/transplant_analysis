@@ -199,7 +199,7 @@ id.boot=list()
 seed=123
 
 # Set number of bootstrap replicate datasets
-n.boot=10
+n.boot=2000
 
 # Create loop to obtain replicate bootstrap datasets
 for (i in 1:length(site)) {
@@ -224,6 +224,10 @@ bootstrapped.recruit.num <- bootstrapped.indivs %>%
 saveRDS(bootstrapped.indivs,"Robjects/Mcard_transplant_DEMOGINDIVS_BOOTSTRAP_data.rds")  
 saveRDS(bootstrapped.recruit.num,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_num.rds")  
 
+### Combine above into recruitment probability
+bootstrapped.recruit.prob = bootstrapped.recruit.num$recruit.size.num/(bootstrapped.fruit.sum$total.fruits*bootstrapped.seeds$V1)
+
+saveRDS(bootstrapped.recruit.prob,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds")  
 
 ### Size distribution of recruits
 
