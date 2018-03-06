@@ -25,6 +25,8 @@ require(doParallel)
 # Read in & examine bootstrapped data 
 bootstrapped.data=readRDS("Robjects/Mcard_transplant_INDIV_BOOTSTRAP_data.rds")
 str(bootstrapped.data)
+bootstrapped.data$Year = as.factor(bootstrapped.data$Year)
+
 
 # set # of cores to use for parallel processing
  registerDoParallel(cores=4)
