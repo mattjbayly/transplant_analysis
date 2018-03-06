@@ -160,16 +160,15 @@ id.boot=list()
 seed=123
 
 # Set number of bootstrap replicate datasets
-n.boot=1000
+n.boot=2000
 
 # Create loop to obtain replicate bootstrap datasets
 for (i in 1:length(site)) {
   data.site=subset(site_fruit_count_north,Site==site[i]) # select data from site i
-  id.boot <- lapply(1:n.boot, function(j) { 
+  data.boot <- lapply(1:n.boot, function(j) { 
     set.seed(j+seed)
     sample_n(data.site,size=nrow(data.site), replace = T)}) %>% ldply() # resample rows of fruiting adults with replacement and size=original dataset for each site and convert list to data frame
-  id.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
-  data.boot=join(id.boot,data.site,type="left",match="all") # merge bootstrapped list of unique IDs to full dataset
+  data.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
   data.boot.rep[[i]]=data.boot # add each site's dataframe of n.boot bootstrap replicates to list
 }
 
@@ -178,7 +177,7 @@ bootstrapped.fruits <- do.call(rbind, data.boot.rep)
 
 bootstrapped.fruit.sum <- bootstrapped.fruits %>% 
   group_by(Replicate) %>% 
-  summarize(total.fruits = sum(Fec1))
+  summarize(total.fruits = sum(Fec1, na.rm=T))
 
 # Write bootstrapped datasets to .rds file
 saveRDS(bootstrapped.fruits,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_data.rds")  
