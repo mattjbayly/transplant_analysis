@@ -53,10 +53,6 @@ recruits <- demo.dat.north %>% filter(is.na(logSize))
 seeds <- read_csv("Data/Amy_wild_demo_data/fec2.seed.per.fruit.2010.2011.2012.csv")
 
 # filter to northern sites only
-seeds.north <- seeds %>% 
-  filter(site=="Coast Fork of Williamette"|site=="Rock Creek"|site=="Canton Creek") %>% 
-  droplevels()
-
 # note: seed counts missing for Coast Fork (substituted Canton instead) so Coast Fork not included here
 seeds.north <- seeds %>% 
   filter(site=="Rock Creek"|site=="Canton Creek") %>% 
