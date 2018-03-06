@@ -3,7 +3,7 @@
 ############# IPMs parameterized by bootstrapped coeffcients will then be run and lambdas will be obtained
 ############# Replicate bootstrap datasets will be used to obtain confidence intervals around lambda estimates for each site
 #### AUTHOR: Seema Sheth
-#### DATE LAST MODIFIED: 20180224
+#### DATE LAST MODIFIED: 20180306
 
 # remove objects and clear workspace
 rm(list = ls(all=TRUE))
@@ -44,8 +44,10 @@ surv <- function(i) {
 # run mixed effects model for survival on each bootstrapped dataset
 surv.reg <- lapply(1:2000, surv)
 
-# save model output
-saveRDS(surv.reg,"Robjects/surv.reg_boot.rds") # 50+ convergence warnings
+# ****save model output MANUALLY****
+# large files will crash Git - move these out of directory and do not commit to git!!!
+# saveRDS(surv.reg,"Robjects/surv.reg_boot.rds") # 50+ convergence warnings
+
 
 #*******************************************************************************
 #### 3. Growth ###
