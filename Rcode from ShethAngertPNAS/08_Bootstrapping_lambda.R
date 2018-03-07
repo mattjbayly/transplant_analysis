@@ -25,10 +25,10 @@ bootstrapped.data=readRDS("Robjects/Mcard_transplant_INDIV_BOOTSTRAP_data.rds")
 str(bootstrapped.data)
 
 ## Read in & examine bootstrapped coefficients from vital rate models
-surv.reg_boot=readRDS("Robjects/surv.reg_boot.rds")
-growth.reg_boot=readRDS("Robjects/growth.reg_boot.rds")
-flowering.reg_boot=readRDS("Robjects/flowering.reg_boot.rds")
-fruit.reg_boot=readRDS("Robjects/fruit.reg_boot.rds")
+surv.reg_boot=readRDS("/Users/amyangert/Documents/GitClones/matt transplant bootstraps/surv.reg_boot.rds")
+growth.reg_boot=readRDS("/Users/amyangert/Documents/GitClones/matt transplant bootstraps/growth.reg_boot.rds")
+flowering.reg_boot=readRDS("/Users/amyangert/Documents/GitClones/matt transplant bootstraps/flowering.reg_boot.rds")
+fruit.reg_boot=readRDS("/Users/amyangert/Documents/GitClones/matt transplant bootstraps/fruit.reg_boot.rds")
 
 ## Read in and examine other bootstrapped parameters (constants across sites)
 # seeds per fruit
@@ -37,7 +37,7 @@ bootstrapped.seed.num=readRDS("Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rd
 # recruitment probabilty
 bootstrapped.recruit.prob=readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds")
 
-# recruit size disribution
+# recruit size distribution
 bootstrapped.recruit.dist=readRDS("Robjects/Mcard_transplant_RECRUITS_dist.rds")
 
 ## Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
@@ -58,7 +58,7 @@ for (k in 1:n.boot) {
   data.rep=subset(bootstrapped.data,Replicate==k) # select data from replicate k
   
   # Obtain total fruit count for each indivdiual at each site in each year, including monster plants
-  site_fruit_count_data=subset(data.rep,select=c(SiteID,Fec1)) 
+  #site_fruit_count_data=subset(data.rep,select=c(SiteID,Fec1)) 
   
   # Set up data frame of model parameters
   params=c()
@@ -126,40 +126,24 @@ for (k in 1:n.boot) {
   #*******************************************************************************
   ### 3E. Size distribution of recruits ###
   #*******************************************************************************
-  recruit.size.mean=tapply(data.rep$logSizeNext[is.na(data.rep$logSize)],data.rep$SiteID[is.na(data.rep$logSize)],FUN="mean") %>% data.frame()
-  recruit.size.sd=tapply(data.rep$logSizeNext[is.na(data.rep$logSize)],data.rep$SiteID[is.na(data.rep$logSize)],FUN="sd") %>% data.frame()
-  
-  params$recruit.logSize.mean=recruit.size.mean[,1]  
-  params$recruit.logSize.sd=recruit.size.sd[,1]  
-  
-  params$recruit.logSize.mean[is.na(params$recruit.logSize.mean)]=0
-  params$recruit.logSize.sd[is.na(params$recruit.logSize.sd)]=0
+ 
+  params$recruit.logSize.mean=bootstrapped.recruit.dist[k,"recruit.size.mean"]  
+  params$recruit.logSize.sd=bootstrapped.recruit.dist[k,"recruit.size.sd"]  
   
   #*******************************************************************************
   ### 3F. Number of seeds per fruit ###
   #*******************************************************************************
   
-  params=merge(params,seeds.per.site,by.x="Site",by.y="Site") # site-specific seed counts
+  params$seeds.per.fruit=bootstrapped.seed.num[k,V1]
   
   #*******************************************************************************
   ### 3G. Establishment probability ###
   #*******************************************************************************
   
-  # Obtain number of new recruits per site
-  recruit.number=tapply(data.rep$logSizeNext[is.na(data.rep$logSize)],data.rep$Site[is.na(data.rep$logSize)],FUN="length") %>% data.frame()
-  colnames(recruit.number)="recruit.number"
+  params$establishment.prob=bootstrapped.recruit.prob[k,"bootstrapped.recruit.prob"]
   
-  # Obtain total fruit count per site 
-  fruits.per.site=tapply(site_fruit_count_data$Fec1[!is.na(site_fruit_count_data$Fec1)],site_fruit_count_data$Site[!is.na(site_fruit_count_data$Fec1)],sum)
   
-  # Obtain total seed count per site (= # fruits per site * # seeds per fruit per site)
-  total.seeds.per.site=fruits.per.site*seeds.per.site$seed.ct	
   
-  # Estimate establishment probability as # of new recruits/# of seeds
-  params$establishment.prob=recruit.number$recruit.number/total.seeds.per.site
-  
-  # Set establishment probability as 0 for Hauser Creek (was calculated as NA because Hauser creek has 0 new recruits)
-  params$establishment.prob[is.na(params$establishment.prob)|params$establishment.prob=="Inf"]=0	
   
   # Store data frame of parameter values for a given bootstrap replicate dataset into list
   params$Replicate=rep(k,each=nrow(params)) # create a column in data frame that corresponds to bootstrap replicate
