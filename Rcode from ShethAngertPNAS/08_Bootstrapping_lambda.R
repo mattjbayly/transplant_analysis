@@ -51,7 +51,7 @@ bootstrapped.recruit.dist=readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_
 site=unique(bootstrapped.data$SiteID)
 
 ## Set number of bootstrap replicate datasets
-n.boot=1
+n.boot=2000
 
 #*******************************************************************************
 #### 2. Obtain vital rate parameters across all sites for each replicate bootstrap dataset ###
