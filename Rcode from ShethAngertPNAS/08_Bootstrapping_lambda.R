@@ -23,6 +23,9 @@ require(glmmADMB)
 # Matt's individual data
 bootstrapped.data=readRDS("Robjects/Mcard_transplant_INDIV_BOOTSTRAP_data.rds")
 str(bootstrapped.data)
+bootstrapped.data$SiteID <- as.factor(bootstrapped.data$SiteID)
+bootstrapped.data$PlotID <- as.factor(bootstrapped.data$PlotID)
+bootstrapped.data$Year <- as.factor(bootstrapped.data$Year)
 
 ## Read in & examine bootstrapped coefficients from vital rate models
 surv.reg_boot=readRDS("/Users/amyangert/Documents/GitClones/matt transplant bootstraps/surv.reg_boot.rds")
