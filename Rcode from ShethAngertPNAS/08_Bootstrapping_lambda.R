@@ -135,8 +135,8 @@ for (k in 1:n.boot) {
   ### 3E. Size distribution of recruits ###
   #*******************************************************************************
  
-  params$recruit.logSize.mean=rep(bootstrapped.recruit.dist[k,"recruit.size.mean"],times=length(site))  
-  params$recruit.logSize.sd=rep(bootstrapped.recruit.dist[k,"recruit.size.sd"],times=length(site))  
+  params$recruit.logSize.mean=unlist(rep(bootstrapped.recruit.dist[k,"recruit.size.mean"],times=length(site)))  
+  params$recruit.logSize.sd=unlist(rep(bootstrapped.recruit.dist[k,"recruit.size.sd"],times=length(site)))  
   
   #*******************************************************************************
   ### 3F. Number of seeds per fruit ###
@@ -169,7 +169,7 @@ rm(fruit.reg_boot)
 bootstrapped.params <- do.call(rbind, params.boot)
   
 # Write bootstrapped parameter estimates to .csv file
-write.csv(bootstrapped.params,"R_output/Mcard_demog_INDIV_BOOTSTRAP_params_2010-2013.csv",row.names=FALSE)  
+write.csv(bootstrapped.params,"Robjects/Mcard_transplant_BOOTSTRAP_params.csv",row.names=FALSE)  
   
   #*******************************************************************************
   ### 4. Create site-specific IPMs parameterized by site-specific parameters derived from global vital rates models 
@@ -196,9 +196,9 @@ data.rep=subset(data.rep,NotAnIndividual!=1|is.na(NotAnIndividual))
   siteID=c()
   
   for (j in 1:length(site)) {
-    data1=subset(data.rep,Site==site[j])
+    data1=subset(data.rep,SiteID==site[j])
     params1=subset(params,Site==site[j])
-    params1=subset(params1,select=-Site)
+    params1=subset(params1,selectID=-Site)
     
     # write if else statement so that if all individuals in bootstrap died, lambda is manually set equal to 0
     
@@ -210,7 +210,7 @@ data.rep=subset(data.rep,NotAnIndividual!=1|is.na(NotAnIndividual))
       ### 4B. Create survival, growth, and fecundity functions and build IPM by running integral_projection_model.R script
       #*******************************************************************************
       
-      source("R_scripts/integral_projection_model.R")
+      source("Rcode/integral_projection_model.R")
       
       #*******************************************************************************
       ### 4C. Obtain lambda
