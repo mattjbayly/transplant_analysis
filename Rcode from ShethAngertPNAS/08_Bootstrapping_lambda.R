@@ -47,11 +47,11 @@ colnames(bootstrapped.recruit.prob) = c("recruit.prob", "Replicate")
 bootstrapped.recruit.dist=readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_dist.rds")
 
 
-## Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
+## Create a vector of unique Site names for subsetting 
 site=unique(bootstrapped.data$SiteID)
 
 ## Set number of bootstrap replicate datasets
-n.boot=2
+n.boot=1
 
 #*******************************************************************************
 #### 2. Obtain vital rate parameters across all sites for each replicate bootstrap dataset ###
@@ -81,7 +81,7 @@ for (k in 1:n.boot) {
   params$surv.globint=fixef(surv.reg)[1]
   params$surv.siteint=c(0,fixef(surv.reg)[3:9]) 
   params$surv.slope=fixef(surv.reg)[2] 
-  params$surv.int=surv.globint+surv.siteint
+  params$surv.int=params$surv.globint+params$surv.siteint
   params$Site=site
   
   # Make into data frame
@@ -116,6 +116,7 @@ for (k in 1:n.boot) {
   params$flowering.globint=fixef(flowering.reg)[1] 
   params$flowering.siteint=c(0,fixef(flowering.reg)[3:9]) 
   params$flowering.slope=fixef(flowering.reg)[2] 
+  params$flowering.int=params$flowering.globint+params$flowering.siteint
   
   #*******************************************************************************
   ### 3D. Fruit number (untransformed) using negative binomial regression ###
@@ -127,27 +128,27 @@ for (k in 1:n.boot) {
   # Store model coefficients
   params$fruits.globint=fixef(fruit.reg)[1] 
   params$fruits.siteint=c(0,fixef(fruit.reg)[3:9]) 
-  params$fruits.int=fruits.globint+fruits.siteint
+  params$fruits.int=params$fruits.globint+params$fruits.siteint
   params$fruits.slope=fixef(fruit.reg)[2] 
   
   #*******************************************************************************
   ### 3E. Size distribution of recruits ###
   #*******************************************************************************
  
-  params$recruit.logSize.mean=bootstrapped.recruit.dist[k,"recruit.size.mean"]  
-  params$recruit.logSize.sd=bootstrapped.recruit.dist[k,"recruit.size.sd"]  
+  params$recruit.logSize.mean=rep(bootstrapped.recruit.dist[k,"recruit.size.mean"],times=length(site))  
+  params$recruit.logSize.sd=rep(bootstrapped.recruit.dist[k,"recruit.size.sd"],times=length(site))  
   
   #*******************************************************************************
   ### 3F. Number of seeds per fruit ###
   #*******************************************************************************
   
-  params$seeds.per.fruit=bootstrapped.seed.num[k,V1]
+  params$seeds.per.fruit=rep(bootstrapped.seed.num[k,"V1"],times=length(site))
   
   #*******************************************************************************
   ### 3G. Establishment probability ###
   #*******************************************************************************
   
-  params$establishment.prob=bootstrapped.recruit.prob[k,"bootstrapped.recruit.prob"]
+  params$establishment.prob=rep(bootstrapped.recruit.prob[k,"bootstrapped.recruit.prob"],times=length(site))
   
   
   
