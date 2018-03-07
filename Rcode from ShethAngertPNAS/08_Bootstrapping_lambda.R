@@ -22,7 +22,7 @@ require(glmmADMB)
 ## Read in & examine bootstrapped data 
 # Matt's individual data
 bootstrapped.data=readRDS("Robjects/Mcard_transplant_INDIV_BOOTSTRAP_data.rds")
-str(bootstrapped.data)
+# str(bootstrapped.data)
 bootstrapped.data$SiteID <- as.factor(bootstrapped.data$SiteID)
 bootstrapped.data$PlotID <- as.factor(bootstrapped.data$PlotID)
 bootstrapped.data$Year <- as.factor(bootstrapped.data$Year)
@@ -38,10 +38,14 @@ fruit.reg_boot=readRDS("/Users/amyangert/Documents/GitClones/matt transplant boo
 bootstrapped.seed.num=readRDS("Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")
 
 # recruitment probabilty
-bootstrapped.recruit.prob=readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds")
+bootstrapped.recruit.prob=as.data.frame(readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds"))
+# add Replicate column
+bootstrapped.recruit.prob$Replicate = seq(1:2000)
+colnames(bootstrapped.recruit.prob) = c("recruit.prob", "Replicate")
 
 # recruit size distribution
-bootstrapped.recruit.dist=readRDS("Robjects/Mcard_transplant_RECRUITS_dist.rds")
+bootstrapped.recruit.dist=readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_dist.rds")
+
 
 ## Create a vector of unique Site names for subsetting; note this is sorted by decreasing latitude 
 site=unique(bootstrapped.data$SiteID)
