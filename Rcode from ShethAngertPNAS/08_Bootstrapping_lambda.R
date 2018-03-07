@@ -148,7 +148,7 @@ for (k in 1:n.boot) {
   ### 3G. Establishment probability ###
   #*******************************************************************************
   
-  params$establishment.prob=rep(bootstrapped.recruit.prob[k,"bootstrapped.recruit.prob"],times=length(site))
+  params$establishment.prob=rep(bootstrapped.recruit.prob[k,"recruit.prob"],times=length(site))
   
   
   
@@ -220,12 +220,12 @@ data.rep=subset(data.rep,NotAnIndividual!=1|is.na(NotAnIndividual))
       (lambda[j] <- Re(eigen(K)$values[1])) 
       
       # obtain site name corresponding to lambda estimate
-      siteID[j]=as.character(unique(data1$Site))
+      siteID[j]=as.character(unique(data1$SiteID))
       
     } # end if loop
     else{
       lambda[j]=0     
-      siteID[j]=as.character(unique(data1$Site))} # end else loop
+      siteID[j]=as.character(unique(data1$SiteID))} # end else loop
     
     # merge lambda estimate with site name
     lambda.site=data.frame(siteID,lambda)
