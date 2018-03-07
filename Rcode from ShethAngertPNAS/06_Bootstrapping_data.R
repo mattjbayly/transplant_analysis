@@ -218,14 +218,14 @@ bootstrapped.indivs <- do.call(rbind, data.boot.rep)
 bootstrapped.recruit.num <- bootstrapped.indivs %>% 
   filter(is.na(logSize)) %>% 
   group_by(Replicate) %>% 
-  summarize(recruit.size.num = n())
+  summarize(recruit.num = n())
 
 # Write bootstrapped datasets to .rds file
 saveRDS(bootstrapped.indivs,"Robjects/Mcard_transplant_DEMOGINDIVS_BOOTSTRAP_data.rds")  
 saveRDS(bootstrapped.recruit.num,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_num.rds")  
 
 ### Combine above into recruitment probability
-bootstrapped.recruit.prob = bootstrapped.recruit.num$recruit.size.num/(bootstrapped.fruit.sum$total.fruits*bootstrapped.seeds$V1)
+bootstrapped.recruit.prob = bootstrapped.recruit.num$recruit.num/(bootstrapped.fruit.sum$total.fruits*bootstrapped.seeds$V1)
 
 saveRDS(bootstrapped.recruit.prob,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds")  
 
