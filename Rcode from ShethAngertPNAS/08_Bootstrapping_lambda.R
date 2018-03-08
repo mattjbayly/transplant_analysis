@@ -264,6 +264,7 @@ bootstrap.summary <- bootstrapped.lambda %>%
   group_by(siteID) %>% 
   arrange(lambda) %>% 
   summarize(boot.min = nth(lambda, 0.05*2000),
+            boot.med = nth(lambda, 0.50*2000),
             boot.max = nth(lambda, 0.95*2000))
 
 # merge these with real lambdas
