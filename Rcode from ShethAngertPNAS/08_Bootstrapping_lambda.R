@@ -183,10 +183,6 @@ for (k in 1:n.boot) {
   data.rep=subset(bootstrapped.data,Replicate==k) # select data from replicate k
   params=subset(bootstrapped.params,Replicate==k) # select parameters from replicate K
   
-# Remove monster plants where individuals were not distinguished; do this again when estimating lambda to restrict size range
-#### NOTE: these are plants that A. Angert noted as "not ok, definitely exclude from survival, growth, and fecundity but ok for seed input denominator for recruitment (history of lumping/splitting/relumping; redundant IDs)"
-data.rep=subset(data.rep,NotAnIndividual!=1|is.na(NotAnIndividual))
-  
   #*******************************************************************************
   ### 4A. Set up loop to create site-specific vital rate functions and IPMs
   #*******************************************************************************
@@ -200,12 +196,21 @@ data.rep=subset(data.rep,NotAnIndividual!=1|is.na(NotAnIndividual))
     params1=subset(params,Site==site[j])
     params1=subset(params1,selectID=-Site)
     
-    # write if else statement so that if all individuals in bootstrap died, lambda is manually set equal to 0
+    # loop fails for site Wiley (j=8) in bootstrap rep k=1962 because F matrix is NA because fruits.siteint and fruits.int are NA
+    # similarly, growth.int is NA for Wiley (j=8) in bootstrap rep k=1754
     
-    if(length(data1$logSizeNext[!is.na(data1$logSizeNext)])>0)
-      
-    {
-      
+    # write if else statement so that if all individuals in bootstrap died, or if parameters were inestimable for a certain bootstrap, lambda is manually set equal to 0
+    
+    if (is.na(params1$fruits.int)) {
+      lambda[j]=0     
+      siteID[j]=as.character(unique(data1$SiteID))
+    }
+    else if(is.na(params1$growth.int)) {
+      lambda[j]=0     
+      siteID[j]=as.character(unique(data1$SiteID))
+    }
+    else if(length(data1$logSizeNext[!is.na(data1$logSizeNext)])>0) {
+       
       #*******************************************************************************
       ### 4B. Create survival, growth, and fecundity functions and build IPM by running integral_projection_model.R script
       #*******************************************************************************
@@ -222,10 +227,13 @@ data.rep=subset(data.rep,NotAnIndividual!=1|is.na(NotAnIndividual))
       # obtain site name corresponding to lambda estimate
       siteID[j]=as.character(unique(data1$SiteID))
       
-    } # end if loop
-    else{
-      lambda[j]=0     
-      siteID[j]=as.character(unique(data1$SiteID))} # end else loop
+    } # end last if loop
+
+    else {
+    lambda[j]=0     
+    siteID[j]=as.character(unique(data1$SiteID))
+  }
+
     
     # merge lambda estimate with site name
     lambda.site=data.frame(siteID,lambda)
@@ -245,4 +253,4 @@ bootstrapped.lambda <- do.call(rbind, lambda.boot) %>% arrange(siteID)
 bootstrapped.lambda$Replicate=rep(seq(1,n.boot,1),times=length(site))
 
 # write bootstrapped lambda estimates to .csv
-write.csv(bootstrapped.lambda,"R_output/Mcard_demog_INDIV_BOOTSTRAP_lambda_2010-2013.csv",row.names=FALSE) 
+write.csv(bootstrapped.lambda,"Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv",row.names=FALSE) 
