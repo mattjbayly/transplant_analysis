@@ -254,3 +254,21 @@ bootstrapped.lambda$Replicate=rep(seq(1,n.boot,1),times=length(site))
 
 # write bootstrapped lambda estimates to .csv
 write.csv(bootstrapped.lambda,"Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv",row.names=FALSE) 
+
+
+#*******************************************************************************
+### 6. Summarize bootstrapped results
+#*******************************************************************************
+
+bootstrap.summary <- bootstrapped.lambda %>% 
+  group_by(siteID) %>% 
+  arrange(lambda) %>% 
+  summarize(boot.min = nth(lambda, 0.05*2000),
+            boot.max = nth(lambda, 0.95*2000))
+
+# merge these with real lambdas
+site.lambdas <- read.csv("Robjects/site.lambda.csv")
+
+lambdas <- left_join(site.lambdas, bootstrap.summary, by=c("Site"="siteID"))
+
+write.csv(lambdas, "Robjects/site.lambdas.bootstrap.csv")
