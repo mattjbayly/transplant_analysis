@@ -281,8 +281,8 @@ for (j in 1:length(site)) {
   CIs.tmp <- quantile(data1$lambda,probs=p) # bias-corrected percentile limits
   site.lambdas$lower.bias[j] <- CIs.tmp[1] # add to data frame with real estimates
   site.lambdas$upper.bias[j] <- CIs.tmp[2]
-  site.lambdas$lower[j] <- arrange(data1, lambda)[alpha*n.boot, "lambda"]
-  site.lambdas$upper[j] <- arrange(data1, lambda)[(1-alpha)*n.boot, "lambda"]
+  site.lambdas$lower[j] <- arrange(data1, lambda)[0.5*alpha*n.boot, "lambda"]
+  site.lambdas$upper[j] <- arrange(data1, lambda)[(1-(0.5*alpha))*n.boot, "lambda"]
     }
 
 write.csv(site.lambdas, "Robjects/site.lambdas.bootstrap.csv")
