@@ -105,3 +105,31 @@ ggplot(Coast.boot.vitals, aes(recruit.logSize.sd)) +
 # real value is near center of bootstrapped distribution
 
 # ok, so this is a problem for all sites, but for some reason it is having an exaggerated effect at Thomas (mabye sensitivity is higher for its life history structure, with highest observed lambda)
+
+# let's dig a bit deeper into establishment prob calculation.
+# it is the ratio of new recruits to total seeds. 
+# total seeds is the product of total fruits and seeds per fruit.
+# we know from above that seeds.per.fruit matches bootstrapped distribution well.
+# so, what about recruit.num and fruit.sum?
+
+boot.fruits <- readRDS("Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_sum.rds") 
+
+boot.recruits <- readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_num.rds") 
+
+# real values
+source("Rcode/data_prep.R")
+demo.dat.north <- demo.data %>% 
+  filter(Site=="Rock Creek"|Site=="Canton Creek"|Site=="Coast Fork of Williamette") %>% 
+  droplevels()
+
+mean.recruit.number.per.site=mean(tapply(demo.dat.north$logSizeNext[is.na(demo.dat.north$logSize)],demo.dat.north$Site[is.na(demo.dat.north$logSize)],FUN="length"))
+
+mean.fruits.per.site=mean(tapply(demo.dat.north$Fec1[!is.na(demo.dat.north$Fec1)],demo.dat.north$Site[!is.na(demo.dat.north$Fec1)],sum))
+
+ggplot(boot.fruits, aes(total.fruits)) +
+  geom_histogram() + 
+  geom_vline(aes(xintercept=mean.fruits.per.site))
+
+ggplot(boot.recruits, aes(recruit.num)) +
+  geom_histogram() + 
+  geom_vline(aes(xintercept=mean.recruit.number.per.site))
