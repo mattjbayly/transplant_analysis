@@ -285,11 +285,19 @@ for (j in 1:length(site)) {
   site.lambdas$upper[j] <- arrange(data1, lambda)[(1-(0.5*alpha))*n.boot, "lambda"]
     }
 
+site.lambdas <- site.lambdas %>% 
+  mutate(region = ifelse(lat<44, "in", "out"))
+
 write.csv(site.lambdas, "Robjects/site.lambdas.bootstrap.csv")
 
-ggplot(site.lambdas, aes(lat, lambda)) +
-  geom_point() + 
-  geom_errorbar(aes(ymax=upper, ymin=lower))
+ggplot(site.lambdas, aes(lat, lambda, color=region)) +
+  geom_point(pch=21) + 
+  scale_color_manual(values=c("black", "grey")) +
+  geom_errorbar(aes(ymax=upper, ymin=lower)) + 
+  xlab("Latitude") + 
+  ylab(expression(paste("Population growth rate (", lambda, ") + 95% CI"))) +
+  geom_hline(yintercept=1, linetype="dashed") + 
+  theme_classic()
 
 ggplot(site.lambdas, aes(lat, lambda)) +
   geom_point() + 
