@@ -260,7 +260,7 @@ write.csv(bootstrapped.lambda,"Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv",
 #*******************************************************************************
 
 # read in bootstrapped lambdas
-bootstrapped.lambda <- read.csv("Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv") 
+# bootstrapped.lambda <- read.csv("Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv") 
 
 # read in real lambdas
 site.lambdas <- read.csv("Robjects/site.lambda.csv")
