@@ -37,12 +37,10 @@ fruit.reg_boot=readRDS("/Users/amyangert/Documents/GitClones/matt transplant boo
 ## Read in and examine other bootstrapped parameters (constants across sites)
 # seeds per fruit
 bootstrapped.seed.num=readRDS("Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")
+colnames(bootstrapped.seed.num) = c("seeds", "Replicate")
 
 # recruitment probabilty
-bootstrapped.recruit.prob=as.data.frame(readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds"))
-# add Replicate column
-bootstrapped.recruit.prob$Replicate = seq(1:2000)
-colnames(bootstrapped.recruit.prob) = c("recruit.prob", "Replicate")
+bootstrapped.recruit.prob=readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds")
 
 # recruit size distribution
 bootstrapped.recruit.dist=readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_dist.rds")
@@ -143,13 +141,13 @@ for (k in 1:n.boot) {
   ### 3F. Number of seeds per fruit ###
   #*******************************************************************************
   
-  params$seeds.per.fruit=rep(bootstrapped.seed.num[k,"V1"],times=length(site))
+  params$seeds.per.fruit=rep(bootstrapped.seed.num[k,"seeds"],times=length(site))
   
   #*******************************************************************************
   ### 3G. Establishment probability ###
   #*******************************************************************************
   
-  params$establishment.prob=rep(bootstrapped.recruit.prob[k,"recruit.prob"],times=length(site))
+  params$establishment.prob=unlist(rep(bootstrapped.recruit.prob[k,"recruit.prob"],times=length(site)))
   
   
   
