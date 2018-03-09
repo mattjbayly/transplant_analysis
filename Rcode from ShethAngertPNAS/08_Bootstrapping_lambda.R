@@ -11,6 +11,7 @@ require(plyr)
 require(dplyr)
 require(lme4)
 require(glmmADMB)
+require(ggplot2)
 
 # set working directory
 # setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
@@ -285,3 +286,7 @@ for (j in 1:length(site)) {
     }
 
 write.csv(site.lambdas, "Robjects/site.lambdas.bootstrap.csv")
+
+ggplot(site.lambdas, aes(lat, lambda)) +
+  geom_point() + 
+  geom_errorbar(aes(ymax=upper, ymin=lower))
