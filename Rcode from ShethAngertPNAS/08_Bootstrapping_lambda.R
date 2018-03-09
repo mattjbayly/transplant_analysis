@@ -147,7 +147,7 @@ for (k in 1:n.boot) {
   ### 3G. Establishment probability ###
   #*******************************************************************************
   
-  params$establishment.prob=unlist(rep(bootstrapped.recruit.prob[k,"recruit.prob"],times=length(site)))
+  params$establishment.prob=unlist(rep(bootstrapped.recruit.prob[k,"mean.recruit.prob"],times=length(site)))
   
   
   
