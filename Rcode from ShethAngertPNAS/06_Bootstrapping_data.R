@@ -142,6 +142,10 @@ data.boot <- lapply(1:n.boot, function(j) {
   rnorm(1, mean=1163.28, sd=seeds.dist$seeds.sd)}) %>% ldply() # 
   data.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
 
+# rename
+bootstrapped.seeds <- data.boot
+colnames(bootstrapped.seeds) <- c("seeds", "Replicate")
+  
 # Write bootstrapped datasets to .rds file
 saveRDS(data.boot,"Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")  
 
@@ -177,8 +181,9 @@ for (i in 1:length(site)) {
 bootstrapped.fruits <- do.call(rbind, data.boot.rep) 
 
 bootstrapped.fruit.sum <- bootstrapped.fruits %>% 
-  group_by(Replicate) %>% 
-  summarize(total.fruits = sum(Fec1, na.rm=T))
+  group_by(Site, Replicate) %>% 
+  summarize(total.fruits = sum(Fec1, na.rm=T)) %>% 
+  ungroup
 
 # Write bootstrapped datasets to .rds file
 saveRDS(bootstrapped.fruits,"Robjects/Mcard_transplant_FRUITS_BOOTSTRAP_data.rds")  
@@ -216,15 +221,21 @@ bootstrapped.indivs <- do.call(rbind, data.boot.rep)
 # Ok, so how many of these are recruits (as opposed to survivors)?
 bootstrapped.recruit.num <- bootstrapped.indivs %>% 
   filter(is.na(logSize)) %>% 
-  group_by(Replicate) %>% 
-  summarize(recruit.num = n())
+  group_by(Site, Replicate) %>% 
+  summarize(recruit.num = n()) %>% 
+  ungroup
 
 # Write bootstrapped datasets to .rds file
 saveRDS(bootstrapped.indivs,"Robjects/Mcard_transplant_DEMOGINDIVS_BOOTSTRAP_data.rds")  
 saveRDS(bootstrapped.recruit.num,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_num.rds")  
 
 ### Combine above into recruitment probability
-bootstrapped.recruit.prob = bootstrapped.recruit.num$recruit.num/(bootstrapped.fruit.sum$total.fruits*bootstrapped.seeds$V1)
+df <- left_join(bootstrapped.recruit.num, bootstrapped.fruit.sum)
+df2 <- left_join(df, bootstrapped.seeds)
+
+bootstrapped.recruit.prob <- df2 %>% 
+  group_by(Replicate) %>% 
+  summarize(recruit.prob = mean(recruit.num)/(mean(total.fruits)*mean(seeds)))
 
 saveRDS(bootstrapped.recruit.prob,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds")  
 
