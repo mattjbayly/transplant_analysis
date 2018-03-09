@@ -260,7 +260,7 @@ write.csv(bootstrapped.lambda,"Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv",
 #*******************************************************************************
 
 # read in bootstrapped lambdas
-# bootstrapped.lambda <- read.csv("Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv") 
+bootstrapped.lambda <- read.csv("Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv") 
 
 # read in real lambdas
 site.lambdas <- read.csv("Robjects/site.lambda.csv")
@@ -279,8 +279,10 @@ for (j in 1:length(site)) {
   b=qnorm((sum(data1$lambda > site.lambdas$lambda[j])+sum(data1$lambda==site.lambdas$lambda[j])/2)/n.boot)
   p=pnorm(z-2*b) # bias-correct & convert to proportions
   CIs.tmp <- quantile(data1$lambda,probs=p) # bias-corrected percentile limits
-  site.lambdas$lower[j] <- CIs.tmp[1] # add to data frame with real estimates
-  site.lambdas$upper[j] <- CIs.tmp[2]
+  site.lambdas$lower.bias[j] <- CIs.tmp[1] # add to data frame with real estimates
+  site.lambdas$upper.bias[j] <- CIs.tmp[2]
+  site.lambdas$lower[j] <- arrange(data1, lambda)[alpha*n.boot, "lambda"]
+  site.lambdas$upper[j] <- arrange(data1, lambda)[(1-alpha)*n.boot, "lambda"]
     }
 
 write.csv(site.lambdas, "Robjects/site.lambdas.bootstrap.csv")
@@ -288,3 +290,7 @@ write.csv(site.lambdas, "Robjects/site.lambdas.bootstrap.csv")
 ggplot(site.lambdas, aes(lat, lambda)) +
   geom_point() + 
   geom_errorbar(aes(ymax=upper, ymin=lower))
+
+ggplot(site.lambdas, aes(lat, lambda)) +
+  geom_point() + 
+  geom_errorbar(aes(ymax=upper.bias, ymin=lower.bias))
