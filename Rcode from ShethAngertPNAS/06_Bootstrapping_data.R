@@ -229,13 +229,19 @@ bootstrapped.recruit.num <- bootstrapped.indivs %>%
 saveRDS(bootstrapped.indivs,"Robjects/Mcard_transplant_DEMOGINDIVS_BOOTSTRAP_data.rds")  
 saveRDS(bootstrapped.recruit.num,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_num.rds")  
 
+bootstrapped.indivs <- readRDS("Robjects/Mcard_transplant_DEMOGINDIVS_BOOTSTRAP_data.rds")
+bootstrapped.recruit.num <- readRDS("Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_num.rds")
+bootstrapped.seeds <- readRDS("Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")
+colnames(bootstrapped.seeds) = c("seeds", "Replicate")
+
 ### Combine above into recruitment probability
 df <- left_join(bootstrapped.recruit.num, bootstrapped.fruit.sum)
 df2 <- left_join(df, bootstrapped.seeds)
 
 bootstrapped.recruit.prob <- df2 %>% 
+  mutate(recruit.prob = recruit.num/(total.fruits*seeds)) %>%
   group_by(Replicate) %>% 
-  summarize(recruit.prob = mean(recruit.num)/(mean(total.fruits)*mean(seeds)))
+  summarize(mean.recruit.prob = mean(recruit.prob))
 
 saveRDS(bootstrapped.recruit.prob,"Robjects/Mcard_transplant_RECRUITS_BOOTSTRAP_prob.rds")  
 
