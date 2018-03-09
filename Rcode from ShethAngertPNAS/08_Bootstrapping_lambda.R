@@ -260,16 +260,28 @@ write.csv(bootstrapped.lambda,"Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv",
 ### 6. Summarize bootstrapped results
 #*******************************************************************************
 
-bootstrap.summary <- bootstrapped.lambda %>% 
-  group_by(siteID) %>% 
-  arrange(lambda) %>% 
-  summarize(boot.min = nth(lambda, 0.05*2000),
-            boot.med = nth(lambda, 0.50*2000),
-            boot.max = nth(lambda, 0.95*2000))
+# read in bootstrapped lambdas
+bootstrapped.lambda <- read.csv("Robjects/Mcard_transplants_BOOTSTRAP_lambda.csv") 
 
-# merge these with real lambdas
+# read in real lambdas
 site.lambdas <- read.csv("Robjects/site.lambda.csv")
 
-lambdas <- left_join(site.lambdas, bootstrap.summary, by=c("Site"="siteID"))
+## estimate bias-corrected CIs
 
-write.csv(lambdas, "Robjects/site.lambdas.bootstrap.csv")
+# site vector and constants
+site=unique(bootstrapped.lambda$siteID)
+n.boot=2000
+alpha=0.05 # 95% limits
+z=qnorm(c(alpha/2,1-alpha/2)) # Std. norm. limits
+
+# loop across sites
+for (j in 1:length(site)) {
+  data1=subset(bootstrapped.lambda,siteID==site[j])
+  b=qnorm((sum(data1$lambda > site.lambdas$lambda[j])+sum(data1$lambda==site.lambdas$lambda[j])/2)/n.boot)
+  p=pnorm(z-2*b) # bias-correct & convert to proportions
+  CIs.tmp <- quantile(data1$lambda,probs=p) # bias-corrected percentile limits
+  site.lambdas$lower[j] <- CIs.tmp[1] # add to data frame with real estimates
+  site.lambdas$upper[j] <- CIs.tmp[2]
+    }
+
+write.csv(site.lambdas, "Robjects/site.lambdas.bootstrap.csv")
