@@ -122,6 +122,9 @@ saveRDS(bootstrapped.data,"Robjects/Mcard_transplant_INDIV_BOOTSTRAP_data.rds")
 seeds.dist <- seeds.north %>% 
   summarize(seeds.mean = mean(c(mean2010, mean2011, mean2012), na.rm=T),
          seeds.sd = sd(c(mean2010, mean2011, mean2012), na.rm=T))
+# but this mean is lower than that used for real estimates because of removing pseudoreplicated values for coast fork
+# it could be causing bootstrapped lambdas to be consistently lower than real estimates
+# use empirical sd, but same mean as used for real estimates
 
 # Create empty list to be filled in loop
 data.boot.rep=list()
@@ -136,7 +139,7 @@ n.boot=2000
 # Create loop to obtain replicate bootstrap datasets
 data.boot <- lapply(1:n.boot, function(j) { 
   set.seed(j+seed)
-  rnorm(1, mean=seeds.dist$seeds.mean, sd=seeds.dist$seeds.sd)}) %>% ldply() # 
+  rnorm(1, mean=1163.28, sd=seeds.dist$seeds.sd)}) %>% ldply() # 
   data.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
   data.boot.rep[[i]]=data.boot # add each site's dataframe of n.boot bootstrap replicates to list
 
