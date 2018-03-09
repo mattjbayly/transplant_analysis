@@ -141,13 +141,9 @@ data.boot <- lapply(1:n.boot, function(j) {
   set.seed(j+seed)
   rnorm(1, mean=1163.28, sd=seeds.dist$seeds.sd)}) %>% ldply() # 
   data.boot$Replicate=rep(seq(1:n.boot)) # create a column in data frame that corresponds to bootstrap replicate
-  data.boot.rep[[i]]=data.boot # add each site's dataframe of n.boot bootstrap replicates to list
-
-# Convert list to data frame
-bootstrapped.seeds <- do.call(rbind, data.boot.rep) 
 
 # Write bootstrapped datasets to .rds file
-saveRDS(bootstrapped.seeds,"Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")  
+saveRDS(data.boot,"Robjects/Mcard_transplant_SEEDS_BOOTSTRAP_data.rds")  
 
 
 ### Probability of recruitment
