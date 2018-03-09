@@ -290,9 +290,9 @@ site.lambdas <- site.lambdas %>%
 
 write.csv(site.lambdas, "Robjects/site.lambdas.bootstrap.csv")
 
-ggplot(site.lambdas, aes(lat, lambda, color=region)) +
-  geom_point(pch=21) + 
-  scale_color_manual(values=c("black", "grey")) +
+ggplot(site.lambdas, aes(lat, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  geom_point(shape=1, size=5, colour="black") +
   geom_errorbar(aes(ymax=upper, ymin=lower)) + 
   xlab("Latitude") + 
   ylab(expression(paste("Population growth rate (", lambda, ") + 95% CI"))) +
