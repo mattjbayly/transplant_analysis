@@ -133,3 +133,5 @@ ggplot(boot.fruits, aes(total.fruits)) +
 ggplot(boot.recruits, aes(recruit.num)) +
   geom_histogram() + 
   geom_vline(aes(xintercept=mean.recruit.number.per.site))
+
+# trimodality highlights how important it is to do calcs within sites prior to averaging across them. this is the case for real data but wasn't the case for bootstrapping.
