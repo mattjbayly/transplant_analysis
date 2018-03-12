@@ -251,13 +251,21 @@ for (i in 1:10) {
 	  mod = get(paste("BRT.mod4.",i, sep="")); 
 	  brprob = predict(mod, pred.dom, n.trees=mod$gbm.call$best.trees, type="response"); 
 	  br_preddy <- data.frame(brprob); 
-	  bio <- cbind(bio, br_preddy)
+	  results <- cbind(results, br_preddy)
 	  }
-	BRTavg <- rowMeans(bio[,49:58]); final <- cbind(final, BRTavg)
+	BRTavg <- rowMeans(results[,44:53]); 
+	final <- cbind(final, BRTavg)
 
 ## MAX prediction and classification
-	library(dismo); library(raster); setwd(path.obj)
-	for (i in 1:10) {mod = get(paste("MAX.mod1.",i, sep="")); maxprob = predict(mod, pred.dom); max_preddy <- data.frame(maxprob); bio <- cbind(bio, max_preddy)}
+	library(dismo); 
+	library(raster); 
+	setwd(path.obj)
+	for (i in 1:10) {
+	  mod = get(paste("MAX.mod1.",i, sep="")); 
+	  maxprob = predict(mod, pred.dom); 
+	  max_preddy <- data.frame(maxprob); 
+	  results <- cbind(results, max_preddy)
+	  }
 	  # MAX ave
 		MAXavg <- rowMeans(bio[,59:68]); final <- cbind(final, MAXavg)
 # get sites climate data
