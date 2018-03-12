@@ -267,11 +267,10 @@ for (i in 1:10) {
 	  results <- cbind(results, max_preddy)
 	  }
 	  # MAX ave
-		MAXavg <- rowMeans(bio[,59:68]); final <- cbind(final, MAXavg)
-# get sites climate data
-setwd(path.dev)
+		MAXavg <- rowMeans(results[,54:63]); 
+		final <- cbind(final, MAXavg)
 
-write.csv(final, file = "site_preds_annual.csv", row.names = FALSE)
+write.csv(final, file = "/Users/amyangert/Documents/GitClones/transplant_analysis/Data/site_preds_average.csv", row.names = FALSE)
 
 
 #
