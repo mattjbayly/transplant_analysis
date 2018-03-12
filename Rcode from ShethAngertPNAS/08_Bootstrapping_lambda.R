@@ -7,11 +7,12 @@
 rm(list = ls(all=TRUE))
 
 # require packages
-require(plyr)
-require(dplyr)
-require(lme4)
-require(glmmADMB)
-require(ggplot2)
+library(plyr)
+library(dplyr)
+library(lme4)
+library(glmmADMB)
+library(ggplot2)
+library(MuMIn)
 
 # set working directory
 # setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
@@ -289,6 +290,26 @@ site.lambdas <- site.lambdas %>%
   mutate(region = ifelse(lat<44, "in", "out"))
 
 write.csv(site.lambdas, "Robjects/site.lambdas.bootstrap.csv")
+
+# linear models of lambda vs latitude
+mod0 <- lm(lambda ~ 1, data=site.lambdas)
+mod1 <- lm(lambda ~ lat, data=site.lambdas)
+mod2 <- lm(lambda ~ poly(lat, 2), data=site.lambdas)
+AIC(mod0, mod1, mod2)
+model.sel(mod0, mod1, mod2)
+summary(mod0)
+summary(mod1)
+summary(mod2)
+
+# without northernmost site
+mod0b <- lm(lambda ~ 1, data=site.lambdas[site.lambdas$lat<44.8,])
+mod1b <- lm(lambda ~ lat, data=site.lambdas[site.lambdas$lat<44.8,])
+mod2b <- lm(lambda ~ poly(lat, 2), data=site.lambdas[site.lambdas$lat<44.8,])
+AIC(mod0b, mod1b, mod2b)
+model.sel(mod0b, mod1b, mod2b)
+summary(mod0b)
+summary(mod1b)
+summary(mod2b)
 
 ggplot(site.lambdas, aes(lat, lambda)) +
   geom_point(aes(colour=region), size=5) +
