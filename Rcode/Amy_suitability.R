@@ -60,6 +60,7 @@ ggplot(dat, aes(Ens, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method=lm, aes(color="black")) + 
   xlab("Climate ENM suitability") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
