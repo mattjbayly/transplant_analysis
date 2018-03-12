@@ -25,13 +25,12 @@ library(gbm)
 #http://www.nceas.ucsb.edu/scicomp/usecases/point-in-polygon
 
 ## set pathnames - Amy
-path.root="/Users/amyangert/Desktop/Amy work August 2014" 
+path.root="/Users/amyangert/Google Drive/OccAmNat" 
 path.dat = paste(path.root, "/data files", sep="")
 path.obj = paste(path.root, "/R objects", sep="")
 path.eco = paste(path.dat, "/ecoregions.shp", sep="")
 path.bio = paste(path.dat, "/wc0.5", sep="")
 path.sta = paste(path.dat, "/gz_2010_us_040_00_500k", sep="")
-path.fig = paste(path.root, "/figures", sep="")
 
 ## set pathnames - Matthew
 path.root = "C:/Users/DW/Desktop/temp.sept.30" 
@@ -159,6 +158,7 @@ cuts.avg <- colMeans(cuts)
 
 #########################################################
 
+### this seems to make predictions to sites based on short-term climate data
 path.dev <- "C:/Users/DW/Desktop/transplant_analysis/Data/raw_data/Deviations"
 # get sites climate data
 setwd(path.dev)
@@ -186,27 +186,73 @@ sites <- read.csv(file="trans2015.csv")
 	pred.dom <- bio # will needed
 	head(sites, 2)
 
+	
+### 
+# let's use occ_site_preds_sept2014 as source of 1981-2010 climate variables for transplant sites. any differences between model predictions in this file and those we will output now should be due to changes in model objects during am nat revisions	
+	
+sites <- read.csv("/Users/amyangert/Documents/GitClones/transplant_analysis/Data/raw_data/occ_site_preds_sept2014.csv")
+	
+sites$bio3 <- log(sites$bio3+0.5)
+sites$bio10 <- log(sites$bio10+0.5)
+sites$bio12 <- log(sites$bio12+0.5)
+sites$bio14 <- log(sites$bio14+0.5)
+
+pred.dom = sites[,c("bio2", "bio3", "bio4", "bio10", "bio11", "bio12", "bio14", "bio15")]
 #####################
 # run model predictions 
 
 ## LR prediction to sites 
-for (i in 1:10) {setwd(path.obj); mod = get(paste("LR.mod2.",i, sep="")); modprob = predict(mod, pred.dom, type="response", fun=predict); modprob <- data.frame(modprob); bio <- cbind(bio, modprob)}
+results = sites[,2:3]
+
+for (i in 1:10) {
+  setwd(path.obj); 
+  mod = get(paste("LR.mod2.",i, sep="")); 
+  modprob = predict(mod, pred.dom, type="response", fun=predict); 
+  modprob <- data.frame(modprob); 
+  results <- cbind(results, modprob)
+  }
 	# LR ave
-	LRavg <- rowMeans(bio[,9:18]); final <- cbind(sites, LRavg)
+	LRavg <- rowMeans(results[,3:13]); 
+	final <- cbind(results, LRavg)
 		
 ## GAM prediction to sites 
-	library(gam); library(dismo); setwd(path.obj)
-for (i in 1:10) {mod = get(paste("GAM.mod4.",i, sep="")); gamprob = predict(mod, pred.dom, type="response", fun=predict); gammy <- data.frame(gamprob); bio <- cbind(bio, gammy)}  		
-		GAMavg <- rowMeans(bio[,19:28]); final <- cbind(final, GAMavg)
+	library(gam); 
+	library(dismo); 
+	setwd(path.obj)
+for (i in 1:10) {
+  mod = get(paste("GAM.mod4.",i, sep="")); 
+  gamprob = predict(mod, pred.dom, type="response", fun=predict); 
+  gammy <- data.frame(gamprob); 
+  results <- cbind(results, gammy)
+  }  		
+	GAMavg <- rowMeans(results[,14:23]); 
+	final <- cbind(final, GAMavg)
 
 ## RF prediction and classification
-	setwd(path.obj); library(randomForest); library(raster)
-	for (i in 1:10) {setwd(path.obj); mod = get(paste("RF.mod1.",i, sep="")); rfprob = predict(mod, pred.dom, type = "prob", fun=predict, index=2); rf_preddy <- data.frame(rfprob); bio <- cbind(bio, rf_preddy)}
-		RFavg <- rowMeans(bio[,c(30,32,34,36,38,40,42,44,46,48)]); final <- cbind(final, RFavg)
+	setwd(path.obj); 
+	library(randomForest); 
+	library(raster)
+	for (i in 1:10) {
+	  setwd(path.obj); 
+	  mod = get(paste("RF.mod1.",i, sep="")); 
+	  rfprob = predict(mod, pred.dom, type = "prob", fun=predict, index=2); 
+	  rf_preddy <- data.frame(rfprob); 
+	  results <- cbind(results, rf_preddy)
+	  }
+		RFavg <- rowMeans(results[,c(25,27,29,31,33,35,37,39,41,43)]); 
+		final <- cbind(final, RFavg)
 		
 ## BRT prediction and classification
-	library(dismo); library(gbm); library(raster); setwd(path.obj)
-	for (i in 1:10) {mod = get(paste("BRT.mod4.",i, sep="")); brprob = predict(mod, pred.dom, n.trees=mod$gbm.call$best.trees, type="response"); br_preddy <- data.frame(brprob); bio <- cbind(bio, br_preddy)}
+	library(dismo); 
+	library(gbm); 
+	library(raster); 
+	setwd(path.obj)
+	for (i in 1:10) {
+	  mod = get(paste("BRT.mod4.",i, sep="")); 
+	  brprob = predict(mod, pred.dom, n.trees=mod$gbm.call$best.trees, type="response"); 
+	  br_preddy <- data.frame(brprob); 
+	  bio <- cbind(bio, br_preddy)
+	  }
 	BRTavg <- rowMeans(bio[,49:58]); final <- cbind(final, BRTavg)
 
 ## MAX prediction and classification
