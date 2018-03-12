@@ -63,6 +63,23 @@ data$Year = as.factor(data$Year)
 # SeedCt: mean seed count, rounded to the nearest integer, for each site
 # ClassNext: stage class (juvenile, adult, dead, or NA) of plant at time = t+1 
 
+# simple summaries for Supplementary Table 1
+countNperplot <- data %>% 
+  group_by(PlotID) %>% 
+  summarize(count_per_plot = n_distinct(ID))
+min(countNperplot$count_per_plot)
+max(countNperplot$count_per_plot)
+mean(countNperplot$count_per_plot)
+sum(countNperplot$count_per_plot)
+
+countNpersite <- data %>% 
+  group_by(SiteID) %>% 
+  summarize(count_per_site = n_distinct(ID))
+min(countNpersite$count_per_site)
+max(countNpersite$count_per_site)
+mean(countNpersite$count_per_site)
+sum(countNpersite$count_per_site)
+
 #*******************************************************************************
 #### 2. Survival ###
 #*******************************************************************************

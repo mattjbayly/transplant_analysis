@@ -311,6 +311,10 @@ summary(mod0b)
 summary(mod1b)
 summary(mod2b)
 
+# anova of lambda by range position
+mod1c <- lm(lambda ~ region, data=site.lambdas)
+summary(mod1c)
+
 ggplot(site.lambdas, aes(lat, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
