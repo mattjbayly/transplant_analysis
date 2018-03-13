@@ -1,5 +1,6 @@
 library(tidyverse)
 library(MuMIn)
+library(cowplot)
 
 lams <- read_csv("Robjects/site.lambdas.bootstrap.csv")
 head(lams)
@@ -18,33 +19,55 @@ for (i in 1:dim(dat)[1]) {
 
 write.csv(dat, "Robjects/site.lambdas.suitability.csv")
 
-# linear models of lambda vs latitude
-mod0 <- lm(Ens ~ 1, data=dat)
-mod1 <- lm(Ens ~ lat, data=dat)
-mod2 <- lm(Ens ~ poly(lat, 2), data=dat)
-AIC(mod0, mod1, mod2)
-model.sel(mod0, mod1, mod2)
-summary(mod0)
-summary(mod1)
-summary(mod2)
+# linear models of suitability vs latitude
+mod0.ens <- lm(Ens ~ 1, data=dat)
+mod1.ens <- lm(Ens ~ lat, data=dat)
+model.sel(mod0.ens, mod1.ens)
+summary(mod1.ens)
 
-# without northernmost site
-mod0b <- lm(Ens ~ 1, data=dat[dat$lat<44.8,])
-mod1b <- lm(Ens ~ lat, data=dat[dat$lat<44.8,])
-mod2b <- lm(Ens ~ poly(lat, 2), data=dat[dat$lat<44.8,])
-AIC(mod0b, mod1b, mod2b)
-model.sel(mod0b, mod1b, mod2b)
-summary(mod0b)
-summary(mod1b)
-summary(mod2b)
+mod0.lr <- lm(LRavg ~ 1, data=dat)
+mod1.lr <- lm(LRavg ~ lat, data=dat)
+model.sel(mod0.lr, mod1.lr)
+summary(mod1.lr)
 
-# anova of lambda by range position
-mod1c <- lm(Ens ~ region, data=dat)
-summary(mod1c)
+mod0.gam <- lm(GAMavg ~ 1, data=dat)
+mod1.gam <- lm(GAMavg ~ lat, data=dat)
+model.sel(mod0.gam, mod1.gam)
+summary(mod1.gam)
 
-# anova of lambda by range position without northernmost site
-mod1d <- lm(Ens ~ region, data=dat[dat$lat<44.8,])
-summary(mod1d)
+mod0.rf <- lm(RFavg ~ 1, data=dat)
+mod1.rf <- lm(RFavg ~ lat, data=dat)
+model.sel(mod0.rf, mod1.rf)
+summary(mod1.rf)
+
+mod0.brt <- lm(BRTavg ~ 1, data=dat)
+mod1.brt <- lm(BRTavg ~ lat, data=dat)
+model.sel(mod0.brt, mod1.brt)
+summary(mod1.brt)
+
+mod0.max <- lm(MAXavg ~ 1, data=dat)
+mod1.max <- lm(MAXavg ~ lat, data=dat)
+model.sel(mod0.max, mod1.max)
+summary(mod1.max)
+
+# anova of suitability by range position
+mod2.ens <- lm(Ens ~ region, data=dat)
+summary(mod2.ens)
+
+mod2.lr <- lm(LRavg ~ region, data=dat)
+summary(mod2.lr)
+
+mod2.gam <- lm(GAMavg ~ region, data=dat)
+summary(mod2.gam)
+
+mod2.rf <- lm(RFavg ~ region, data=dat)
+summary(mod2.rf)
+
+mod2.brt <- lm(BRTavg ~ region, data=dat)
+summary(mod2.brt)
+
+mod2.max <- lm(MAXavg ~ region, data=dat)
+summary(mod2.max)
 
 ggplot(dat, aes(lat, Ens)) +
   geom_point(aes(colour=region), size=5) +
@@ -54,8 +77,86 @@ ggplot(dat, aes(lat, Ens)) +
   ylab("Climate ENM suitability") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
-ggsave("Figures/ClimateENM_vs_Latitude.png", width=8, height=8)
+ggplot2::ggsave("Figures/ClimateENM_vs_Latitude.png", width=8, height=8)
 
+# individual models
+LRlat <- ggplot(dat, aes(lat, LRavg)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Latitude") + 
+  ylab("Climate ENM suitability: LR") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+GAMlat <- ggplot(dat, aes(lat, GAMavg)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Latitude") + 
+  ylab("Climate ENM suitability: GAM") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+RFlat <- ggplot(dat, aes(lat, RFavg)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Latitude") + 
+  ylab("Climate ENM suitability: RF") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+BRTlat <- ggplot(dat, aes(lat, BRTavg)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Latitude") + 
+  ylab("Climate ENM suitability: BRT") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+MAXlat <- ggplot(dat, aes(lat, MAXavg)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Latitude") + 
+  ylab("Climate ENM suitability: MAX") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+
+multi <- plot_grid(LRlat, GAMlat, RFlat, BRTlat, MAXlat, labels="AUTO")
+save_plot("Figures/ClimateENM_vs_Latitude_IndModels.png", multi, base_width=8.5, base_height=11)
+
+
+# linear models of lambda vs suitability 
+mod0b.ens <- lm(lambda ~ 1, data=dat)
+mod1b.ens <- lm(lambda ~ Ens, data=dat)
+model.sel(mod0b.ens, mod1b.ens)
+summary(mod1b.ens)
+
+mod0b.lr <- lm(lambda ~ 1, data=dat)
+mod1b.lr <- lm(lambda ~ LRavg, data=dat)
+model.sel(mod0b.lr, mod1b.lr)
+summary(mod1b.lr)
+
+mod0b.gam <- lm(lambda ~ 1, data=dat)
+mod1b.gam <- lm(lambda ~ GAMavg, data=dat)
+model.sel(mod0b.gam, mod1b.gam)
+summary(mod1b.gam)
+
+mod0b.rf <- lm(lambda ~ 1, data=dat)
+mod1b.rf <- lm(lambda ~ RFavg, data=dat)
+model.sel(mod0b.rf, mod1b.rf)
+summary(mod1b.rf)
+
+mod0b.brt <- lm(lambda ~ 1, data=dat)
+mod1b.brt <- lm(lambda ~ BRTavg, data=dat)
+model.sel(mod0b.brt, mod1b.brt)
+summary(mod1b.brt)
+
+mod0b.max <- lm(lambda ~ 1, data=dat)
+mod1b.max <- lm(lambda ~ MAXavg, data=dat)
+model.sel(mod0b.max, mod1b.max)
+summary(mod1b.max)
+
+# lambda vs ensemble suitability
 ggplot(dat, aes(Ens, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -65,4 +166,54 @@ ggplot(dat, aes(Ens, lambda)) +
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
-ggsave("Figures/Lambda_vs_ClimateENM.png", width=8, height=8)
+ggplot2::ggsave("Figures/Lambda_vs_ClimateENM.png", width=8, height=8)
+
+# individual models
+LRlam <- ggplot(dat, aes(LRavg, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method=lm, aes(color="black")) + 
+  xlab("Climate ENM suitability: LR") + 
+  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method=lm, aes(color="black")) + 
+  xlab("Climate ENM suitability: GAM") + 
+  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+RFlam <- ggplot(dat, aes(RFavg, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method=lm, linetype="dashed", aes(color="black")) + 
+  xlab("Climate ENM suitability: RF") + 
+  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method=lm, linetype="dashed", aes(color="black")) + 
+  xlab("Climate ENM suitability: BRT") + 
+  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method=lm, aes(color="black")) + 
+  xlab("Climate ENM suitability: MAX") + 
+  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+
+multi2 <- plot_grid(LRlam, GAMlam, RFlam, BRTlam, MAXlam, labels="AUTO")
+save_plot("Figures/Lambda_vs_ClimateENM_IndModels.png", multi2, base_width=8.5, base_height=11)
