@@ -7,7 +7,7 @@ head(lams)
 
 suit <- read_csv("Data/site_preds_average.csv") %>% 
   filter(ID1=="trans") %>% droplevels() %>% 
-  select(ID2, LRavg, GAMavg, RFavg, BRTavg, MAXavg) %>% 
+  dplyr::select(ID2, LRavg, GAMavg, RFavg, BRTavg, MAXavg) %>% 
   mutate(Site = if_else(ID2=="Rock Creek", "ROCK", ifelse(ID2=="Coast Fork Willamette", "COAST", ifelse(ID2=="Mosby Creek", "MOSBY", ifelse(ID2=="Calapooia Creek", "CALAPOOIA", ifelse(ID2=="Wiley Creek", "WILEY", ifelse(ID2=="Thomas", "THOMAS", ifelse(ID2=="Hunter", "HUNTER", ifelse(ID2=="Looking Glass", "LOOK", NA)))))))))
 
 dat <- left_join(lams, suit)
@@ -161,7 +161,7 @@ ggplot(dat, aes(Ens, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, aes(color="black")) + 
+  geom_smooth(method=lm, se=FALSE, aes(color="black")) + 
   xlab("Climate ENM suitability") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
@@ -173,7 +173,7 @@ LRlam <- ggplot(dat, aes(LRavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, aes(color="black")) + 
+  geom_smooth(method=lm, se=FALSE, aes(color="black")) + 
   xlab("Climate ENM suitability: LR") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
@@ -182,7 +182,7 @@ GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, aes(color="black")) + 
+  geom_smooth(method=lm, se=FALSE, aes(color="black")) + 
   xlab("Climate ENM suitability: GAM") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
@@ -191,7 +191,7 @@ RFlam <- ggplot(dat, aes(RFavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, linetype="dashed", aes(color="black")) + 
+  geom_smooth(method=lm, se=FALSE, linetype="dashed", aes(color="black")) + 
   xlab("Climate ENM suitability: RF") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
@@ -200,7 +200,7 @@ BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, linetype="dashed", aes(color="black")) + 
+  geom_smooth(method=lm, se=FALSE, linetype="dashed", aes(color="black")) + 
   xlab("Climate ENM suitability: BRT") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
@@ -209,7 +209,7 @@ MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, aes(color="black")) + 
+  geom_smooth(method=lm, se=FALSE, aes(color="black")) + 
   xlab("Climate ENM suitability: MAX") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
@@ -217,3 +217,113 @@ MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
 
 multi2 <- plot_grid(LRlam, GAMlam, RFlam, BRTlam, MAXlam, labels="AUTO")
 save_plot("Figures/Lambda_vs_ClimateENM_IndModels.png", multi2, base_width=8.5, base_height=11)
+
+
+# exploring individual vital rates
+vitals <- read_csv("Robjects/vital_rate_coefficients.csv")
+
+dat2 <- left_join(dat, vitals, by=c("Site"="site"))
+
+# linear models of vitals vs latitude
+surv.lat <- lm(surv.siteint ~ lat, data=dat2)
+summary(surv.lat)
+
+growth.lat <- lm(growth.siteint ~ lat, data=dat2)
+summary(growth.lat)
+
+flower.lat <- lm(flowering.siteint ~ lat, data=dat2)
+summary(flower.lat)
+
+fruit.lat <- lm(fruits.siteint ~ lat, data=dat2)
+summary(fruit.lat)
+
+# individual models
+survlat <- ggplot(dat2, aes(lat, surv.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Latitude") + 
+  ylab("Survival intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+growthlat <- ggplot(dat2, aes(lat, growth.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Latitude") + 
+  ylab("Growth intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+flowerlat <- ggplot(dat2, aes(lat, flowering.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method=lm, se=FALSE, aes(color="black")) + 
+  xlab("Latitude") + 
+  ylab("Flowering intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+fruitlat <- ggplot(dat2, aes(lat, fruits.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Latitude") + 
+  ylab("Fruits intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+
+multi3 <- plot_grid(survlat, growthlat, flowerlat, fruitlat, labels="AUTO")
+save_plot("Figures/Vitals_vs_Latitude.png", multi3, base_width=8.5, base_height=11)
+
+# linear models of vitals vs suitability
+surv.suit <- lm(surv.siteint ~ Ens, data=dat2)
+summary(surv.suit)
+
+growth.suit <- lm(growth.siteint ~ Ens, data=dat2)
+summary(growth.suit)
+
+flower.suit <- lm(flowering.siteint ~ Ens, data=dat2)
+summary(flower.suit)
+
+fruit.suit <- lm(fruits.siteint ~ Ens, data=dat2)
+summary(fruit.suit)
+
+# individual models
+survsuit <- ggplot(dat2, aes(Ens, surv.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Climatic suitability") + 
+  ylab("Survival intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+growthsuit <- ggplot(dat2, aes(Ens, growth.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, aes(colour="black")) +
+  xlab("Climatic suitability") + 
+  ylab("Growth intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+flowersuit <- ggplot(dat2, aes(Ens, flowering.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Climatic suitability") + 
+  ylab("Flowering intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+fruitsuit <- ggplot(dat2, aes(Ens, fruits.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method=lm, se=FALSE, aes(color="black")) + 
+  xlab("Climatic suitability") + 
+  ylab("Fruits intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+
+multi4 <- plot_grid(survsuit, growthsuit, flowersuit, fruitsuit, labels="AUTO")
+save_plot("Figures/Vitals_vs_Suitability.png", multi4, base_width=8.5, base_height=11)
+
