@@ -71,58 +71,69 @@ summary(mod2.max)
 
 ggplot(dat, aes(lat, Ens)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("Latitude") + 
+  xlim(43,45.5) +
   ylab("Climate ENM suitability") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
 ggplot2::ggsave("Figures/ClimateENM_vs_Latitude.png", width=8, height=8)
 
 # individual models
 LRlat <- ggplot(dat, aes(lat, LRavg)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
-  ylab("Climate ENM suitability: LR") +
+  xlab("") + 
+  xlim(43,45.5) +
+  ylab("LF suitability") +
+  ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
 GAMlat <- ggplot(dat, aes(lat, GAMavg)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
-  ylab("Climate ENM suitability: GAM") +
+  xlab("") + 
+  xlim(43,45.5) +
+  ylab("GAM suitability") +
+  ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
 RFlat <- ggplot(dat, aes(lat, RFavg)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
-  ylab("Climate ENM suitability: RF") +
+  xlab("") + 
+  xlim(43,45.5) +
+  ylab("RF suitability") +
+  ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
 BRTlat <- ggplot(dat, aes(lat, BRTavg)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
-  ylab("Climate ENM suitability: BRT") +
+  xlab("") + 
+  xlim(43,45.5) +
+  ylab("BRT suitability") +
+  ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
 MAXlat <- ggplot(dat, aes(lat, MAXavg)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("Latitude") + 
-  ylab("Climate ENM suitability: MAX") +
+  xlim(43,45.5) +
+  ylab("MAX suitability") +
+  ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
 
-multi <- plot_grid(LRlat, GAMlat, RFlat, BRTlat, MAXlat, labels="AUTO")
-save_plot("Figures/ClimateENM_vs_Latitude_IndModels.png", multi, base_width=8.5, base_height=11)
+multi <- plot_grid(LRlat, GAMlat, RFlat, BRTlat, MAXlat, ncol=1, labels="AUTO", label_x=0.9)
+save_plot("Figures/ClimateENM_vs_Latitude_IndModels.png", multi, base_width=5, base_height=11)
 
 
 # linear models of lambda vs suitability 
@@ -159,14 +170,14 @@ summary(mod1b.max)
 # lambda vs ensemble suitability
 ggplot(dat, aes(Ens, lambda)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, se=FALSE, aes(color="black")) + 
+  geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("Climate ENM suitability") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
-ggplot2::ggsave("Figures/Lambda_vs_ClimateENM.png", width=8, height=8)
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
+gplot2::ggsave("Figures/Lambda_vs_ClimateENM.png", width=8, height=8)
 
 # individual models
 LRlam <- ggplot(dat, aes(LRavg, lambda)) +
@@ -240,40 +251,44 @@ summary(fruit.lat)
 # individual models
 survlat <- ggplot(dat2, aes(lat, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
+  xlab("") + 
+  xlim(43,45.5) +
   ylab("Survival intercept") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
 growthlat <- ggplot(dat2, aes(lat, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
+  xlab("") + 
+  xlim(43,45.5) +
   ylab("Growth intercept") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
 flowerlat <- ggplot(dat2, aes(lat, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, aes(color="black")) + 
-  xlab("Latitude") + 
+  xlab("") + 
+  xlim(43,45.5) +
   ylab("Flowering intercept") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
 fruitlat <- ggplot(dat2, aes(lat, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
+  scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("Latitude") + 
+  xlim(43,45.5) +
   ylab("Fruits intercept") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
 
-multi3 <- plot_grid(survlat, growthlat, flowerlat, fruitlat, labels="AUTO")
-save_plot("Figures/Vitals_vs_Latitude.png", multi3, base_width=8.5, base_height=11)
+multi3 <- plot_grid(survlat, growthlat, flowerlat, fruitlat, nrow=4, ncol=1, labels="AUTO")
+save_plot("Figures/Vitals_vs_Latitude.png", multi3, base_width=5, base_height=11)
 
 # linear models of vitals vs suitability
 surv.suit <- lm(surv.siteint ~ Ens, data=dat2)
