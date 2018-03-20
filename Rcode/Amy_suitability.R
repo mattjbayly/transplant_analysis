@@ -73,7 +73,7 @@ ggplot(dat, aes(lat, Ens)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
+  xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Climate ENM suitability") +
   theme_classic() + 
@@ -125,7 +125,7 @@ MAXlat <- ggplot(dat, aes(lat, MAXavg)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
+  xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("MAX suitability") +
   ylim(0,0.8) +
@@ -173,7 +173,7 @@ ggplot(dat, aes(Ens, lambda)) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
-  xlab("Climate ENM suitability") + 
+  xlab("Climatic suitability") + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
@@ -258,6 +258,20 @@ summary(flower.lat)
 fruit.lat <- lm(fruits.siteint ~ lat, data=dat2)
 summary(fruit.lat)
 
+# linear models of vitals vs region
+surv.reg <- lm(surv.siteint ~ region, data=dat2)
+summary(surv.reg)
+visreg(surv.reg)
+
+growth.reg <- lm(growth.siteint ~ region, data=dat2)
+summary(growth.reg)
+
+flower.reg <- lm(flowering.siteint ~ region, data=dat2)
+summary(flower.reg)
+
+fruit.reg <- lm(fruits.siteint ~ region, data=dat2)
+summary(fruit.reg)
+
 # individual models
 survlat <- ggplot(dat2, aes(lat, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
@@ -291,7 +305,7 @@ fruitlat <- ggplot(dat2, aes(lat, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab("Latitude") + 
+  xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Fruits intercept") +
   theme_classic() + 

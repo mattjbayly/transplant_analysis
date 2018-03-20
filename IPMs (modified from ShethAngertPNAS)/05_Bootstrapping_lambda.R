@@ -320,12 +320,12 @@ ggplot(site.lambdas, aes(lat, lambda)) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_errorbar(aes(ymax=upper, ymin=lower)) + 
-  xlab("Latitude") + 
+  xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43, 45.2) + 
   ylab(expression(paste("Population growth rate (", lambda, ") + 95% CI"))) +
   geom_hline(yintercept=1, linetype="dashed") + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
 ggsave("Figures/Lambda_vs_Latitude.png", width=8, height=8)
 
 ggplot(site.lambdas, aes(lat, lambda)) +
