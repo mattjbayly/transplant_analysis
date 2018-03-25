@@ -106,7 +106,7 @@ summary(mod2.brt)
 mod2.max <- lm(MAXavg ~ region, data=dat)
 summary(mod2.max)
 
-ggplot(dat, aes(lat, Ens)) +
+plot_lat_suit1 <- ggplot(dat, aes(lat, Ens)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -117,7 +117,7 @@ ggplot(dat, aes(lat, Ens)) +
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
 ggplot2::ggsave("Figures/ClimateENM_vs_Latitude.png", width=8, height=8)
 
-ggplot(dat, aes(lat, mean_pred_climate)) +
+plot_lat_suit2 <- ggplot(dat, aes(lat, mean_pred_climate)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -127,7 +127,7 @@ ggplot(dat, aes(lat, mean_pred_climate)) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)))
 
-ggplot(dat, aes(lat, mean_pred_stream)) +
+plot_lat_suit3 <- ggplot(dat, aes(lat, mean_pred_stream)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -136,6 +136,8 @@ ggplot(dat, aes(lat, mean_pred_stream)) +
   ylab("Stream ENM suitability") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)))
+
+plot_grid(plot_lat_suit1, plot_lat_suit2)
 
 # individual models
 LRlat <- ggplot(dat, aes(lat, LRavg)) +
@@ -238,7 +240,7 @@ model.sel(mod0b.max, mod1b.max)
 summary(mod1b.max)
 
 # lambda vs ensemble suitability
-ggplot(dat, aes(Ens, lambda)) +
+plot_lam_suit1 <- ggplot(dat, aes(Ens, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -249,7 +251,7 @@ ggplot(dat, aes(Ens, lambda)) +
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
 ggplot2::ggsave("Figures/Lambda_vs_ClimateENM.png", width=8, height=8)
 
-ggplot(dat, aes(mean_pred_climate, lambda)) +
+plot_lam_suit2 <- ggplot(dat, aes(mean_pred_climate, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -259,7 +261,7 @@ ggplot(dat, aes(mean_pred_climate, lambda)) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
 
-ggplot(dat, aes(mean_pred_stream, lambda)) +
+plot_lam_suit3 <- ggplot(dat, aes(mean_pred_stream, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -268,6 +270,10 @@ ggplot(dat, aes(mean_pred_stream, lambda)) +
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
+
+multi2 <- plot_grid(plot_lam_suit1, plot_lam_suit2)
+multi4 <- plot_grid(plot_lat_suit1, plot_lat_suit2, plot_lam_suit1, plot_lam_suit2)
+save_plot("Figures/ClimateENMComparions.png", multi4, base_width=8, base_height=8)
 
 # individual models
 LRlam <- ggplot(dat, aes(LRavg, lambda)) +
