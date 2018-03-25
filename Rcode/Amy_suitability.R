@@ -34,6 +34,63 @@ plot(dat$RFavg, dat$rf_climate) #not good
 plot(dat$BRTavg, dat$brt_climate) #terrible
 plot(dat$MAXavg, dat$max_climate) #good
 
+plot_ens <- ggplot(dat, aes(Ens, mean_pred_climate)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Amy climate ENS") + 
+  ylab("Matt climate ENS") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+
+plot_glm <- ggplot(dat, aes(LRavg, glm_climate)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Amy climate GLM") + 
+  ylab("Matt climate GLM") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="nonw") 
+
+plot_gam <- ggplot(dat, aes(GAMavg, gam_climate)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Amy climate GAM") + 
+  ylab("Matt climate GAM") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+
+plot_rf <- ggplot(dat, aes(RFavg, rf_climate)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Amy climate RF") + 
+  ylab("Matt climate RF") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+
+plot_brt <- ggplot(dat, aes(BRTavg, brt_climate)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Amy climate BRT") + 
+  ylab("Matt climate BRT") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+
+plot_max <- ggplot(dat, aes(MAXavg, max_climate)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("Amy climate MAX") + 
+  ylab("Matt climate MAX") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+
+model_comp <- plot_grid(plot_ens, plot_glm, plot_gam, plot_rf, plot_brt, plot_max)
+save_plot("Figures/ClimateENMComparions1.png", model_comp, base_width=11, base_height=8.5)
+
 plot(dat$mean_pred_climate, dat$mean_pred_stream)
 
 ### linear models of suitability vs latitude
