@@ -303,3 +303,54 @@ legend(1, 1, legend = c("Transplant Site", "Occurence Record"),
        cex=1.5,
        xjust=0.5, yjust=0.5)
 dev.off()
+
+
+
+
+
+
+
+
+
+
+#====================================================
+# Extra Supplimentary point for stream and climate
+#------------------------------------------
+
+fname <- paste0(path.fig,"/spatial predictions/occurence point map.tif")
+tiff(fname, width = 8, height = 8, units = "in", res=300, compression = c("none"), bg = "transparent")
+
+
+clim_pt <- readOGR(paste0(path.root,"/2018 Revisions/additional_plotting_layers/herb_climate_thinned_demo_set.gpkg"), layer="herb_climate_thinned_demo_set")
+strm_pt <- readOGR(paste0(path.root,"/2018 Revisions/additional_plotting_layers/herb_stream__demo_set.gpkg"), layer="herb_stream__demo_set")
+plotting_extent <- readOGR(paste0(path.root,"/2018 Revisions/additional_plotting_layers/plotting_extent.gpkg"), layer="plotting_extent")
+
+statelinesc <- gIntersection(statelines, plotting_extent, byid=TRUE)
+
+
+par(mfrow=c(2,2), mar=c(2.1,1.1,2.1,3.1), bg=NA)
+
+# CLIMATE PRESENCE
+plot(statelinesc, col=NA, border="darkgrey", lwd=1.8, main="A   Climate: Presence", font.main = 1)
+
+plot(clim_pt[which(clim_pt$PRESABS ==1),], bg='white', col="black", pch=21, add=TRUE)
+
+# CLIMATE ABSENCE
+plot(statelinesc, col=NA, border="darkgrey", lwd=1.8, main="B   Climate: Absence", font.main = 1)
+
+plot(clim_pt[which(clim_pt$PRESABS ==0),], cex=0.5, col="black", pch=4, add=TRUE)
+
+# steam PRESENCE
+plot(statelinesc, col=NA, border="darkgrey", lwd=1.8, main="C   Stream: Presence", font.main = 1)
+
+plot(strm_pt[which(strm_pt$PRESABS ==1),], bg='white', col="black", pch=21, add=TRUE)
+
+# stream ABSENCE
+plot(statelinesc, col=NA, border="darkgrey", lwd=1.8, main="D   Stream: Absence", font.main = 1)
+
+plot(strm_pt[which(strm_pt$PRESABS ==0),], cex=0.5, col="black", pch=4, add=TRUE)
+
+
+dev.off()
+
+#dev.off
