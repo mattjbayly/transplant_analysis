@@ -366,3 +366,25 @@ fruitsuit <- ggplot(dat2, aes(Ens, fruits.siteint)) +
 multi4 <- plot_grid(survsuit, growthsuit, flowersuit, fruitsuit, ncol=1, labels="AUTO", label_x=0.9)
 save_plot("Figures/Vitals_vs_Suitability.png", multi4, base_width=5, base_height=11)
 
+vitals.slim <- dat2 %>% dplyr::select(surv.siteint, growth.siteint, flowering.siteint, fruits.siteint, lambda)
+vitals.slim <- as.data.frame(vitals.slim)
+
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor) 
+{
+  usr <- par("usr"); on.exit(par(usr)) 
+  par(usr = c(0, 1, 0, 1)) 
+  r <- abs(cor(x, y)) 
+  txt <- format(c(r, 0.123456789), digits=digits)[1] 
+  txt <- paste(prefix, txt, sep="") 
+  if(missing(cex.cor)) cex <- 0.8/strwidth(txt) 
+  
+  test <- cor.test(x,y) 
+  # borrowed from printCoefmat
+  Signif <- symnum(test$p.value, corr = FALSE, na = FALSE, 
+                   cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+                   symbols = c("***", "**", "*", ".", " ")) 
+  
+  text(0.5, 0.5, txt, cex = cex * r) 
+  text(.8, .8, Signif, cex=cex, col=2) 
+}
+pairs(vitals.slim[1:5], lower.panel=panel.smooth, upper.panel=panel.cor)
