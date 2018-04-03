@@ -663,6 +663,7 @@ survsuit.amy <- ggplot(dat2, aes(Ens, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
   ylab("Survival intercept") +
   theme_classic() + 
@@ -680,6 +681,7 @@ flowersuit.amy <- ggplot(dat2, aes(Ens, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
   ylab("Flowering intercept") +
   theme_classic() + 
@@ -701,6 +703,7 @@ survsuit.matt <- ggplot(dat2, aes(mean_pred_climate, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
   ylab("Survival intercept") +
   theme_classic() + 
@@ -709,7 +712,7 @@ growthsuit.matt <- ggplot(dat2, aes(mean_pred_climate, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method="lm", se=FALSE, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
   ylab("Growth intercept") +
   theme_classic() + 
@@ -718,6 +721,7 @@ flowersuit.matt <- ggplot(dat2, aes(mean_pred_climate, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
   ylab("Flowering intercept") +
   theme_classic() + 
@@ -726,7 +730,7 @@ fruitsuit.matt <- ggplot(dat2, aes(mean_pred_climate, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("Climatic suitability (2014-15)") + 
   ylab("Fruits intercept") +
   theme_classic() + 
@@ -735,6 +739,45 @@ fruitsuit.matt <- ggplot(dat2, aes(mean_pred_climate, fruits.siteint)) +
 multi5 <- plot_grid(survsuit.matt, growthsuit.matt, flowersuit.matt, fruitsuit.matt, ncol=1, labels="AUTO", label_x=0.9)
 save_plot("Figures/Vitals_vs_Suit_Clim1415.png", multi5, base_width=5, base_height=11)
 
+survsuit.stream <- ggplot(dat2, aes(mean_pred_stream, surv.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  xlab("") + 
+  ylab("Survival intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="top", legend.text=element_text(size=rel(1.2)), legend.title=element_text(size=rel(1.8))) 
+growthsuit.stream <- ggplot(dat2, aes(mean_pred_stream, growth.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  xlab("") + 
+  ylab("Growth intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+flowersuit.stream <- ggplot(dat2, aes(mean_pred_stream, flowering.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  xlab("") + 
+  ylab("Flowering intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+fruitsuit.stream <- ggplot(dat2, aes(mean_pred_stream, fruits.siteint)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  xlab("Climatic suitability (2014-15)") + 
+  ylab("Fruits intercept") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none")
+
+multi6 <- plot_grid(survsuit.stream, growthsuit.stream, flowersuit.stream, fruitsuit.stream, ncol=1, labels="AUTO", label_x=0.9)
+save_plot("Figures/Vitals_vs_Suit_Stream.png", multi6, base_width=5, base_height=11)
 
 # correlations among vital rates
 vitals.slim <- dat2 %>% dplyr::select(surv.siteint, growth.siteint, flowering.siteint, fruits.siteint, lambda)
