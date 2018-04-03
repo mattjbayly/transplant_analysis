@@ -8,6 +8,7 @@ head(lams)
 
 # suitability (redone by Amy March 2018)
 # ENM models applied to long-term average climate of the sites
+# climate values from sites from single spot
 suit <- read_csv("Data/site_preds_average.csv") %>% 
   filter(ID1=="trans") %>% droplevels() %>% 
   dplyr::select(ID2, LRavg, GAMavg, RFavg, BRTavg, MAXavg) %>% 
@@ -24,6 +25,7 @@ write_csv(dat, "Robjects/site.lambdas.suitability.csv")
 
 # matthew's ENM predictions (redone March 2018)
 # ENM models applied to experimental conditions during transplant
+# climate values from zonal average of all plots at a site
 matt.preds <- read_csv("data/Site Level ENM Preds.csv")
 
 dat <- left_join(dat, matt.preds)
@@ -634,13 +636,13 @@ summary(fruit.suit)
 surv.suit.matt <- lm(surv.siteint ~ mean_pred_climate, data=dat2)
 summary(surv.suit.matt)
 
-growth.suit.matt <- lm(growth.siteint ~ Ens, data=dat2)
+growth.suit.matt <- lm(growth.siteint ~ mean_pred_climate, data=dat2)
 summary(growth.suit.matt)
 
-flower.suit.matt <- lm(flowering.siteint ~ Ens, data=dat2)
+flower.suit.matt <- lm(flowering.siteint ~ mean_pred_climate, data=dat2)
 summary(flower.suit.matt)
 
-fruit.suit.matt <- lm(fruits.siteint ~ Ens, data=dat2)
+fruit.suit.matt <- lm(fruits.siteint ~ mean_pred_climate, data=dat2)
 summary(fruit.suit.matt)
 
 # stream
