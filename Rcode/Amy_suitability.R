@@ -47,7 +47,7 @@ plot_ens <- ggplot(dat, aes(Ens, mean_pred_climate)) +
   xlab("Amy climate ENS") + 
   ylab("Matt climate ENS") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right") 
 
 plot_glm <- ggplot(dat, aes(LRavg, glm_climate)) +
   geom_point(aes(colour=region), size=5) +
@@ -56,7 +56,7 @@ plot_glm <- ggplot(dat, aes(LRavg, glm_climate)) +
   xlab("Amy climate GLM") + 
   ylab("Matt climate GLM") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="nonw") 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right") 
 
 plot_gam <- ggplot(dat, aes(GAMavg, gam_climate)) +
   geom_point(aes(colour=region), size=5) +
@@ -65,7 +65,7 @@ plot_gam <- ggplot(dat, aes(GAMavg, gam_climate)) +
   xlab("Amy climate GAM") + 
   ylab("Matt climate GAM") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right") 
 
 plot_rf <- ggplot(dat, aes(RFavg, rf_climate)) +
   geom_point(aes(colour=region), size=5) +
@@ -74,7 +74,7 @@ plot_rf <- ggplot(dat, aes(RFavg, rf_climate)) +
   xlab("Amy climate RF") + 
   ylab("Matt climate RF") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right") 
 
 plot_brt <- ggplot(dat, aes(BRTavg, brt_climate)) +
   geom_point(aes(colour=region), size=5) +
@@ -83,7 +83,7 @@ plot_brt <- ggplot(dat, aes(BRTavg, brt_climate)) +
   xlab("Amy climate BRT") + 
   ylab("Matt climate BRT") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right") 
 
 plot_max <- ggplot(dat, aes(MAXavg, max_climate)) +
   geom_point(aes(colour=region), size=5) +
@@ -94,7 +94,14 @@ plot_max <- ggplot(dat, aes(MAXavg, max_climate)) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none") 
 
-model_comp <- plot_grid(plot_ens, plot_glm, plot_gam, plot_rf, plot_brt, plot_max)
+model_comp <- plot_grid(plot_ens + theme(legend.position = "none"), 
+                        plot_glm + theme(legend.position = "none"), 
+                        plot_gam + theme(legend.position = "none"), 
+                        plot_rf + theme(legend.position = "none"), 
+                        plot_brt + theme(legend.position = "none"), 
+                        plot_max + theme(legend.position = "none"))
+legend <- get_legend(plot_ens)
+model_comp2 <- plot_grid(model_comp, legend)
 save_plot("Figures/ClimateENMComparions1.png", model_comp, base_width=11, base_height=8.5)
 
 plot(dat$mean_pred_climate, dat$mean_pred_stream)
@@ -231,23 +238,25 @@ plot_lat_suit1 <- ggplot(dat, aes(lat, Ens)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab(expression(paste("Latitude (", degree, "N)"))) + 
+  #xlab(expression(paste("Latitude (", degree, "N)"))) + 
+  xlab("") + 
   xlim(43,45.5) +
-  ylab("Climate ENM suitability (1980-2010)") +
+  ylab("Climate (1980-2010)") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
-ggplot2::ggsave("Figures/LongTermClimateENM_vs_Latitude.png", width=8, height=8)
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+#ggplot2::ggsave("Figures/LongTermClimateENM_vs_Latitude.png", width=8, height=8)
 
 plot_lat_suit2 <- ggplot(dat, aes(lat, mean_pred_climate)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  xlab(expression(paste("Latitude (", degree, "N)"))) + 
+  #xlab(expression(paste("Latitude (", degree, "N)"))) + 
+  xlab("") + 
   xlim(43,45.5) +
-  ylab("Climate ENM suitability (2014-15)") +
+  ylab("Climate (2014-15)") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)))
-ggplot2::ggsave("Figures/ShortTermClimateENM_vs_Latitude.png", width=8, height=8)
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
+#ggplot2::ggsave("Figures/ShortTermClimateENM_vs_Latitude.png", width=8, height=8)
 
 plot_lat_suit3 <- ggplot(dat, aes(lat, mean_pred_stream)) +
   geom_point(aes(colour=region), size=5) +
@@ -255,12 +264,20 @@ plot_lat_suit3 <- ggplot(dat, aes(lat, mean_pred_stream)) +
   geom_point(shape=1, size=5, colour="black") +
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
-  ylab("Stream ENM suitability") +
+  ylab("Physical habitat") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)))
-ggplot2::ggsave("Figures/StreamENM_vs_Latitude.png", width=8, height=8)
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
+#ggplot2::ggsave("Figures/StreamENM_vs_Latitude.png", width=8, height=8)
 
-plot_grid(plot_lat_suit1, plot_lat_suit2)
+latsuit <- plot_grid(plot_lat_suit1 + theme(legend.position = "none"), 
+                     plot_lat_suit2 + theme(legend.position = "none"), 
+                     plot_lat_suit3 + theme(legend.position = "none"),
+                     nrow=3)
+legend <- get_legend(plot_lat_suit1)
+latsuit2 <- plot_grid(legend, latsuit, ncol=1, rel_heights = c(0.3, 3))
+left_label <- "ENM suitability"
+latsuit3 <- ggdraw(latsuit2) + draw_label(left_label, angle=90, x=0.05, size=24)
+save_plot("Figures/Suitability_vs_Latitude_3Panel.png", latsuit3, base_width=5, base_height=11)
 
 # individual models
 LRlat <- ggplot(dat, aes(lat, LRavg)) +
@@ -269,53 +286,62 @@ LRlat <- ggplot(dat, aes(lat, LRavg)) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
-  ylab("LF suitability") +
+  ylab("LR") +
   ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 GAMlat <- ggplot(dat, aes(lat, GAMavg)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
-  ylab("GAM suitability") +
+  ylab("GAM") +
   ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 RFlat <- ggplot(dat, aes(lat, RFavg)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
-  ylab("RF suitability") +
+  ylab("RF") +
   ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 BRTlat <- ggplot(dat, aes(lat, BRTavg)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
-  ylab("BRT suitability") +
+  ylab("BRT") +
   ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 MAXlat <- ggplot(dat, aes(lat, MAXavg)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
-  ylab("MAX suitability") +
+  ylab("MAX") +
   ylim(0,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
-multi <- plot_grid(LRlat, GAMlat, RFlat, BRTlat, MAXlat, ncol=1, labels="AUTO", label_x=0.9)
-save_plot("Figures/LongTermClimateENM_vs_Latitude_IndModels.png", multi, base_width=5, base_height=11)
+latsuit_ind_long <- plot_grid(LRlat + theme(legend.position = "none"), 
+                   GAMlat + theme(legend.position = "none"), 
+                   RFlat + theme(legend.position = "none"), 
+                   BRTlat + theme(legend.position = "none"), 
+                   MAXlat + theme(legend.position = "none"), 
+                   ncol=1, labels="AUTO", label_x=0.9)
+legend <- get_legend(LRlat)
+latsuit_ind_long2 <- plot_grid(legend, latsuit_ind_long, ncol=1, rel_heights = c(0.3, 5))
+left_label <- "ENM suitability: long-term climate"
+latsuit_ind_long3 <- ggdraw(latsuit_ind_long2) + draw_label(left_label, angle=90, x=0.05, size=24)
+save_plot("Figures/LongTermClimateENM_vs_Latitude_IndModels.png", latsuit_ind_long3, base_width=5, base_height=11)
 
 LRlat2 <- ggplot(dat, aes(lat, glm_climate)) +
   geom_point(aes(colour=region), size=5) +
@@ -323,53 +349,125 @@ LRlat2 <- ggplot(dat, aes(lat, glm_climate)) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
-  ylab("LF suitability") +
-  ylim(0,1) +
+  ylab("LR") +
+  ylim(0.7,0.95) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 GAMlat2 <- ggplot(dat, aes(lat, gam_climate)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
-  ylab("GAM suitability") +
-  ylim(0,1) +
+  ylab("GAM") +
+  ylim(0.7,0.95) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 RFlat2 <- ggplot(dat, aes(lat, rf_climate)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
-  ylab("RF suitability") +
-  ylim(0,1) +
+  ylab("RF") +
+  ylim(0.2,0.8) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 BRTlat2 <- ggplot(dat, aes(lat, brt_climate)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
-  ylab("BRT suitability") +
-  ylim(0,1) +
+  ylab("BRT") +
+  ylim(0.1,0.9) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 MAXlat2 <- ggplot(dat, aes(lat, max_climate)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
-  ylab("MAX suitability") +
-  ylim(0,1) +
+  ylab("MAX") +
+  ylim(0.4,0.6) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
-multi <- plot_grid(LRlat2, GAMlat2, RFlat2, BRTlat2, MAXlat2, ncol=1, labels="AUTO", label_x=0.9)
-save_plot("Figures/ShortTermClimateENM_vs_Latitude_IndModels.png", multi, base_width=5, base_height=11)
+latsuit_ind_short <- plot_grid(LRlat2 + theme(legend.position = "none"), 
+                         GAMlat2 + theme(legend.position = "none"), 
+                         RFlat2 + theme(legend.position = "none"), 
+                         BRTlat2 + theme(legend.position = "none"), 
+                         MAXlat2 + theme(legend.position = "none"), 
+                         ncol=1, labels="AUTO", label_x=0.9)
+legend <- get_legend(LRlat2)
+latsuit_ind_short2 <- plot_grid(legend, latsuit_ind_short, ncol=1, rel_heights = c(0.3, 5))
+left_label <- "ENM suitability: short-term climate"
+latsuit_ind_short3 <- ggdraw(latsuit_ind_short2) + draw_label(left_label, angle=90, x=0.05, size=24)
+save_plot("Figures/ShortTermClimateENM_vs_Latitude_IndModels.png", latsuit_ind_short3, base_width=5, base_height=11)
+
+LRlat3 <- ggplot(dat, aes(lat, glm_stream)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("") + 
+  xlim(43,45.5) +
+  ylab("LR") +
+  ylim(0,0.1) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+GAMlat3 <- ggplot(dat, aes(lat, gam_stream)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("") + 
+  xlim(43,45.5) +
+  ylab("GAM") +
+  ylim(0,0.1) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+RFlat3 <- ggplot(dat, aes(lat, rf_stream)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("") + 
+  xlim(43,45.5) +
+  ylab("RF") +
+  ylim(0,0.7) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+BRTlat3 <- ggplot(dat, aes(lat, brt_stream)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab("") + 
+  xlim(43,45.5) +
+  ylab("BRT") +
+  ylim(0,0.2) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+MAXlat3 <- ggplot(dat, aes(lat, max_stream)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  xlab(expression(paste("Latitude (", degree, "N)"))) + 
+  xlim(43,45.5) +
+  ylab("MAX") +
+  ylim(0.3,0.8) +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
+latsuit_ind_stream <- plot_grid(LRlat3 + theme(legend.position = "none"), 
+                               GAMlat3 + theme(legend.position = "none"), 
+                               RFlat3 + theme(legend.position = "none"), 
+                               BRTlat3 + theme(legend.position = "none"), 
+                               MAXlat3 + theme(legend.position = "none"), 
+                               ncol=1, labels="AUTO", label_x=0.9)
+legend <- get_legend(LRlat3)
+latsuit_ind_stream2 <- plot_grid(legend, latsuit_ind_stream, ncol=1, rel_heights = c(0.3, 5))
+left_label <- "ENM suitability: physical habitat"
+latsuit_ind_stream3 <- ggdraw(latsuit_ind_stream2) + draw_label(left_label, angle=90, x=0.05, size=24)
+save_plot("Figures/StreamENM_vs_Latitude_IndModels.png", latsuit_ind_stream3, base_width=5, base_height=11)
 
 ### linear models of lambda vs suitability 
 # climate suitability (Amy March 2018)
@@ -504,7 +602,7 @@ plot_lam_suit3 <- ggplot(dat, aes(mean_pred_stream, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)),plot.margin = unit(c(6,0,6,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,0), "pt")) 
 #ggplot2::ggsave("Figures/Lambda_vs_StreamENM.png", width=8, height=8)
 
 legend <- get_legend(plot_lam_suit1)
@@ -521,59 +619,68 @@ LRlam <- ggplot(dat, aes(LRavg, lambda)) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
-  xlab("LR suitability") + 
-  xlim(0,0.7) +
+  xlab("LR") + 
+  #xlim(0,0.7) +
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
 GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
-  xlab("GAM suitability") + 
-  xlim(0,0.7) +
+  xlab("GAM") + 
+  #xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
 RFlam <- ggplot(dat, aes(RFavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
-  xlab("RF suitability") + 
-  xlim(0,0.7) +
+  xlab("RF") + 
+  #xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="top", legend.text=element_text(size=rel(1.2)), legend.title=element_text(size=rel(1.8))) 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
 BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
-  xlab("BRT suitability") + 
-  xlim(0,0.8) +
+  xlab("BRT") + 
+  #xlim(0,0.8) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
 MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
-  xlab("MAX suitability") + 
-  xlim(0.2,0.5) +
+  xlab("MAX") + 
+  #xlim(0.2,0.5) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="none") 
+  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
 
-multi2 <- plot_grid(LRlam, GAMlam, RFlam, BRTlam, MAXlam, nrow=1, labels="AUTO", label_x=0.9)
-save_plot("Figures/Lambda_vs_ClimateENM_8010_IndModels.png", multi2, base_width=11, base_height=5)
+suitlam_long_ind <- plot_grid(LRlam + theme(legend.position="none"), 
+                               GAMlam + theme(legend.position="none"), 
+                               RFlam + theme(legend.position="none"), 
+                               BRTlam + theme(legend.position="none"), 
+                               MAXlam + theme(legend.position="none"), 
+                               nrow=1, labels="AUTO", label_x=0.9)
+legend <- get_legend(LRlam)
+suitlam_long_ind2 <- plot_grid(suitlam_long_ind, legend, nrow=1, rel_widths = c(5, 0.3))
+bottom_label = "ENM suitability: long-term climate"
+suitlam_long_ind3 <- ggdraw(suitlam_long_ind2) + draw_label(bottom_label, angle=0, y=0.05, size=24)
+save_plot("Figures/Lambda_vs_ClimateENM_8010_IndModels.png", suitlam_long_ind3, base_width=11, base_height=5)
 
 # individual models, Matt climate
 LRlam <- ggplot(dat, aes(glm_climate, lambda)) +
