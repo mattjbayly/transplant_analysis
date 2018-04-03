@@ -646,16 +646,16 @@ fruit.suit.matt <- lm(fruits.siteint ~ mean_pred_climate, data=dat2)
 summary(fruit.suit.matt)
 
 # stream
-surv.suit.stream <- lm(surv.siteint ~ Ens, data=dat2)
+surv.suit.stream <- lm(surv.siteint ~ mean_pred_stream, data=dat2)
 summary(surv.suit.stream)
 
-growth.suit.stream <- lm(growth.siteint ~ Ens, data=dat2)
+growth.suit.stream <- lm(growth.siteint ~ mean_pred_stream, data=dat2)
 summary(growth.suit.stream)
 
-flower.suit.stream <- lm(flowering.siteint ~ Ens, data=dat2)
+flower.suit.stream <- lm(flowering.siteint ~ mean_pred_stream, data=dat2)
 summary(flower.suit.stream)
 
-fruit.suit.stream <- lm(fruits.siteint ~ Ens, data=dat2)
+fruit.suit.stream <- lm(fruits.siteint ~ mean_pred_stream, data=dat2)
 summary(fruit.suit.stream)
 
 # individual models
