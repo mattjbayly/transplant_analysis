@@ -474,37 +474,46 @@ plot_lam_suit1 <- ggplot(dat, aes(Ens, lambda)) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
-  xlab("Climatic suitability") + 
+  xlab("Climate (1980-2010)") + 
+  xlim(0.2,0.57) + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
-ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_8010.png", width=8, height=8)
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,0), "pt")) 
+#ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_8010.png", width=8, height=8)
 
 plot_lam_suit2 <- ggplot(dat, aes(mean_pred_climate, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
-  xlab("Climatic suitability") + 
-  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  xlab("Climate (2014-15)") + 
+  xlim(0.44,0.75) + 
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
-ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_1415.png", width=8, height=8)
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,0), "pt")) 
+#ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_1415.png", width=8, height=8)
 
 plot_lam_suit3 <- ggplot(dat, aes(mean_pred_stream, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
-  xlab("Stream suitability") + 
-  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  xlab("Physical habitat") + 
+  xlim(0.04,0.36) + 
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
-ggplot2::ggsave("Figures/Lambda_vs_StreamENM.png", width=8, height=8)
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)),plot.margin = unit(c(6,0,6,0), "pt")) 
+#ggplot2::ggsave("Figures/Lambda_vs_StreamENM.png", width=8, height=8)
 
-multi2 <- plot_grid(plot_lam_suit1, plot_lam_suit2)
-multi4 <- plot_grid(plot_lat_suit1, plot_lat_suit2, plot_lam_suit1, plot_lam_suit2)
-save_plot("Figures/ClimateENMComparions.png", multi4, base_width=8, base_height=8)
+legend <- get_legend(plot_lam_suit1)
+multi <- plot_grid(plot_lam_suit1 + theme(legend.position = "none"), 
+                   plot_lam_suit2 + theme(legend.position = "none"), 
+                   plot_lam_suit3+ theme(legend.position = "none"), 
+                   nrow=1, labels="AUTO", label_x=0.9)
+multi2 <- plot_grid(multi, legend, rel_widths = c(3, 0.3))
+save_plot("Figures/Lambda_vs_Suitability_3Panel.png", multi2, base_width=11, base_height=5)
 
 # individual models, Amy climate
 LRlam <- ggplot(dat, aes(LRavg, lambda)) +
