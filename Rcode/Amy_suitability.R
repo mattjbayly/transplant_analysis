@@ -574,9 +574,11 @@ plot_lam_suit1 <- ggplot(dat, aes(Ens, lambda)) +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("Climate (1980-2010)") + 
   xlim(0.2,0.57) + 
-  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
+  theme(axis.text=element_text(si
+                               ze=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
 #ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_8010.png", width=8, height=8)
 
 plot_lam_suit2 <- ggplot(dat, aes(mean_pred_climate, lambda)) +
@@ -586,8 +588,8 @@ plot_lam_suit2 <- ggplot(dat, aes(mean_pred_climate, lambda)) +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("Climate (2014-15)") + 
   xlim(0.44,0.75) + 
-  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("") +
+  ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  #ylab("") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
 #ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_1415.png", width=8, height=8)
