@@ -622,55 +622,57 @@ LRlam <- ggplot(dat, aes(LRavg, lambda)) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("LR") + 
-  #xlim(0,0.7) +
+  xlim(0.1,0.7) +
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
 GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("GAM") + 
-  #xlim(0,0.7) +
+  xlim(0.1,0.7) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
 RFlam <- ggplot(dat, aes(RFavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
   xlab("RF") + 
-  #xlim(0,0.7) +
+  xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
 BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
   xlab("BRT") + 
-  #xlim(0,0.8) +
+  #xlim(0,0.85) +
+  scale_x_continuous(limits=c(0, 0.85), breaks=c(0.1, 0.4, 0.7)) + 
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
 MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("MAX") + 
-  #xlim(0.2,0.5) +
+  #xlim(0.27,0.5) +
+  scale_x_continuous(limits=c(0.27, 0.5), breaks=c(0.3, 0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1)), axis.title=element_text(size=rel(1.2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,40,0), "pt")) 
 
 suitlam_long_ind <- plot_grid(LRlam + theme(legend.position="none"), 
                                GAMlam + theme(legend.position="none"), 
@@ -679,7 +681,7 @@ suitlam_long_ind <- plot_grid(LRlam + theme(legend.position="none"),
                                MAXlam + theme(legend.position="none"), 
                                nrow=1, labels="AUTO", label_x=0.9)
 legend <- get_legend(LRlam)
-suitlam_long_ind2 <- plot_grid(suitlam_long_ind, legend, nrow=1, rel_widths = c(5, 0.3))
+suitlam_long_ind2 <- plot_grid(suitlam_long_ind, legend, nrow=1, rel_widths = c(5, 0.5))
 bottom_label = "ENM suitability: long-term climate"
 suitlam_long_ind3 <- ggdraw(suitlam_long_ind2) + draw_label(bottom_label, angle=0, y=0.05, size=24)
 save_plot("Figures/Lambda_vs_ClimateENM_8010_IndModels.png", suitlam_long_ind3, base_width=11, base_height=5)
