@@ -576,7 +576,7 @@ plot_lam_suit1 <- ggplot(dat, aes(Ens, lambda)) +
   xlim(0.2,0.57) + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
 #ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_8010.png", width=8, height=8)
 
 plot_lam_suit2 <- ggplot(dat, aes(mean_pred_climate, lambda)) +
@@ -589,7 +589,7 @@ plot_lam_suit2 <- ggplot(dat, aes(mean_pred_climate, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
 #ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_1415.png", width=8, height=8)
 
 plot_lam_suit3 <- ggplot(dat, aes(mean_pred_stream, lambda)) +
@@ -602,16 +602,18 @@ plot_lam_suit3 <- ggplot(dat, aes(mean_pred_stream, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,0), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,40,0), "pt")) 
 #ggplot2::ggsave("Figures/Lambda_vs_StreamENM.png", width=8, height=8)
 
-legend <- get_legend(plot_lam_suit1)
-multi <- plot_grid(plot_lam_suit1 + theme(legend.position = "none"), 
-                   plot_lam_suit2 + theme(legend.position = "none"), 
+lamsuit <- plot_grid(plot_lam_suit2 + theme(legend.position = "none"), 
+                   plot_lam_suit1 + theme(legend.position = "none"), 
                    plot_lam_suit3+ theme(legend.position = "none"), 
                    nrow=1, labels="AUTO", label_x=0.9)
-multi2 <- plot_grid(multi, legend, rel_widths = c(3, 0.3))
-save_plot("Figures/Lambda_vs_Suitability_3Panel.png", multi2, base_width=11, base_height=5)
+legend <- get_legend(plot_lam_suit1)
+lamsuit2 <- plot_grid(lamsuit, legend, rel_widths = c(3, 0.3))
+bottom_label <- "ENM Suitability"
+lamsuit3 <- ggdraw(lamsuit2) + draw_label(bottom_label, angle=0, y=0.05, size=24)
+save_plot("Figures/Lambda_vs_Suitability_3Panel.png", lamsuit3, base_width=11, base_height=5)
 
 # individual models, Amy climate
 LRlam <- ggplot(dat, aes(LRavg, lambda)) +
