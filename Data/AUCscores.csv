@@ -1,0 +1,1 @@
+Model,ValidationMethod,AUC_LR,AUC_GAM,AUC_RF,AUC_BRT,AUC_MAX,,,,,,,,PhysicalHabitat,InternalCrossvalidation,0.822,0.815,0.817,0.883,0.843,,,,,,,,PhysicalHabitat,ExternalValidation,0.56,0.548,0.629,0.591,0.568,,,,,,,,Climate,InternalCrossvalidation,0.732,0.674,0.84,0.871,0.756,,,,,,,,Climate,ExternalValidation,0.733,0.743,0.76,0.753,0.758,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
