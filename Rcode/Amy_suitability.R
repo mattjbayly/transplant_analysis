@@ -33,6 +33,16 @@ check.merge <- dat %>% dplyr::select(Site, site) # good
 
 write_csv(dat, "Robjects/site.lambdas.suitability.csv")
 
+# add SD among models (for each ensemble)
+dat <- dat %>% 
+  group_by(Site) %>%
+  mutate(clim_amy_sd = sd(c(LRavg,GAMavg,RFavg,BRTavg,MAXavg)),
+         clim_matt_sd = sd(c(glm_climate,gam_climate,rf_climate,brt_climate,max_climate)),
+         stream_sd = sd(c(glm_stream,gam_stream,rf_stream,brt_stream,max_stream)),
+         clim_amy_se = sd(c(LRavg,GAMavg,RFavg,BRTavg,MAXavg))/sqrt(5),
+         clim_matt_se = sd(c(glm_climate,gam_climate,rf_climate,brt_climate,max_climate))/sqrt(5),
+         stream_se = sd(c(glm_stream,gam_stream,rf_stream,brt_stream,max_stream))/sqrt(5))
+
 plot(dat$Ens, dat$mean_pred_climate) #WTF
 plot(dat$LRavg, dat$glm_climate) #pretty good
 plot(dat$GAMavg, dat$gam_climate) #one bad outlier
@@ -571,9 +581,11 @@ plot_lam_suit1 <- ggplot(dat, aes(Ens, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0.01) + 
+  geom_errorbarh(aes(xmin=Ens+clim_amy_se, xmax=Ens-clim_amy_se),height=0.1)+
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("Climate (1980-2010)") + 
-  xlim(0.2,0.57) + 
+  #xlim(0.2,0.57) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
@@ -584,9 +596,11 @@ plot_lam_suit2 <- ggplot(dat, aes(mean_pred_climate, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0.01) + 
+  geom_errorbarh(aes(xmin=mean_pred_climate+clim_matt_se, xmax=mean_pred_climate-clim_matt_se),height=0.1)+
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("Climate (2014-15)") + 
-  xlim(0.44,0.75) + 
+  #xlim(0.44,0.75) + 
   ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   #ylab("") +
   theme_classic() + 
@@ -597,9 +611,11 @@ plot_lam_suit3 <- ggplot(dat, aes(mean_pred_stream, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0.01) + 
+  geom_errorbarh(aes(xmin=mean_pred_stream+stream_se, xmax=mean_pred_stream-stream_se),height=0.1)+
   geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
   xlab("Physical habitat") + 
-  xlim(0.04,0.36) + 
+  #xlim(0.04,0.36) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
@@ -614,7 +630,7 @@ legend <- get_legend(plot_lam_suit1)
 lamsuit2 <- plot_grid(lamsuit, legend, rel_widths = c(3, 0.3))
 bottom_label <- "ENM Suitability"
 lamsuit3 <- ggdraw(lamsuit2) + draw_label(bottom_label, angle=0, y=0.05, size=24)
-save_plot("Figures/Lambda_vs_Suitability_3Panel.png", lamsuit3, base_width=11, base_height=5)
+save_plot("Figures/Lambda_vs_Suitability_3Panel_error.png", lamsuit3, base_width=11, base_height=5)
 
 # individual models, Amy climate
 LRlam <- ggplot(dat, aes(LRavg, lambda)) +
