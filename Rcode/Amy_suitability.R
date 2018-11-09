@@ -624,12 +624,12 @@ LRlam <- ggplot(dat, aes(LRavg, lambda)) +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   #xlab("LR") + 
   xlab("") + 
-  #xlim(0.1,0.7) +
+  xlim(0.1,0.7) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("Clim'80") +
+  ylab("Climate 1980") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,100), "pt"))
 GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -637,12 +637,12 @@ GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   #xlab("GAM") + 
   xlab("") + 
-  #xlim(0.1,0.7) +
-  ylab("Clim'80") +
-  #ylab("") +
+  xlim(0.1,0.7) +
+  #ylab("Climate 1980-2010") +
+  ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,60), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 RFlam <- ggplot(dat, aes(RFavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -650,11 +650,11 @@ RFlam <- ggplot(dat, aes(RFavg, lambda)) +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
   #xlab("RF") + 
   xlab("") + 
-  #xlim(0,0.7) +
+  xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -667,7 +667,7 @@ BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -680,7 +680,7 @@ MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 
 suitlam_long_ind <- plot_grid(LRlam + theme(legend.position="none"), 
                                GAMlam + theme(legend.position="none"), 
@@ -705,10 +705,10 @@ LRlam2 <- ggplot(dat, aes(glm_climate, lambda)) +
   #xlim(0.7, 0.95) +
   scale_x_continuous(limits=c(0.7, 0.95), breaks=c(0.7, 0.8, 0.9)) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("Clim'14") +
+  ylab("Climate 2014") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,100), "pt"))
 GAMlam2 <- ggplot(dat, aes(gam_climate, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -717,12 +717,12 @@ GAMlam2 <- ggplot(dat, aes(gam_climate, lambda)) +
   #xlab("GAM") + 
   xlab("") + 
   #xlim(0.7, 0.95) +
-  #scale_x_continuous(limits=c(0.7, 0.95), breaks=c(0.7, 0.8, 0.9)) + 
-  #ylab("") +
-  ylab("Clim'14") +
+  scale_x_continuous(limits=c(0.7, 0.95), breaks=c(0.7, 0.8, 0.9)) + 
+  ylab("") +
+  #ylab("Climate 2014-15") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,60), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 RFlam2 <- ggplot(dat, aes(rf_climate, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -730,11 +730,11 @@ RFlam2 <- ggplot(dat, aes(rf_climate, lambda)) +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   #xlab("RF") + 
   xlab("") + 
-  #xlim(0.2,0.85) +
+  xlim(0.2,0.85) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 BRTlam2 <- ggplot(dat, aes(brt_climate, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -747,7 +747,7 @@ BRTlam2 <- ggplot(dat, aes(brt_climate, lambda)) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 MAXlam2 <- ggplot(dat, aes(max_climate, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -755,12 +755,12 @@ MAXlam2 <- ggplot(dat, aes(max_climate, lambda)) +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   #xlab("MAX") + 
   xlab("") + 
-  #xlim(0.37,0.55) +
+  xlim(0.37,0.55) +
   #scale_x_continuous(limits=c(0.37, 0.55), breaks=c(0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 
 suitlam_short_ind <- plot_grid(LRlam2 + theme(legend.position="none"), 
                               GAMlam2 + theme(legend.position="none"), 
@@ -779,39 +779,39 @@ LRlam3 <- ggplot(dat, aes(glm_stream, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
   xlab("LR") + 
-  #xlim(0.7, 0.95) +
+  xlim(0, 0.07) +
   #scale_x_continuous(limits=c(0.7, 0.95), breaks=c(0.7, 0.8, 0.9)) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("Hab") +
+  ylab("Habitat") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,80,100), "pt"))
 GAMlam3 <- ggplot(dat, aes(gam_stream, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
   xlab("GAM") + 
-  #xlim(0.7, 0.95) +
+  xlim(0, 0.07) +
   #scale_x_continuous(limits=c(0.7, 0.95), breaks=c(0.7, 0.8, 0.9)) + 
-  #ylab("") +
-  ylab("Hab") +
+  ylab("") +
+  #ylab("Physical habitat") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,40,60), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 RFlam3 <- ggplot(dat, aes(rf_stream, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("RF") + 
-  #xlim(0.2,0.85) +
+  xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,40,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 BRTlam3 <- ggplot(dat, aes(brt_stream, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
@@ -823,19 +823,19 @@ BRTlam3 <- ggplot(dat, aes(brt_stream, lambda)) +
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 MAXlam3 <- ggplot(dat, aes(max_stream, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_grey() +
   geom_point(shape=1, size=5, colour="black") +
-  geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
   xlab("MAX") + 
   #xlim(0.37,0.55) +
   #scale_x_continuous(limits=c(0.37, 0.55), breaks=c(0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(6,0,6,6), "pt")) 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 
 suitlam_stream_ind <- plot_grid(LRlam3 + theme(legend.position="none"), 
                                GAMlam3 + theme(legend.position="none"), 
@@ -871,7 +871,7 @@ left_label <- expression(paste("Population growth rate (", lambda, ")"))
 bottom_label = "ENM algorithm"
 suitlam_all_ind3 <- ggdraw(suitlam_all_ind2) + draw_label(bottom_label, angle=0, y=0.05, size=24)
 suitlam_all_ind4 <- ggdraw(suitlam_all_ind3) + draw_label(left_label, angle=90, x=0.05, size=24)
-save_plot("Figures/Lambda_vs_AllENM_IndModels.png", suitlam_all_ind4, base_width=11, base_height=5)
+save_plot("Figures/Lambda_vs_AllENM_IndModels.png", suitlam_all_ind4, base_width=22, base_height=11)
 
 suitlam_best_ind <- plot_grid(GAMlam + theme(legend.position="none"), 
                              RFlam + theme(legend.position="none"), 
