@@ -1421,7 +1421,7 @@ plot_lam_suit1 <- ggplot(dat, aes(clim_wtd_ens_longterm, lambda)) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
-  geom_errorbarh(aes(xmin=clim_wtd_ens_longterm+clim_amy_se, xmax=clim_wtd_ens_longterm-clim_amy_se),height=0)+
+  geom_errorbarh(aes(xmin=clim_wtd_ens_longterm+clim_wtd_ens_longterm_sd, xmax=clim_wtd_ens_longterm-clim_wtd_ens_longterm_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("Climate (1980-2010)") + 
   #xlim(0.7,2.05) + 
@@ -1435,6 +1435,8 @@ plot_lam_suit2 <- ggplot(dat, aes(clim_wtd_ens_shortterm, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=clim_wtd_ens_shortterm+clim_wtd_ens_shortterm_sd, xmax=clim_wtd_ens_shortterm-clim_wtd_ens_shortterm_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("Climate (2014-15)") + 
   #xlim(1.5,3.1) + 
@@ -1448,6 +1450,8 @@ plot_lam_suit3 <- ggplot(dat, aes(stream_wtd_ens, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=stream_wtd_ens+stream_wtd_ens_sd, xmax=stream_wtd_ens-stream_wtd_ens_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
   xlab("Physical habitat") + 
   #xlim(0.1,1.0) + 
@@ -1471,6 +1475,8 @@ plot_lam_suit4 <- ggplot(dat, aes(joint_wtd_ens_longterm, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=joint_wtd_ens_longterm+joint_wtd_ens_longterm_sd, xmax=joint_wtd_ens_longterm-joint_wtd_ens_longterm_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
   xlab("Climate + habitat ensemble") + 
   #xlim(0.1,1.0) + 
@@ -1483,6 +1489,8 @@ plot_lam_suit5 <- ggplot(dat, aes(joint_wtd_ens_shortterm, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=joint_wtd_ens_shortterm+joint_wtd_ens_shortterm_sd, xmax=joint_wtd_ens_shortterm-joint_wtd_ens_shortterm_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
   xlab("Climate + habitat ensemble") + 
   #xlim(0.1,1.0) + 
