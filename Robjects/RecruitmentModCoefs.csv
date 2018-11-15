@@ -1,4 +1,0 @@
-"Region","meanSeedcount","Seedsd","modName","est","LL","UL","AdjRsqur","Formula"
-"C",1622.35588235294,354.313841552746,"all-lm4",0.0681,0.0548,0.0815,0.78,"log(recruits + 1) = [log(seeds per fruit + 1)*log(number of fruits + 1)]*est"
-"N",1152.40571428571,345.031633504352,"lm_NC",0.0813,0.0682,0.0945,0.87,"log(recruits + 1) = [log(seeds per fruit + 1)*log(number of fruits + 1)]*est"
-"S",1765.32,473.90679334654,"lm_SC",0.0642,0.05,0.0784,0.79,"log(recruits + 1) = [log(seeds per fruit + 1)*log(number of fruits + 1)]*est"

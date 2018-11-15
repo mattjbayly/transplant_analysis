@@ -1,6 +1,0 @@
-"","Model","df","logLik","AICc","delta","weight"
-"mod9linear","z + SiteID + (1 | PlotID)",10,-280.64,581.56,0,0.887
-"mod8linear","z + Region + (1 | PlotID)",4,-289.41,586.87,5.314,0.062
-"mod6linear","z + Region + z * Region + (1 | PlotID)",5,-288.78,587.64,6.075,0.043
-"mod7linear","z + SiteID + z * SiteID + (1 | PlotID)",17,-278.07,590.91,9.351,0.008
-"mod10linear","z + (1 | PlotID)",3,-296.91,599.85,18.288,0
