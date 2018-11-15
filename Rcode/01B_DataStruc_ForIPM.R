@@ -32,29 +32,13 @@
 #---------------------------------------------------------------------------------------
 
 
-### SET DIRECTORIES & LOAD FILES ###
-	if(Sys.getenv("USERNAME") == "mbayly"){
-	  path.set="C:/Users/mbayly/Desktop/Projects/transplant/transplant_analysis/Rcode"
-	} else {
-	  path.set=choose.dir()
-	}
+### LOAD FILES ###
 
-	setwd(path.set)
-	source("00_SetDirectories.R") # directory script (edit for your own computer). 
-	setwd(path.dat); setwd(path.dat.raw); setwd(path.code); setwd(path.fig); setwd(path.obj)
 	# Open 2015/2014 plant datafiles 
-	setwd(path.dat); dir()
-	Data2015 <- read.csv(file="Data_2015.csv")
+	Data2015 <- read.csv(file="Data/Data_2015.csv")
 	dim(Data2015); colnames(Data2015)
 	head(Data2015) # looks good ;)
 
-## working directory must be set here, so the source()'s below run
-# 	setwd("C:/Users/DW/Desktop/transplant_analysis/Planning_Docs/2.IPM_tutorials/Rees_2014_how to IPM/Reese example")
-# # run the utility functions
-# 	source("./Standard Graphical Pars.R")
-# ## run the ungulate IBM
-# 	source("./Ungulate Demog Funs.R") # but will not use these. 
-	setwd(path.dat)
 ## Load extra libraries
 	require(doBy)
 	require(car)
@@ -145,8 +129,7 @@
 ### BASIC QA/QC CHECKS LOOKING FOR WEIRD ANOMALIES BY PLOTTING BASIC VITAL RATES 	
 	# Look for weird residuals, inspect basic plots visually ect. 
 	# will probably need to log transform size
-	setwd(paste(path.fig, "/01_DataStruct", sep=""))
-	pdf(file="01B_OutlierPlots.pdf", width=11, height=8.5)
+	pdf(file="Figures/01_DataStruct/01B_OutlierPlots.pdf", width=11, height=8.5)
 	# Basic boxplots 
 		par(mfrow=c(2,2))
 		hist(IPMData$z, main="z - total stem length (cm)")
@@ -284,5 +267,4 @@ dev.off()
 #---------------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------
 # SAVE FINAL DATA FRAME:
-setwd(path.dat); dir()
-write.csv(IPMData, file="IPMData_transplant.csv", row.names = FALSE)
+write.csv(IPMData, file="Data/IPMData_transplant.csv", row.names = FALSE)
