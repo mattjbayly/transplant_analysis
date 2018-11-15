@@ -26,7 +26,7 @@ write_csv(dat, "Robjects/site.lambdas.suitability.csv")
 # matthew's ENM predictions (redone March 2018, using final Am Nat objects)
 # ENM models applied to experimental conditions during transplant
 # climate values from zonal average of all plots at a site
-matt.preds <- read_csv("data/Site Level ENM Preds.csv")
+matt.preds <- read_csv("Data/Site Level ENM Preds.csv")
 
 dat <- left_join(dat, matt.preds)
 check.merge <- dat %>% dplyr::select(Site, site) # good
