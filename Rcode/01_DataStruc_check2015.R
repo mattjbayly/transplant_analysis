@@ -15,7 +15,7 @@
 
 ## **INDEX**
 
-# 1. SET DIRECTORIES, LOAD LIBRARIES, LOAD PLANT DATA FILE, EXAMIN LEVELS
+# 1. LOAD LIBRARIES, LOAD PLANT DATA FILE, EXAMINE LEVELS
 # 2. Quick plots for size-specific transitions in the global dataset 
 # 3. Revise dataframe change variable names for easier coding, make binary factors for survivorship
 # 4. Custom individual growth tracking plots
@@ -30,22 +30,10 @@
 # 1. START: SET DIRECTORIES, LOAD LIBRARIES, LOAD PLANT DATA FILE, EXAMIN LEVELS
 #============================================================================================#
 
-### _Set directories for computer_ ###
-### _Set directories for computer_ ###
-if(Sys.getenv("USERNAME") == "mbayly"){
-  path.set="C:/Users/mbayly/Desktop/Projects/transplant/transplant_analysis/Rcode"
-} else {
-  path.set=choose.dir()
-}
-
-
-setwd(path.set)
-source("00_SetDirectories.R") # directory script (edit for your own computer). 
-setwd(path.dat); setwd(path.dat.raw); setwd(path.code); setwd(path.fig); setwd(path.obj)
+library(tidyverse)
 
 #Open 2015 plant datafile 
-setwd(path.dat.raw)
-plantdat <- read.csv(file="plant_data2015.csv")
+plantdat <- read_csv("Data/raw_data/plant_data2015.csv")
 dim(plantdat); #colnames(plantdat)
 
 # Check whole data structure
@@ -92,14 +80,13 @@ with(plantdat, table(plantdat$pot, plantdat$source))
   with(plantdat, table(plantdat$plot, plantdat$site))
   # save table 
   setwd(path.obj); 
-  write.csv(with(plantdat, table(plantdat$plot, plantdat$site)), file="plants_per_plot.csv")
+  write.csv(with(plantdat, table(plantdat$plot, plantdat$site)), file="Robjects/plants_per_plot.csv")
 
 ### 3. Quick data structure plots
 
 #***Quick data structure plot to visualize***:
 # Plots of above for each site 
-setwd(paste0(path.fig, "/01_DataStruct"))
-pdf(file="01_DataStruct_global_2015.pdf", width=11, height=8.5)
+pdf(file="Figures/01_DataStruct/01_DataStruct_global_2015.pdf", width=11, height=8.5)
 plot(as.numeric(plantdat$start.height), log(plantdat$start.bsd + 0.5)) # correlation extremely weak as expected 
 boxplot(plantdat$start.height~plantdat$pot, ylab="Start Height") # some very suspect values
 boxplot(plantdat$start.bsd~plantdat$pot, ylab="start BSD") # some very suspect values (including zeros & NAs?)
@@ -128,8 +115,7 @@ dev.off()
 # BY SITE - split down by site for easier viewing (LOOP)
 	site <- levels(plantdat$site); site <- as.factor(site)
 	#op <- par(ask=FALSE)
-	setwd(paste0(path.fig, "/01_DataStruct"))
-	pdf(file="01_DataStruct_sites_2015.pdf", width=11, height=8.5)
+	pdf(file="Figures/01_DataStruct/01_DataStruct_sites_2015.pdf", width=11, height=8.5)
 	for (i in 1:length(site)){
 	   current <- plantdat[plantdat$site==site[i], ]
 	  plot(current$spring.total.height, current$fall.total.height, xlab="July tot stm", ylab="FALL tot stm", 
@@ -206,8 +192,7 @@ revised_data <- plantdat[ ,c("ID", "site", "plot", "pot",
 #########################################
 # Merge data frames 2014 + 2015
 # Will need to merge dataframes to get surv0, surv1, surv2, start, size1, size2 from 2014 data. 
-	setwd(path.dat); dir()
-	Data2014 <- read.csv(file="Data_2014.csv")
+	Data2014 <- read_csv("Data/Data_2014.csv")
 	Data2014 <- Data2014[ ,c("ID.x", "start", "size1", "size1_ln", "size2", "size2_ln", 
 	"surv0", "surv1", "surv2", "pFlower", "fec")]
 	# make sure not to mix up 2014 & 2015 fecundity data 
@@ -263,10 +248,9 @@ revised_data <- plantdat[ ,c("ID", "site", "plot", "pot",
 # START: final plot to verify revisions.
 	d <- revised_data
 	site <- levels(d$site); site <- as.factor(site) # study sites
-	setwd(paste0(path.fig, "/01_DataStruct"))
 
 #### GROWTH ACROSS SITES
-	pdf(file="01_Growth_2015.pdf", width=11, height=8.5)
+	pdf(file="Figures/01_DataStruct/01_Growth_2015.pdf", width=11, height=8.5)
 	par(mfrow=c(2,4),mar=c(4,4,2,1))
 	for (i in 1:length(site)){
 	   current <- d[d$site==site[i], ]
@@ -389,8 +373,7 @@ d$start <- 0.01*(d$start.height_ln) + 0.05*(d$pot) +  0.1*(d$start.height_ln*d$p
 #============================================================================================#
 # 7. START: Attach plot level variables 
 #============================================================================================#
-setwd(path.dat.raw) # where environmental data is stored
-enviro <- read.csv(file="environmental_variables.csv") # plot level enviornmental variables
+enviro <- read_csv("Data/raw_data/environmental_variables.csv") # plot level enviornmental variables
 colnames(enviro) # seems ok
 levels(enviro$SITE)[levels(enviro$SITE)=="HUNT"] <- "HUNTER"
 levels(d$site); levels(enviro$SITE) 
@@ -409,8 +392,7 @@ d <- merge(d, enviro, by.x = "Uplot", by.y = "Un.plot", all.x = TRUE, all.y = FA
 # 8. START: Attach SITE-level variables 
 #============================================================================================#
 
-setwd(path.dat.raw) # where site data is stored
-SDMsite <- read.csv(file="occ_site_preds_sept2014.csv") # site level enviornmental variables
+SDMsite <- read_csv(file="Data/raw_data/occ_site_preds_sept2014.csv") # site level enviornmental variables
 colnames(SDMsite) # seems ok
 levels(d$site); levels(SDMsite$MERGE) # HUNTER needs to be renamed to match
 levels(d$plot); levels(enviro$PLOT) # HUNTER needs to be renamed to match
@@ -452,7 +434,6 @@ d <- d[,c("ID", "site", "Uplot","surv0", "surv1", "surv2", "surv3", "surv4", "su
 #########################################
 
 # Save & check out 
-setwd(path.dat)
 dir()
-write.csv(d, file="Data_2015.csv", row.names = FALSE)
+write.csv(d, file="Data/Data_2015.csv", row.names = FALSE)
 # END
