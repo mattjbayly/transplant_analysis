@@ -1,0 +1,5 @@
+"","Model","df","logLik","AICc","delta","weight"
+"M1A.int","z + SiteID",11,-362.78,748.69,0,0.64
+"M1.Full","z + SiteID + SiteID * z",18,-355.47,749.93,1.24,0.34
+"M1B.intslope","z",4,-374.81,757.79,9.1,0.01
+"M2C.justsize","z",4,-374.81,757.79,9.1,0.01

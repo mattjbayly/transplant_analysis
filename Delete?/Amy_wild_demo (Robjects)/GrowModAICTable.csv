@@ -1,0 +1,6 @@
+"","Model","df","logLik","AICc","delta","weight"
+"M2.Full","z + Region + Year + Region:z",9,-2298.35,4614.81,0,0.916
+"M2C.noZReg","z + Region + Year",7,-2303.33,4620.73,5.921,0.047
+"M2A.noYr","z + Region + z:Region",8,-2302.69,4621.47,6.659,0.033
+"M2B.noReg","z + Year",5,-2307.96,4625.97,11.158,0.003
+"M2D.noZ","Region + Year",6,-2979.66,5971.37,1356.557,0
