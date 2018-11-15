@@ -16,7 +16,7 @@
 
 ## **INDEX**
 
-# 1. SET DIRECTORIES, LOAD LIBRARIES, LOAD PLANT DATA FILE, EXAMIN LEVELS
+# 1. LOAD LIBRARIES, LOAD PLANT DATA FILE, EXAMINE LEVELS
 # 2. Quick plots for size-specific transitions in the global dataset 
 # 3. Revise dataframe change variable names for easier coding, make binary facotrs for survivorship
 # 4. Custom individual growth tracking plots
@@ -28,24 +28,14 @@
 
 
 #============================================================================================#
-# 1. START: SET DIRECTORIES, LOAD LIBRARIES, LOAD PLANT DATA FILE, EXAMIN LEVELS
+# 1. START: LOAD LIBRARIES, LOAD PLANT DATA FILE, EXAMINE LEVELS
 #============================================================================================#
 
-### _Set directories for computer_ ###
-if(Sys.getenv("USERNAME") == "mbayly"){
-  path.set="C:/Users/mbayly/Desktop/Projects/transplant/transplant_analysis/Rcode"
-} else {
-  path.set=choose.dir()
-}
-
-setwd(path.set)
-
-source("00_SetDirectories.R") # directory script (edit for your own computer). 
-setwd(path.dat); setwd(path.dat.raw); setwd(path.code); setwd(path.fig); setwd(path.obj)
+library(tidyverse)
 
 #Open 2014 plant datafile 
 setwd(path.dat.raw)
-plantdat <- read.csv(file="plantdata.csv")
+plantdat <- read_csv("Data/raw_data/plantdata.csv")
 dim(plantdat); #colnames(plantdat)
 
 # Check whole data structure
@@ -127,8 +117,7 @@ abline(0, 1)
 # BY SITE - split down by site for easier viewing (LOOP)
 site <- levels(plantdat$site); site <- as.factor(site)
 #op <- par(ask=FALSE)
-setwd(paste0(path.fig, "/01_DataStruct"))
-pdf(file="01_DataStruct_sites.pdf", width=11, height=8.5)
+pdf(file="Figures/01_DataStruct/01_DataStruct_sites.pdf", width=11, height=8.5)
 for (i in 1:length(site)){
    current <- plantdat[plantdat$site==site[i], ]
   plot(current$MID.total.height, current$FALL.total.height, xlab="July tot stm", ylab="FALL tot stm", 
@@ -241,8 +230,7 @@ summary(revised_data$pot)
 d <- revised_data
 site <- levels(d$site); site <- as.factor(site) # study sites
 
-setwd(paste0(path.fig, "/01_DataStruct"))
-pdf(file="01_Fall growth.pdf", width=11, height=8.5)
+pdf(file="Figures/01_DataStruct/01_Fall growth.pdf", width=11, height=8.5)
 #### GROWTH TO FALL ACROSS SITES
 par(mfrow=c(2,4),mar=c(4,4,2,1))
 for (i in 1:length(site)){
@@ -255,8 +243,7 @@ dev.off(); dev.off()
 
 ##########
 #### GROWTH TO SPRING ACROSS SITES
-setwd(paste0(path.fig, "/01_DataStruct"))
-pdf(file="01_Spring growth.pdf", width=11, height=8.5)
+pdf(file="Data/01_DataStruct/01_Spring growth.pdf", width=11, height=8.5)
 par(mfrow=c(2,4),mar=c(4,4,2,1))
 for (i in 1:length(site)){
    current <- d[d$site==site[i], ]
@@ -346,8 +333,7 @@ d$start <- 0.01*(d$start.height_ln) + 0.05*(d$pot) +  0.1*(d$start.height_ln*d$p
 #============================================================================================#
 # 7. START: Attach plot level variables 
 #============================================================================================#
-setwd(path.dat.raw) # where environmental data is stored
-enviro <- read.csv(file="environmental_variables.csv") # plot level enviornmental variables
+enviro <- read_csv("Data/raw_data/environmental_variables.csv") # plot level enviornmental variables
 colnames(enviro) # seems ok
 levels(enviro$SITE)[levels(enviro$SITE)=="HUNT"] <- "HUNTER"
 levels(d$site); levels(enviro$SITE) 
@@ -366,8 +352,7 @@ d <- merge(d, enviro, by.x = "Uplot", by.y = "Un.plot", all.x = TRUE, all.y = FA
 # 8. START: Attach SITE-level variables 
 #============================================================================================#
 
-setwd(path.dat.raw) # where site data is stored
-SDMsite <- read.csv(file="occ_site_preds_sept2014.csv") # site level enviornmental variables
+SDMsite <- read_csv("Data/raw_data/occ_site_preds_sept2014.csv") # site level enviornmental variables
 colnames(SDMsite) # seems ok
 levels(d$site); levels(SDMsite$MERGE) # HUNTER needs to be renamed to match
 levels(d$plot); levels(enviro$PLOT) # HUNTER needs to be renamed to match
@@ -402,7 +387,6 @@ d$moist_score_sd <- ((d$moist_score - mean(d$moist_score, na.rm=TRUE))/sd(d$mois
 
 
 # Save & check out 
-setwd(path.dat)
 dir()
-write.csv(d, file="Data_2014.csv")
+write_csv(d, file="Data/Data_2014.csv")
 # END
