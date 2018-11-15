@@ -22,8 +22,6 @@ require(plyr)
 require(dplyr)
 require(tidyverse)
 
-# set working directory
-# setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
 
 #*******************************************************************************
 #### 1. Import and format data ###

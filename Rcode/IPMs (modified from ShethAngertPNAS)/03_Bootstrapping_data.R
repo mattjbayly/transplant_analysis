@@ -13,9 +13,6 @@ require(plyr)
 require(dplyr)
 require(tidyverse)
 
-# set working directory
-# setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
-
 #*******************************************************************************
 #### 1. bring in Matt's cardinalis transplant data and demography data ###
 #*******************************************************************************
@@ -32,7 +29,7 @@ matt_dat$Year = as.factor(matt_dat$Year)
 
 # individual-level data
 # run data prep script to clean up and import data
-source("Rcode/data_prep.R")
+source("Rcode/Data prep/data_prep.R")
 # head(demo.data)
 # head(site_fruit_count_data)
 

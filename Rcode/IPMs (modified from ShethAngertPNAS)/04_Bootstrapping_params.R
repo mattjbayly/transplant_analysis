@@ -15,8 +15,6 @@ require(lme4)
 require(glmmADMB)
 require(doParallel)
 
-# set working directory
-# setwd("/Users/ssheth/Google Drive/demography_PNAS_November2017")
 
 #*******************************************************************************
 #### 1. Preliminaries ###
