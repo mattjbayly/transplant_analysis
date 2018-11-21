@@ -1,6 +1,5 @@
 ### LOAD LIBRARIES ---------------------------
 library(tidyverse)
-library(MuMIn)
 library(cowplot)
 
 
@@ -48,6 +47,7 @@ dat <- dat %>%
 
 # vital rates
 vitals <- read_csv("Robjects/vital_rate_coefficients.csv")
+head(vitals)
 
 dat <- left_join(dat, vitals, by=c("Site"="site"))
 
