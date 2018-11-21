@@ -1040,17 +1040,18 @@ fruit.reg <- lm(fruits.siteint ~ region, data=dat)
 summary(fruit.reg)
 
 # plot vitals ~ latitude
-survlat <- ggplot(dat2, aes(lat, surv.siteint)) +
+survlat <- ggplot(dat, aes(lat, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   xlab("") + 
   xlim(43,45.5) +
   ylab("Survival") +
-  ylim(-2.5, 1.5) + 
+  ylim(-2.8, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,6,0,40), "pt")) 
-growthlat <- ggplot(dat2, aes(lat, growth.siteint)) +
+
+growthlat <- ggplot(dat, aes(lat, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -1060,7 +1061,8 @@ growthlat <- ggplot(dat2, aes(lat, growth.siteint)) +
   ylim(-2, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", plot.margin = unit(c(0,6,0,40), "pt"))
-flowerlat <- ggplot(dat2, aes(lat, flowering.siteint)) +
+
+flowerlat <- ggplot(dat, aes(lat, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -1071,7 +1073,8 @@ flowerlat <- ggplot(dat2, aes(lat, flowering.siteint)) +
   ylim(-4, 1) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", plot.margin = unit(c(0,6,0,40), "pt"))
-fruitlat <- ggplot(dat2, aes(lat, fruits.siteint)) +
+
+fruitlat <- ggplot(dat, aes(lat, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -1097,91 +1100,91 @@ save_plot("Figures/Vitals_vs_Latitude.png", vitallat3, base_width=5, base_height
 ### VITALS ~ SUITABILITY ---------------------------
 
 # long-term climate (Amy), weighted ensemble
-surv.suit <- lm(surv.siteint ~ clim_wtd_ens_longterm, data=dat2)
+surv.suit <- lm(surv.siteint ~ clim_wtd_ens_longterm, data=dat)
 summary(surv.suit)
 
-growth.suit <- lm(growth.siteint ~ clim_wtd_ens_longterm, data=dat2)
+growth.suit <- lm(growth.siteint ~ clim_wtd_ens_longterm, data=dat)
 summary(growth.suit)
 
-flower.suit <- lm(flowering.siteint ~ clim_wtd_ens_longterm, data=dat2)
+flower.suit <- lm(flowering.siteint ~ clim_wtd_ens_longterm, data=dat)
 summary(flower.suit)
 
-fruit.suit <- lm(fruits.siteint ~ clim_wtd_ens_longterm, data=dat2)
+fruit.suit <- lm(fruits.siteint ~ clim_wtd_ens_longterm, data=dat)
 summary(fruit.suit)
 
 # short-term climate (Matt), weighted ensemble
-surv.suit.matt <- lm(surv.siteint ~ clim_wtd_ens_shortterm, data=dat2)
+surv.suit.matt <- lm(surv.siteint ~ clim_wtd_ens_shortterm, data=dat)
 summary(surv.suit.matt)
 
-growth.suit.matt <- lm(growth.siteint ~ clim_wtd_ens_shortterm, data=dat2)
+growth.suit.matt <- lm(growth.siteint ~ clim_wtd_ens_shortterm, data=dat)
 summary(growth.suit.matt)
 
-flower.suit.matt <- lm(flowering.siteint ~ clim_wtd_ens_shortterm, data=dat2)
+flower.suit.matt <- lm(flowering.siteint ~ clim_wtd_ens_shortterm, data=dat)
 summary(flower.suit.matt)
 
-fruit.suit.matt <- lm(fruits.siteint ~ clim_wtd_ens_shortterm, data=dat2)
+fruit.suit.matt <- lm(fruits.siteint ~ clim_wtd_ens_shortterm, data=dat)
 summary(fruit.suit.matt)
 
 # stream, weighted ensemble
-surv.suit.stream <- lm(surv.siteint ~ stream_wtd_ens, data=dat2)
+surv.suit.stream <- lm(surv.siteint ~ stream_wtd_ens, data=dat)
 summary(surv.suit.stream)
 
-growth.suit.stream <- lm(growth.siteint ~ stream_wtd_ens, data=dat2)
+growth.suit.stream <- lm(growth.siteint ~ stream_wtd_ens, data=dat)
 summary(growth.suit.stream)
 
-flower.suit.stream <- lm(flowering.siteint ~ stream_wtd_ens, data=dat2)
+flower.suit.stream <- lm(flowering.siteint ~ stream_wtd_ens, data=dat)
 summary(flower.suit.stream)
 
-fruit.suit.stream <- lm(fruits.siteint ~ stream_wtd_ens, data=dat2)
+fruit.suit.stream <- lm(fruits.siteint ~ stream_wtd_ens, data=dat)
 summary(fruit.suit.stream)
 
 # plot vitals ~ suitability
-survsuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, surv.siteint)) +
+survsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
-  xlim(0.7, 2.1) +
+  xlim(0.15, 0.45) +
   #ylab("Survival") +
   ylab("") +
   ylim(-3, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,0,0,0), "pt"))
 
-growthsuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, growth.siteint)) +
+growthsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black") +
   xlab("") + 
-  xlim(0.7, 2.1) +
+  xlim(0.15, 0.45) +
   #ylab("Growth") +
   ylab("") +
   ylim(-2, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
 
-flowersuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, flowering.siteint)) +
+flowersuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
-  xlim(0.7, 2.1) +
+  xlim(0.15, 0.45) +
   #ylab("Flowering") +
   ylab("") +
   ylim(-4, 1) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
 
-fruitsuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, fruits.siteint)) +
+fruitsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
   xlab("Climatic suitability \n(1980-2010)") + 
-  xlim(0.7, 2.1) +
+  xlim(0.15, 0.45) +
   ylab("") +
   #ylab("Fruits") +
   #ylim(-1, 0.3) + 
@@ -1200,49 +1203,49 @@ left_label <- "Vital rate intercepts"
 vitalsuit_long3 <- ggdraw(vitalsuit_long2) + draw_label(left_label, angle=90, x=0.05, size=24)
 save_plot("Figures/Vitals_vs_WtdSuit_Clim8010.png", vitalsuit_long3, base_width=5, base_height=11)
 
-survsuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, surv.siteint)) +
+survsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
-  scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
+  #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Survival") +
   ylim(-3, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,0,0,40), "pt"))
 
-growthsuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, growth.siteint)) +
+growthsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, linetype="dashed", colour="black") +
   xlab("") + 
-  scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
+  #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Growth") +
   ylim(-2, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
 
-flowersuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, flowering.siteint)) +
+flowersuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
   xlab("") + 
-  scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
+  #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Flowering") +
   ylim(-4, 1) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
 
-fruitsuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, fruits.siteint)) +
+fruitsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
   xlab("Climatic suitability \n(2014-2015)") + 
-  scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
+  #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Fruits") +
   #ylim(-1, 0.3) + 
   scale_y_continuous(limit=c(-1.5,0.5), breaks=c(-1,0)) + 
@@ -1273,7 +1276,7 @@ left_label <- "Vital rate intercept"
 vitalsuit_clim2 <- ggdraw(vitalsuit_clim) + draw_label(left_label, angle=90, size=24, x=0.02)
 save_plot("Figures/Vitals_vs_WtdSuit_Clim.png", vitalsuit_clim2, base_width=8.5, base_height=11)
 
-survsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, surv.siteint)) +
+survsuit.stream <- ggplot(dat, aes(stream_wtd_ens, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -1284,7 +1287,7 @@ survsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, surv.siteint)) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,10,0,40), "pt"))
 
-growthsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, growth.siteint)) +
+growthsuit.stream <- ggplot(dat, aes(stream_wtd_ens, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -1295,7 +1298,7 @@ growthsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, growth.siteint)) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,0,40), "pt"))
 
-flowersuit.stream <- ggplot(dat2, aes(stream_wtd_ens, flowering.siteint)) +
+flowersuit.stream <- ggplot(dat, aes(stream_wtd_ens, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
@@ -1306,7 +1309,7 @@ flowersuit.stream <- ggplot(dat2, aes(stream_wtd_ens, flowering.siteint)) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,0,40), "pt"))
 
-fruitsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, fruits.siteint)) +
+fruitsuit.stream <- ggplot(dat, aes(stream_wtd_ens, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
   geom_point(shape=1, size=5, colour="black") +
