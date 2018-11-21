@@ -493,6 +493,36 @@ save_plot("Figures/StreamENM_vs_Latitude_IndModels.png", latsuit_ind_stream3, ba
 
 ### LAMBDA ~ SUITABILITY ------------------------
 
+# long-term climate suitability (Amy March 2018), weighted ensemble
+mod0b.ens <- lm(lambda ~ 1, data=dat)
+mod1b.ens <- lm(lambda ~ clim_wtd_ens_longterm, data=dat)
+model.sel(mod0b.ens, mod1b.ens)
+summary(mod1b.ens)
+
+# short-term climate suitability (Matt March 2018), weighted ensemble
+mod0b.ens.matt <- lm(lambda ~ 1, data=dat)
+mod1b.ens.matt <- lm(lambda ~ clim_wtd_ens_shortterm, data=dat)
+model.sel(mod0b.ens.matt, mod1b.ens.matt)
+summary(mod1b.ens.matt)
+
+# stream suitability, weighted ensemble
+mod0b.ens.stream <- lm(lambda ~ 1, data=dat)
+mod1b.ens.stream <- lm(lambda ~ stream_wtd_ens, data=dat)
+model.sel(mod0b.ens.stream, mod1b.ens.stream)
+summary(mod1b.ens.stream)
+
+# joint suitability, long-term climate + stream, weighted ensembles
+mod0b.joint.long <- lm(lambda ~ 1, data=dat)
+mod1b.joint.long <- lm(lambda ~ joint_wtd_ens_longterm, data=dat)
+model.sel(mod0b.joint.long, mod1b.joint.long)
+summary(mod1b.joint.long)
+
+# joint suitability, short-term climate + stream, weighted ensembles
+mod0b.joint.short <- lm(lambda ~ 1, data=dat)
+mod1b.joint.short <- lm(lambda ~ joint_wtd_ens_shortterm, data=dat)
+model.sel(mod0b.joint.short, mod1b.joint.short)
+summary(mod1b.joint.short)
+
 # individual models: long-term climate
 mod0b.lr <- lm(lambda ~ 1, data=dat)
 mod1b.lr <- lm(lambda ~ LRavg, data=dat)
@@ -571,7 +601,104 @@ mod1b.max.stream <- lm(lambda ~ max_stream, data=dat)
 model.sel(mod0b.max.stream, mod1b.max.stream)
 summary(mod1b.max.stream)
 
-# plot individual models
+# plot lambda vs ensemble suitability
+plot_lam_suit1 <- ggplot(dat, aes(clim_wtd_ens_longterm, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=clim_wtd_ens_longterm+clim_wtd_ens_longterm_sd, xmax=clim_wtd_ens_longterm-clim_wtd_ens_longterm_sd),height=0)+
+  geom_smooth(method=lm, se=FALSE, color="black") + 
+  xlab("Climate (1980-2010)") + 
+  #xlim(0.7,2.05) + 
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
+#ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_8010.png", width=8, height=8)
+
+plot_lam_suit2 <- ggplot(dat, aes(clim_wtd_ens_shortterm, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=clim_wtd_ens_shortterm+clim_wtd_ens_shortterm_sd, xmax=clim_wtd_ens_shortterm-clim_wtd_ens_shortterm_sd),height=0)+
+  geom_smooth(method=lm, se=FALSE, color="black") + 
+  xlab("Climate (2014-15)") + 
+  #xlim(1.5,3.1) + 
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
+#ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_1415.png", width=8, height=8)
+
+plot_lam_suit3 <- ggplot(dat, aes(stream_wtd_ens, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=stream_wtd_ens+stream_wtd_ens_sd, xmax=stream_wtd_ens-stream_wtd_ens_sd),height=0)+
+  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
+  xlab("Physical habitat") + 
+  #xlim(0.1,1.0) + 
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
+#ggplot2::ggsave("Figures/Lambda_vs_StreamENM.png", width=8, height=8)
+
+lamsuit <- plot_grid(plot_lam_suit2 + theme(legend.position = "none"), 
+                     plot_lam_suit1 + theme(legend.position = "none"), 
+                     plot_lam_suit3+ theme(legend.position = "none"), 
+                     nrow=1, labels="AUTO", label_x=0.9)
+legend <- get_legend(plot_lam_suit1)
+lamsuit2 <- plot_grid(lamsuit, legend, rel_widths = c(3, 0.3))
+bottom_label <- "ENM suitability, weighted ensemble"
+lamsuit3 <- ggdraw(lamsuit2) + draw_label(bottom_label, angle=0, y=0.05, size=24)
+save_plot("Figures/Lambda_vs_WtdSuitability_3Panel.png", lamsuit3, base_width=11, base_height=5)
+
+plot_lam_suit4 <- ggplot(dat, aes(joint_wtd_ens_longterm, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=joint_wtd_ens_longterm+joint_wtd_ens_longterm_sd, xmax=joint_wtd_ens_longterm-joint_wtd_ens_longterm_sd),height=0)+
+  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
+  xlab("Climate + habitat ensemble") + 
+  #xlim(0.1,1.0) + 
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt"))
+
+plot_lam_suit5 <- ggplot(dat, aes(joint_wtd_ens_shortterm, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_manual(values=c("black", "grey")) +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_errorbarh(aes(xmin=joint_wtd_ens_shortterm+joint_wtd_ens_shortterm_sd, xmax=joint_wtd_ens_shortterm-joint_wtd_ens_shortterm_sd),height=0)+
+  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
+  xlab("Climate + habitat ensemble") + 
+  #xlim(0.1,1.0) + 
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,6), "pt"))
+
+lamsuit2 <- plot_grid(plot_lam_suit2 + theme(legend.position = "none"), 
+                      plot_lam_suit1 + theme(legend.position = "none"), 
+                      plot_lam_suit3 + theme(legend.position = "none"),
+                      plot_lam_suit4 + theme(legend.position = "none"),
+                      nrow=2, labels="AUTO", label_x=0.9)
+legend <- get_legend(plot_lam_suit1)
+lamsuit3 <- plot_grid(lamsuit2, legend, rel_widths = c(3, 0.5))
+bottom_label <- "ENM suitability"
+lamsuit4 <- ggdraw(lamsuit3) + draw_label(bottom_label, angle=0, y=0.05, size=24)
+left_label <- expression(paste("Population growth rate (", lambda, ")"))
+lamsuit5 <- ggdraw(lamsuit4) + draw_label(left_label, angle=90, x=0.05, size=24)
+save_plot("Figures/Lambda_vs_WtdSuitability_4Panel.png", lamsuit5, base_width=10, base_height=8)
+
+# plot lambda vs individual models
 LRlam <- ggplot(dat, aes(LRavg, lambda)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -928,175 +1055,7 @@ save_plot("Figures/Vitals_vs_Latitude.png", vitallat3, base_width=5, base_height
 
 ### VITALS ~ SUITABILITY ---------------------------
 
-
-
-### CORRELATIONS AMONG VITALS ------------------------
-vitals.slim <- dat %>% dplyr::select(surv.siteint, growth.siteint, flowering.siteint, fruits.siteint, lambda)
-vitals.slim <- as.data.frame(vitals.slim)
-
-panel.cor <- function(x, y, digits=2, prefix="", cex.cor) 
-{
-  usr <- par("usr"); on.exit(par(usr)) 
-  par(usr = c(0, 1, 0, 1)) 
-  r <- abs(cor(x, y)) 
-  txt <- format(c(r, 0.123456789), digits=digits)[1] 
-  txt <- paste(prefix, txt, sep="") 
-  if(missing(cex.cor)) cex <- 0.8/strwidth(txt) 
-  
-  test <- cor.test(x,y) 
-  # borrowed from printCoefmat
-  Signif <- symnum(test$p.value, corr = FALSE, na = FALSE, 
-                   cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
-                   symbols = c("***", "**", "*", ".", " ")) 
-  
-  text(0.5, 0.5, txt, cex = cex * r) 
-  text(.8, .8, Signif, cex=cex, col=2) 
-}
-pairs(vitals.slim[1:5], lower.panel=panel.smooth, upper.panel=panel.cor)
-
-
-
-
-#### Redo key stats and plots with new weighted ensembles
-
-### linear models of suitability vs latitude
-
-
-### anova of suitability by range position
-
-
-
-
-# climate suitability (Amy March 2018)
-mod0b.ens <- lm(lambda ~ 1, data=dat)
-mod1b.ens <- lm(lambda ~ clim_wtd_ens_longterm, data=dat)
-model.sel(mod0b.ens, mod1b.ens)
-summary(mod1b.ens)
-
-# climate suitability (Matt March 2018)
-mod0b.ens.matt <- lm(lambda ~ 1, data=dat)
-mod1b.ens.matt <- lm(lambda ~ clim_wtd_ens_shortterm, data=dat)
-model.sel(mod0b.ens.matt, mod1b.ens.matt)
-summary(mod1b.ens.matt)
-
-# Stream suitability 
-mod0b.ens.stream <- lm(lambda ~ 1, data=dat)
-mod1b.ens.stream <- lm(lambda ~ stream_wtd_ens, data=dat)
-model.sel(mod0b.ens.stream, mod1b.ens.stream)
-summary(mod1b.ens.stream)
-
-# Joint suitability, long-term climate
-mod0b.joint.long <- lm(lambda ~ 1, data=dat)
-mod1b.joint.long <- lm(lambda ~ joint_wtd_ens_longterm, data=dat)
-model.sel(mod0b.joint.long, mod1b.joint.long)
-summary(mod1b.joint.long)
-
-# Joint suitability, short-term climate
-mod0b.joint.short <- lm(lambda ~ 1, data=dat)
-mod1b.joint.short <- lm(lambda ~ joint_wtd_ens_shortterm, data=dat)
-model.sel(mod0b.joint.short, mod1b.joint.short)
-summary(mod1b.joint.short)
-
-# lambda vs ensemble suitability
-plot_lam_suit1 <- ggplot(dat, aes(clim_wtd_ens_longterm, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
-  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
-  geom_errorbarh(aes(xmin=clim_wtd_ens_longterm+clim_wtd_ens_longterm_sd, xmax=clim_wtd_ens_longterm-clim_wtd_ens_longterm_sd),height=0)+
-  geom_smooth(method=lm, se=FALSE, color="black") + 
-  xlab("Climate (1980-2010)") + 
-  #xlim(0.7,2.05) + 
-  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("") +
-  theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
-#ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_8010.png", width=8, height=8)
-
-plot_lam_suit2 <- ggplot(dat, aes(clim_wtd_ens_shortterm, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
-  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
-  geom_errorbarh(aes(xmin=clim_wtd_ens_shortterm+clim_wtd_ens_shortterm_sd, xmax=clim_wtd_ens_shortterm-clim_wtd_ens_shortterm_sd),height=0)+
-  geom_smooth(method=lm, se=FALSE, color="black") + 
-  xlab("Climate (2014-15)") + 
-  #xlim(1.5,3.1) + 
-  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("") +
-  theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
-#ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_1415.png", width=8, height=8)
-
-plot_lam_suit3 <- ggplot(dat, aes(stream_wtd_ens, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
-  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
-  geom_errorbarh(aes(xmin=stream_wtd_ens+stream_wtd_ens_sd, xmax=stream_wtd_ens-stream_wtd_ens_sd),height=0)+
-  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
-  xlab("Physical habitat") + 
-  #xlim(0.1,1.0) + 
-  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("") +
-  theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
-#ggplot2::ggsave("Figures/Lambda_vs_StreamENM.png", width=8, height=8)
-
-lamsuit <- plot_grid(plot_lam_suit2 + theme(legend.position = "none"), 
-                     plot_lam_suit1 + theme(legend.position = "none"), 
-                     plot_lam_suit3+ theme(legend.position = "none"), 
-                     nrow=1, labels="AUTO", label_x=0.9)
-legend <- get_legend(plot_lam_suit1)
-lamsuit2 <- plot_grid(lamsuit, legend, rel_widths = c(3, 0.3))
-bottom_label <- "ENM suitability, weighted ensemble"
-lamsuit3 <- ggdraw(lamsuit2) + draw_label(bottom_label, angle=0, y=0.05, size=24)
-save_plot("Figures/Lambda_vs_WtdSuitability_3Panel.png", lamsuit3, base_width=11, base_height=5)
-
-plot_lam_suit4 <- ggplot(dat, aes(joint_wtd_ens_longterm, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
-  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
-  geom_errorbarh(aes(xmin=joint_wtd_ens_longterm+joint_wtd_ens_longterm_sd, xmax=joint_wtd_ens_longterm-joint_wtd_ens_longterm_sd),height=0)+
-  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
-  xlab("Climate + habitat ensemble") + 
-  #xlim(0.1,1.0) + 
-  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("") +
-  theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt"))
-
-plot_lam_suit5 <- ggplot(dat, aes(joint_wtd_ens_shortterm, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
-  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
-  geom_errorbarh(aes(xmin=joint_wtd_ens_shortterm+joint_wtd_ens_shortterm_sd, xmax=joint_wtd_ens_shortterm-joint_wtd_ens_shortterm_sd),height=0)+
-  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
-  xlab("Climate + habitat ensemble") + 
-  #xlim(0.1,1.0) + 
-  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
-  ylab("") +
-  theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,6), "pt"))
-
-lamsuit2 <- plot_grid(plot_lam_suit2 + theme(legend.position = "none"), 
-                     plot_lam_suit1 + theme(legend.position = "none"), 
-                     plot_lam_suit3 + theme(legend.position = "none"),
-                     plot_lam_suit4 + theme(legend.position = "none"),
-                     nrow=2, labels="AUTO", label_x=0.9)
-legend <- get_legend(plot_lam_suit1)
-lamsuit3 <- plot_grid(lamsuit2, legend, rel_widths = c(3, 0.5))
-bottom_label <- "ENM suitability"
-lamsuit4 <- ggdraw(lamsuit3) + draw_label(bottom_label, angle=0, y=0.05, size=24)
-left_label <- expression(paste("Population growth rate (", lambda, ")"))
-lamsuit5 <- ggdraw(lamsuit4) + draw_label(left_label, angle=90, x=0.05, size=24)
-save_plot("Figures/Lambda_vs_WtdSuitability_4Panel.png", lamsuit5, base_width=10, base_height=8)
-
-
-## linear models of vitals vs suitability
-# Amy climate
+# long-term climate (Amy), weighted ensemble
 surv.suit <- lm(surv.siteint ~ clim_wtd_ens_longterm, data=dat2)
 summary(surv.suit)
 
@@ -1109,7 +1068,7 @@ summary(flower.suit)
 fruit.suit <- lm(fruits.siteint ~ clim_wtd_ens_longterm, data=dat2)
 summary(fruit.suit)
 
-# Matt climate
+# short-term climate (Matt), weighted ensemble
 surv.suit.matt <- lm(surv.siteint ~ clim_wtd_ens_shortterm, data=dat2)
 summary(surv.suit.matt)
 
@@ -1122,7 +1081,7 @@ summary(flower.suit.matt)
 fruit.suit.matt <- lm(fruits.siteint ~ clim_wtd_ens_shortterm, data=dat2)
 summary(fruit.suit.matt)
 
-# stream
+# stream, weighted ensemble
 surv.suit.stream <- lm(surv.siteint ~ stream_wtd_ens, data=dat2)
 summary(surv.suit.stream)
 
@@ -1135,7 +1094,7 @@ summary(flower.suit.stream)
 fruit.suit.stream <- lm(fruits.siteint ~ stream_wtd_ens, data=dat2)
 summary(fruit.suit.stream)
 
-# individual vitals
+# plot vitals ~ suitability
 survsuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, surv.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1148,6 +1107,7 @@ survsuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, surv.siteint)) +
   ylim(-3, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,0,0,0), "pt"))
+
 growthsuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1160,6 +1120,7 @@ growthsuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, growth.siteint)) +
   ylim(-2, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
+
 flowersuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1172,6 +1133,7 @@ flowersuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, flowering.siteint)) +
   ylim(-4, 1) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
+
 fruitsuit.amy <- ggplot(dat2, aes(clim_wtd_ens_longterm, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1208,6 +1170,7 @@ survsuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, surv.siteint)) +
   ylim(-3, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,0,0,40), "pt"))
+
 growthsuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1219,6 +1182,7 @@ growthsuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, growth.siteint)) +
   ylim(-2, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
+
 flowersuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1230,6 +1194,7 @@ flowersuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, flowering.siteint)) 
   ylim(-4, 1) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
+
 fruitsuit.matt <- ggplot(dat2, aes(clim_wtd_ens_shortterm, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1277,6 +1242,7 @@ survsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, surv.siteint)) +
   #ylim(-2.5, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,10,0,40), "pt"))
+
 growthsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, growth.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1287,6 +1253,7 @@ growthsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, growth.siteint)) +
   ylim(-2, 1.5) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,0,40), "pt"))
+
 flowersuit.stream <- ggplot(dat2, aes(stream_wtd_ens, flowering.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1297,6 +1264,7 @@ flowersuit.stream <- ggplot(dat2, aes(stream_wtd_ens, flowering.siteint)) +
   ylim(-4, 1) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,0,40), "pt"))
+
 fruitsuit.stream <- ggplot(dat2, aes(stream_wtd_ens, fruits.siteint)) +
   geom_point(aes(colour=region), size=5) +
   scale_color_manual(values=c("black", "grey")) +
@@ -1318,4 +1286,29 @@ vitalsuit_stream2 <- plot_grid(legend, vitalsuit_stream, ncol=1, rel_heights = c
 left_label <- "Vital rate intercepts"
 vitalsuit_stream3 <- ggdraw(vitalsuit_stream2) + draw_label(left_label, angle=90, x=0.05, size=24)
 save_plot("Figures/Vitals_vs_WtdSuit_Stream.png", vitalsuit_stream3, base_width=5, base_height=11)
+
+
+### CORRELATIONS AMONG VITALS ------------------------
+vitals.slim <- dat %>% dplyr::select(surv.siteint, growth.siteint, flowering.siteint, fruits.siteint, lambda)
+vitals.slim <- as.data.frame(vitals.slim)
+
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor) 
+{
+  usr <- par("usr"); on.exit(par(usr)) 
+  par(usr = c(0, 1, 0, 1)) 
+  r <- abs(cor(x, y)) 
+  txt <- format(c(r, 0.123456789), digits=digits)[1] 
+  txt <- paste(prefix, txt, sep="") 
+  if(missing(cex.cor)) cex <- 0.8/strwidth(txt) 
+  
+  test <- cor.test(x,y) 
+  # borrowed from printCoefmat
+  Signif <- symnum(test$p.value, corr = FALSE, na = FALSE, 
+                   cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
+                   symbols = c("***", "**", "*", ".", " ")) 
+  
+  text(0.5, 0.5, txt, cex = cex * r) 
+  text(.8, .8, Signif, cex=cex, col=2) 
+}
+pairs(vitals.slim[1:5], lower.panel=panel.smooth, upper.panel=panel.cor)
 
