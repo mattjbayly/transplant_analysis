@@ -52,25 +52,7 @@ write_csv(dat, "Robjects/site.lambdas.suitability.csv")
 
 
 
-### linear models of suitability vs latitude
-## ave suitability
-# Amy's values, climate long-term
-mod0.ens <- lm(Ens ~ 1, data=dat)
-mod1.ens <- lm(Ens ~ lat, data=dat)
-model.sel(mod0.ens, mod1.ens)
-summary(mod1.ens)
-
-# Matt's values, climate short-term
-mod0.ens.matt <- lm(mean_pred_climate ~ 1, data=dat)
-mod1.ens.matt <- lm(mean_pred_climate ~ lat, data=dat)
-model.sel(mod0.ens.matt, mod1.ens.matt)
-summary(mod1.ens.matt)
-
-# Matt's values, stream
-mod0.ens.stream <- lm(mean_pred_stream ~ 1, data=dat)
-mod1.ens.stream <- lm(mean_pred_stream ~ lat, data=dat)
-model.sel(mod0.ens.stream, mod1.ens.stream)
-summary(mod1.ens.stream)
+### linear models of suitability vs latitude ------------------------
 
 ## individual ENM algorithms
 # Amy's values, climate long-term
