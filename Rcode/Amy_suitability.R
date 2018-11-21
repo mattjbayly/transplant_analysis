@@ -656,7 +656,7 @@ plot_lam_suit1 <- ggplot(dat, aes(clim_wtd_ens_longterm, lambda)) +
   ylab("") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
-#ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_8010.png", width=8, height=8)
+ggplot2::ggsave("Figures/Lambda_vs_WtdClimateENM_8010.png", width=8, height=8)
 
 plot_lam_suit2 <- ggplot(dat, aes(clim_wtd_ens_shortterm, lambda)) +
   geom_point(aes(colour=region), size=5) +
@@ -671,7 +671,7 @@ plot_lam_suit2 <- ggplot(dat, aes(clim_wtd_ens_shortterm, lambda)) +
   ylab("") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
-#ggplot2::ggsave("Figures/Lambda_vs_ClimateENM_1415.png", width=8, height=8)
+ggplot2::ggsave("Figures/Lambda_vs_WtdClimateENM_1415.png", width=8, height=8)
 
 plot_lam_suit3 <- ggplot(dat, aes(stream_wtd_ens, lambda)) +
   geom_point(aes(colour=region), size=5) +
@@ -686,7 +686,7 @@ plot_lam_suit3 <- ggplot(dat, aes(stream_wtd_ens, lambda)) +
   ylab("") +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
-#ggplot2::ggsave("Figures/Lambda_vs_StreamENM.png", width=8, height=8)
+ggplot2::ggsave("Figures/Lambda_vs_WtdStreamENM.png", width=8, height=8)
 
 lamsuit <- plot_grid(plot_lam_suit2 + theme(legend.position = "none"), 
                      plot_lam_suit1 + theme(legend.position = "none"), 
@@ -1353,3 +1353,13 @@ panel.cor <- function(x, y, digits=2, prefix="", cex.cor)
 }
 pairs(vitals.slim[1:5], lower.panel=panel.smooth, upper.panel=panel.cor)
 
+cor.test(vitals.slim[,1], vitals.slim[,2])
+cor.test(vitals.slim[,1], vitals.slim[,3])
+cor.test(vitals.slim[,1], vitals.slim[,4])
+cor.test(vitals.slim[,1], vitals.slim[,5])
+cor.test(vitals.slim[,2], vitals.slim[,3])
+cor.test(vitals.slim[,2], vitals.slim[,4])
+cor.test(vitals.slim[,2], vitals.slim[,5])
+cor.test(vitals.slim[,3], vitals.slim[,4])
+cor.test(vitals.slim[,3], vitals.slim[,5])
+cor.test(vitals.slim[,4], vitals.slim[,5])
