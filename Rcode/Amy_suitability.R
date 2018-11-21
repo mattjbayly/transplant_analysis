@@ -1,13 +1,18 @@
+### LOAD LIBRARIES ---------------------------
 library(tidyverse)
 library(MuMIn)
 library(cowplot)
+
+
+### LOAD DATA FRAMES -------------------------
 
 # lambdas
 lams <- read_csv("Robjects/site.lambdas.bootstrap.csv")
 head(lams)
 
-# suitability (redone by Amy March 2018, using final Am Nat objects)
-# ENM models applied to long-term average climate of the sites
+# long-term climate suitability 
+# redone by Amy March 2018, using final Am Nat objects
+# ENM models applied to long-term average climate of the sites, 1980-2010
 # climate values from sites from single spot
 suit <- read_csv("Data/site_preds_average.csv") %>% 
   filter(ID1=="trans") %>% droplevels() %>% 
@@ -21,17 +26,14 @@ for (i in 1:dim(dat)[1]) {
   dat$Ens[i] = mean(c(dat$LRavg[i], dat$GAMavg[i], dat$RFavg[i], dat$BRTavg[i], dat$MAXavg[i]))
 }
 
-write_csv(dat, "Robjects/site.lambdas.suitability.csv")
-
+# short-term climate suitability
 # matthew's ENM predictions (redone March 2018, using final Am Nat objects)
-# ENM models applied to experimental conditions during transplant
+# ENM models applied to experimental conditions during transplant, 2014-15
 # climate values from zonal average of all plots at a site
 matt.preds <- read_csv("Data/Site Level ENM Preds.csv")
 
 dat <- left_join(dat, matt.preds)
 check.merge <- dat %>% dplyr::select(Site, site) # good
-
-write_csv(dat, "Robjects/site.lambdas.suitability.csv")
 
 # add SD among models (for each ensemble)
 dat <- dat %>% 
@@ -43,6 +45,10 @@ dat <- dat %>%
          clim_matt_se = sd(c(glm_climate,gam_climate,rf_climate,brt_climate,max_climate))/sqrt(5),
          stream_se = sd(c(glm_stream,gam_stream,rf_stream,brt_stream,max_stream))/sqrt(5)) %>% 
   ungroup()
+
+write_csv(dat, "Robjects/site.lambdas.suitability.csv")
+
+
 
 plot(dat$Ens, dat$mean_pred_climate) #WTF
 plot(dat$LRavg, dat$glm_climate) #pretty good
@@ -1254,11 +1260,11 @@ joint <- cbind(joint_AUC_ext, joint_scores)
 joint_wtd_ens <- joint %>% 
   group_by(site) %>%
   mutate(
-    stream_wtd_ens = AUC_LR.stream*glm_stream + AUC_GAM.stream*gam_stream + AUC_RF.stream*rf_stream + AUC_BRT.stream*brt_stream + AUC_MAX.stream*max_stream,
+    stream_wtd_ens = (AUC_LR.stream*glm_stream + AUC_GAM.stream*gam_stream + AUC_RF.stream*rf_stream + AUC_BRT.stream*brt_stream + AUC_MAX.stream*max_stream)/5,
     stream_wtd_ens_sd = sd(c(AUC_LR.stream*glm_stream, AUC_GAM.stream*gam_stream, AUC_RF.stream*rf_stream, AUC_BRT.stream*brt_stream, AUC_MAX.stream*max_stream)),
-    clim_wtd_ens_shortterm = AUC_LR.clim*glm_climate + AUC_GAM.clim*gam_climate + AUC_RF.clim*rf_climate + AUC_BRT.clim*brt_climate + AUC_MAX.clim*max_climate,
+    clim_wtd_ens_shortterm = (AUC_LR.clim*glm_climate + AUC_GAM.clim*gam_climate + AUC_RF.clim*rf_climate + AUC_BRT.clim*brt_climate + AUC_MAX.clim*max_climate)/5,
     clim_wtd_ens_shortterm_sd = sd(c(AUC_LR.clim*glm_climate,AUC_GAM.clim*gam_climate,AUC_RF.clim*rf_climate,AUC_BRT.clim*brt_climate,AUC_MAX.clim*max_climate)),
-    clim_wtd_ens_longterm = AUC_LR.clim*LRavg + AUC_GAM.clim*GAMavg + AUC_RF.clim*RFavg + AUC_BRT.clim*BRTavg + AUC_MAX.clim*MAXavg,
+    clim_wtd_ens_longterm = (AUC_LR.clim*LRavg + AUC_GAM.clim*GAMavg + AUC_RF.clim*RFavg + AUC_BRT.clim*BRTavg + AUC_MAX.clim*MAXavg)/5,
     clim_wtd_ens_longterm_sd = sd(c(AUC_LR.clim*LRavg,AUC_GAM.clim*GAMavg,AUC_RF.clim*RFavg,AUC_BRT.clim*BRTavg,AUC_MAX.clim*MAXavg)),
     joint_wtd_ens_longterm = (stream_wtd_ens + clim_wtd_ens_longterm)/2,
     joint_wtd_ens_longterm_sd = sd(c(AUC_LR.clim*LRavg, AUC_GAM.clim*GAMavg, AUC_RF.clim*RFavg, AUC_BRT.clim*BRTavg, AUC_MAX.clim*MAXavg, AUC_LR.stream*glm_stream, AUC_GAM.stream*gam_stream, AUC_RF.stream*rf_stream, AUC_BRT.stream*brt_stream, AUC_MAX.stream*max_stream)),
