@@ -492,6 +492,46 @@ latsuit_ind_stream3 <- ggdraw(latsuit_ind_stream2) + draw_label(left_label, angl
 save_plot("Figures/StreamENM_vs_Latitude_IndModels.png", latsuit_ind_stream3, base_width=5, base_height=11)
 
 
+### LAMBDA ~ LATITUDE ---------------------------
+
+# linear models of lambda vs latitude
+mod0 <- lm(lambda ~ 1, data=dat)
+mod1 <- lm(lambda ~ lat, data=dat)
+mod2 <- lm(lambda ~ poly(lat, 2), data=dat)
+AIC(mod0, mod1, mod2)
+model.sel(mod0, mod1, mod2)
+summary(mod0)
+summary(mod1)
+summary(mod2)
+
+# without northernmost site
+mod0b <- lm(lambda ~ 1, data=dat[dat$lat<44.8,])
+mod1b <- lm(lambda ~ lat, data=dat[dat$lat<44.8,])
+mod2b <- lm(lambda ~ poly(lat, 2), data=dat[dat$lat<44.8,])
+AIC(mod0b, mod1b, mod2b)
+model.sel(mod0b, mod1b, mod2b)
+summary(mod0b)
+summary(mod1b)
+summary(mod2b)
+
+# anova of lambda by range position
+mod1c <- lm(lambda ~ region, data=dat)
+summary(mod1c)
+
+ggplot(dat, aes(lat, lambda)) +
+  geom_point(aes(colour=region), size=5) +
+  scale_color_grey() +
+  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=upper, ymin=lower)) + 
+  xlab(expression(paste("Latitude (", degree, "N)"))) + 
+  xlim(43, 45.2) + 
+  ylab(expression(paste("Population growth rate (", lambda, ") + 95% CI"))) +
+  geom_hline(yintercept=1, linetype="dashed") + 
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
+ggsave("Figures/Lambda_vs_Latitude.png", width=8, height=8)
+
+
 ### LAMBDA ~ SUITABILITY ------------------------
 
 # long-term climate suitability (Amy March 2018), weighted ensemble
