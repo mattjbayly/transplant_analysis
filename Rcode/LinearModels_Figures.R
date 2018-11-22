@@ -87,6 +87,8 @@ dat <- left_join(dat, joint_wtd_ens)
 # save data frame with all necessary variables for analyses
 write_csv(dat, "Robjects/site.lambdas.suitability.csv")
 
+# or, bring in data frame without re-running above
+dat <- read_csv("Robjects/site.lambdas.suitability.csv")
 
 ### SUITABILITY VS LATITUDE ----------------------------
 
@@ -247,6 +249,7 @@ plot_lat_suit1 <- ggplot(dat, aes(lat, clim_wtd_ens_longterm)) +
   xlab("") + 
   xlim(43,45.5) +
   ylab("Climate (1980-2010)") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
@@ -258,6 +261,7 @@ plot_lat_suit2 <- ggplot(dat, aes(lat, clim_wtd_ens_shortterm)) +
   xlab("") + 
   xlim(43,45.5) +
   ylab("Climate (2014-15)") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -268,6 +272,7 @@ plot_lat_suit3 <- ggplot(dat, aes(lat, stream_wtd_ens)) +
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Physical habitat") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -288,6 +293,7 @@ plot_lat_suit4 <- ggplot(dat, aes(lat, joint_wtd_ens_longterm)) +
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Climate + habitat ensemble") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -298,6 +304,7 @@ plot_lat_suit5 <- ggplot(dat, aes(lat, joint_wtd_ens_shortterm)) +
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Climate + habitat ensemble") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -310,6 +317,7 @@ LRlat <- ggplot(dat, aes(lat, LRavg)) +
   xlim(43,45.5) +
   ylab("LR") +
   ylim(0,0.8) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 GAMlat <- ggplot(dat, aes(lat, GAMavg)) +
@@ -320,6 +328,7 @@ GAMlat <- ggplot(dat, aes(lat, GAMavg)) +
   xlim(43,45.5) +
   ylab("GAM") +
   ylim(0,0.8) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 RFlat <- ggplot(dat, aes(lat, RFavg)) +
@@ -330,6 +339,7 @@ RFlat <- ggplot(dat, aes(lat, RFavg)) +
   xlim(43,45.5) +
   ylab("RF") +
   ylim(0,0.8) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 BRTlat <- ggplot(dat, aes(lat, BRTavg)) +
@@ -340,6 +350,7 @@ BRTlat <- ggplot(dat, aes(lat, BRTavg)) +
   xlim(43,45.5) +
   ylab("BRT") +
   ylim(0,0.8) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 MAXlat <- ggplot(dat, aes(lat, MAXavg)) +
@@ -350,6 +361,7 @@ MAXlat <- ggplot(dat, aes(lat, MAXavg)) +
   xlim(43,45.5) +
   ylab("MAX") +
   ylim(0,0.8) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
@@ -373,6 +385,7 @@ LRlat2 <- ggplot(dat, aes(lat, glm_climate)) +
   xlim(43,45.5) +
   ylab("LR") +
   ylim(0.7,0.95) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 GAMlat2 <- ggplot(dat, aes(lat, gam_climate)) +
@@ -383,6 +396,7 @@ GAMlat2 <- ggplot(dat, aes(lat, gam_climate)) +
   xlim(43,45.5) +
   ylab("GAM") +
   ylim(0.7,0.95) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 RFlat2 <- ggplot(dat, aes(lat, rf_climate)) +
@@ -393,6 +407,7 @@ RFlat2 <- ggplot(dat, aes(lat, rf_climate)) +
   xlim(43,45.5) +
   ylab("RF") +
   ylim(0.2,0.8) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 BRTlat2 <- ggplot(dat, aes(lat, brt_climate)) +
@@ -403,6 +418,7 @@ BRTlat2 <- ggplot(dat, aes(lat, brt_climate)) +
   xlim(43,45.5) +
   ylab("BRT") +
   ylim(0.1,0.9) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 MAXlat2 <- ggplot(dat, aes(lat, max_climate)) +
@@ -413,6 +429,7 @@ MAXlat2 <- ggplot(dat, aes(lat, max_climate)) +
   xlim(43,45.5) +
   ylab("MAX") +
   ylim(0.4,0.6) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
@@ -436,6 +453,7 @@ LRlat3 <- ggplot(dat, aes(lat, glm_stream)) +
   xlim(43,45.5) +
   ylab("LR") +
   ylim(0,0.1) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 GAMlat3 <- ggplot(dat, aes(lat, gam_stream)) +
@@ -446,6 +464,7 @@ GAMlat3 <- ggplot(dat, aes(lat, gam_stream)) +
   xlim(43,45.5) +
   ylab("GAM") +
   ylim(0,0.1) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 RFlat3 <- ggplot(dat, aes(lat, rf_stream)) +
@@ -456,6 +475,7 @@ RFlat3 <- ggplot(dat, aes(lat, rf_stream)) +
   xlim(43,45.5) +
   ylab("RF") +
   ylim(0,0.7) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 BRTlat3 <- ggplot(dat, aes(lat, brt_stream)) +
@@ -466,6 +486,7 @@ BRTlat3 <- ggplot(dat, aes(lat, brt_stream)) +
   xlim(43,45.5) +
   ylab("BRT") +
   ylim(0,0.2) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 MAXlat3 <- ggplot(dat, aes(lat, max_stream)) +
@@ -476,6 +497,7 @@ MAXlat3 <- ggplot(dat, aes(lat, max_stream)) +
   xlim(43,45.5) +
   ylab("MAX") +
   ylim(0.3,0.8) +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
@@ -527,6 +549,7 @@ ggplot(dat, aes(lat, lambda)) +
   xlim(43, 45.2) + 
   ylab(expression(paste("Population growth rate (", lambda, ") + 95% CI"))) +
   geom_hline(yintercept=1, linetype="dashed") + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
 ggsave("Figures/Lambda_vs_Latitude.png", width=8, height=8)
@@ -654,6 +677,7 @@ plot_lam_suit1 <- ggplot(dat, aes(clim_wtd_ens_longterm, lambda)) +
   #xlim(0.7,2.05) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
 ggplot2::ggsave("Figures/Lambda_vs_WtdClimateENM_8010.png", width=8, height=8)
@@ -669,6 +693,7 @@ plot_lam_suit2 <- ggplot(dat, aes(clim_wtd_ens_shortterm, lambda)) +
   #xlim(1.5,3.1) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
 ggplot2::ggsave("Figures/Lambda_vs_WtdClimateENM_1415.png", width=8, height=8)
@@ -684,6 +709,7 @@ plot_lam_suit3 <- ggplot(dat, aes(stream_wtd_ens, lambda)) +
   #xlim(0.1,1.0) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
 ggplot2::ggsave("Figures/Lambda_vs_WtdStreamENM.png", width=8, height=8)
@@ -709,6 +735,7 @@ plot_lam_suit4 <- ggplot(dat, aes(joint_wtd_ens_longterm, lambda)) +
   #xlim(0.1,1.0) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt"))
 
@@ -723,6 +750,7 @@ plot_lam_suit5 <- ggplot(dat, aes(joint_wtd_ens_shortterm, lambda)) +
   #xlim(0.1,1.0) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,6), "pt"))
 
@@ -751,6 +779,7 @@ LRlam <- ggplot(dat, aes(LRavg, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("Climate 1980") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,100), "pt"))
 GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
@@ -764,6 +793,7 @@ GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
   #ylab("Climate 1980-2010") +
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 RFlam <- ggplot(dat, aes(RFavg, lambda)) +
@@ -776,6 +806,7 @@ RFlam <- ggplot(dat, aes(RFavg, lambda)) +
   xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
@@ -789,6 +820,7 @@ BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
   scale_x_continuous(limits=c(0, 0.85), breaks=c(0.1, 0.4, 0.7)) + 
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
@@ -802,6 +834,7 @@ MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
   scale_x_continuous(limits=c(0.27, 0.5), breaks=c(0.3, 0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 
@@ -829,6 +862,7 @@ LRlam2 <- ggplot(dat, aes(glm_climate, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("Climate 2014") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,100), "pt"))
 GAMlam2 <- ggplot(dat, aes(gam_climate, lambda)) +
@@ -843,6 +877,7 @@ GAMlam2 <- ggplot(dat, aes(gam_climate, lambda)) +
   ylab("") +
   #ylab("Climate 2014-15") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 RFlam2 <- ggplot(dat, aes(rf_climate, lambda)) +
@@ -855,6 +890,7 @@ RFlam2 <- ggplot(dat, aes(rf_climate, lambda)) +
   xlim(0.2,0.85) +
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 BRTlam2 <- ggplot(dat, aes(brt_climate, lambda)) +
@@ -868,6 +904,7 @@ BRTlam2 <- ggplot(dat, aes(brt_climate, lambda)) +
   #scale_x_continuous(limits=c(0, 0.85), breaks=c(0.1, 0.4, 0.7)) + 
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 MAXlam2 <- ggplot(dat, aes(max_climate, lambda)) +
@@ -881,6 +918,7 @@ MAXlam2 <- ggplot(dat, aes(max_climate, lambda)) +
   #scale_x_continuous(limits=c(0.37, 0.55), breaks=c(0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 
@@ -907,6 +945,7 @@ LRlam3 <- ggplot(dat, aes(glm_stream, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("Habitat") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,80,100), "pt"))
 GAMlam3 <- ggplot(dat, aes(gam_stream, lambda)) +
@@ -920,6 +959,7 @@ GAMlam3 <- ggplot(dat, aes(gam_stream, lambda)) +
   ylab("") +
   #ylab("Physical habitat") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 RFlam3 <- ggplot(dat, aes(rf_stream, lambda)) +
@@ -931,6 +971,7 @@ RFlam3 <- ggplot(dat, aes(rf_stream, lambda)) +
   xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 BRTlam3 <- ggplot(dat, aes(brt_stream, lambda)) +
@@ -943,6 +984,7 @@ BRTlam3 <- ggplot(dat, aes(brt_stream, lambda)) +
   #scale_x_continuous(limits=c(0, 0.85), breaks=c(0.1, 0.4, 0.7)) + 
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 MAXlam3 <- ggplot(dat, aes(max_stream, lambda)) +
@@ -955,6 +997,7 @@ MAXlam3 <- ggplot(dat, aes(max_stream, lambda)) +
   #scale_x_continuous(limits=c(0.37, 0.55), breaks=c(0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 
@@ -1048,6 +1091,7 @@ survlat <- ggplot(dat, aes(lat, surv.siteint)) +
   xlim(43,45.5) +
   ylab("Survival") +
   ylim(-2.8, 1.5) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
@@ -1059,6 +1103,7 @@ growthlat <- ggplot(dat, aes(lat, growth.siteint)) +
   xlim(43,45.5) +
   ylab("Growth") +
   ylim(-2, 1.5) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -1071,6 +1116,7 @@ flowerlat <- ggplot(dat, aes(lat, flowering.siteint)) +
   xlim(43,45.5) +
   ylab("Flowering") +
   ylim(-4, 1) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -1082,6 +1128,7 @@ fruitlat <- ggplot(dat, aes(lat, fruits.siteint)) +
   xlim(43,45.5) +
   ylab("Fruits") +
   ylim(-1, 0.3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -1149,6 +1196,7 @@ survsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, surv.siteint)) +
   #ylab("Survival") +
   ylab("") +
   ylim(-3, 1.5) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,0,0,0), "pt"))
 
@@ -1162,6 +1210,7 @@ growthsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, growth.siteint)) +
   #ylab("Growth") +
   ylab("") +
   ylim(-2, 1.5) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
 
@@ -1175,6 +1224,7 @@ flowersuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, flowering.siteint)) +
   #ylab("Flowering") +
   ylab("") +
   ylim(-4, 1) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
 
@@ -1189,6 +1239,7 @@ fruitsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, fruits.siteint)) +
   #ylab("Fruits") +
   #ylim(-1, 0.3) + 
   scale_y_continuous(limit=c(-1.5,0.5), breaks=c(-1,0)) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
 
@@ -1212,6 +1263,7 @@ survsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, surv.siteint)) +
   #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Survival") +
   ylim(-3, 1.5) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,0,0,40), "pt"))
 
@@ -1224,6 +1276,7 @@ growthsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, growth.siteint)) +
   #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Growth") +
   ylim(-2, 1.5) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
 
@@ -1236,6 +1289,7 @@ flowersuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, flowering.siteint)) +
   #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Flowering") +
   ylim(-4, 1) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
 
@@ -1249,6 +1303,7 @@ fruitsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, fruits.siteint)) +
   ylab("Fruits") +
   #ylim(-1, 0.3) + 
   scale_y_continuous(limit=c(-1.5,0.5), breaks=c(-1,0)) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
 
@@ -1284,6 +1339,7 @@ survsuit.stream <- ggplot(dat, aes(stream_wtd_ens, surv.siteint)) +
   xlab("") + 
   ylab("Survival") +
   #ylim(-2.5, 1.5) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,10,0,40), "pt"))
 
@@ -1295,6 +1351,7 @@ growthsuit.stream <- ggplot(dat, aes(stream_wtd_ens, growth.siteint)) +
   xlab("") + 
   ylab("Growth") +
   ylim(-2, 1.5) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,0,40), "pt"))
 
@@ -1306,6 +1363,7 @@ flowersuit.stream <- ggplot(dat, aes(stream_wtd_ens, flowering.siteint)) +
   xlab("") + 
   ylab("Flowering") +
   ylim(-4, 1) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,0,40), "pt"))
 
@@ -1317,6 +1375,7 @@ fruitsuit.stream <- ggplot(dat, aes(stream_wtd_ens, fruits.siteint)) +
   xlab("Physical habitat suitability") + 
   ylab("Fruits") +
   ylim(-1, 0.3) + 
+  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,40,40), "pt"))
 
