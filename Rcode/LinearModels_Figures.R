@@ -87,8 +87,9 @@ dat <- left_join(dat, joint_wtd_ens)
 # save data frame with all necessary variables for analyses
 write_csv(dat, "Robjects/site.lambdas.suitability.csv")
 
-# or, bring in data frame without re-running above
+# or, bring in saved data frame without re-running above
 dat <- read_csv("Robjects/site.lambdas.suitability.csv")
+
 
 ### SUITABILITY VS LATITUDE ----------------------------
 
@@ -242,37 +243,37 @@ summary(mod2.max)
 
 # plot ensemble models
 plot_lat_suit1 <- ggplot(dat, aes(lat, clim_wtd_ens_longterm)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=clim_wtd_ens_longterm+clim_wtd_ens_longterm_sd, ymin=clim_wtd_ens_longterm-clim_wtd_ens_longterm_sd)) +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("Climate (1980-2010)") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
 plot_lat_suit2 <- ggplot(dat, aes(lat, clim_wtd_ens_shortterm)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=clim_wtd_ens_shortterm+clim_wtd_ens_shortterm_sd, ymin=clim_wtd_ens_shortterm-clim_wtd_ens_shortterm_sd)) +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("Climate (2014-15)") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
 
 plot_lat_suit3 <- ggplot(dat, aes(lat, stream_wtd_ens)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=stream_wtd_ens+stream_wtd_ens_sd, ymin=stream_wtd_ens-stream_wtd_ens_sd)) +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Physical habitat") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -287,81 +288,80 @@ latsuit3 <- ggdraw(latsuit2) + draw_label(left_label, angle=90, x=0.05, size=24)
 save_plot("Figures/WtdSuitability_vs_Latitude_3Panel.png", latsuit3, base_width=5, base_height=11)
 
 plot_lat_suit4 <- ggplot(dat, aes(lat, joint_wtd_ens_longterm)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=joint_wtd_ens_longterm+joint_wtd_ens_longterm_sd, ymin=joint_wtd_ens_longterm-joint_wtd_ens_longterm_sd)) +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Climate + habitat ensemble") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
 
 plot_lat_suit5 <- ggplot(dat, aes(lat, joint_wtd_ens_shortterm)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_errorbar(aes(ymax=joint_wtd_ens_shortterm+joint_wtd_ens_shortterm_sd, ymin=joint_wtd_ens_shortterm-joint_wtd_ens_shortterm_sd)) +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Climate + habitat ensemble") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt"))
 
 # plot individual models
 LRlat <- ggplot(dat, aes(lat, LRavg)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("LR") +
   ylim(0,0.8) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 GAMlat <- ggplot(dat, aes(lat, GAMavg)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("GAM") +
   ylim(0,0.8) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 RFlat <- ggplot(dat, aes(lat, RFavg)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("RF") +
   ylim(0,0.8) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 BRTlat <- ggplot(dat, aes(lat, BRTavg)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("BRT") +
   ylim(0,0.8) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 MAXlat <- ggplot(dat, aes(lat, MAXavg)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("MAX") +
   ylim(0,0.8) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
@@ -378,58 +378,57 @@ latsuit_ind_long3 <- ggdraw(latsuit_ind_long2) + draw_label(left_label, angle=90
 save_plot("Figures/LongTermClimateENM_vs_Latitude_IndModels.png", latsuit_ind_long3, base_width=5, base_height=11)
 
 LRlat2 <- ggplot(dat, aes(lat, glm_climate)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("LR") +
   ylim(0.7,0.95) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 GAMlat2 <- ggplot(dat, aes(lat, gam_climate)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("GAM") +
   ylim(0.7,0.95) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 RFlat2 <- ggplot(dat, aes(lat, rf_climate)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("RF") +
   ylim(0.2,0.8) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 BRTlat2 <- ggplot(dat, aes(lat, brt_climate)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("BRT") +
   ylim(0.1,0.9) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 MAXlat2 <- ggplot(dat, aes(lat, max_climate)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("MAX") +
   ylim(0.4,0.6) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
@@ -446,58 +445,57 @@ latsuit_ind_short3 <- ggdraw(latsuit_ind_short2) + draw_label(left_label, angle=
 save_plot("Figures/ShortTermClimateENM_vs_Latitude_IndModels.png", latsuit_ind_short3, base_width=5, base_height=11)
 
 LRlat3 <- ggplot(dat, aes(lat, glm_stream)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("LR") +
   ylim(0,0.1) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 GAMlat3 <- ggplot(dat, aes(lat, gam_stream)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("GAM") +
   ylim(0,0.1) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 RFlat3 <- ggplot(dat, aes(lat, rf_stream)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("RF") +
   ylim(0,0.7) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 BRTlat3 <- ggplot(dat, aes(lat, brt_stream)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("BRT") +
   ylim(0,0.2) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
+
 MAXlat3 <- ggplot(dat, aes(lat, max_stream)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("MAX") +
   ylim(0.3,0.8) +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.2)), axis.title=element_text(size=rel(1.8)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
@@ -540,16 +538,15 @@ summary(mod2b)
 mod1c <- lm(lambda ~ region, data=dat)
 summary(mod1c)
 
-ggplot(dat, aes(lat, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
-  geom_errorbar(aes(ymax=upper, ymin=lower)) + 
+latlam <- ggplot(dat, aes(lat, lambda)) +
+  geom_errorbar(aes(ymax=upper, ymin=lower)) +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43, 45.2) + 
   ylab(expression(paste("Population growth rate (", lambda, ") + 95% CI"))) +
   geom_hline(yintercept=1, linetype="dashed") + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
 ggsave("Figures/Lambda_vs_Latitude.png", width=8, height=8)
@@ -667,49 +664,46 @@ summary(mod1b.max.stream)
 
 # plot lambda vs ensemble suitability
 plot_lam_suit1 <- ggplot(dat, aes(clim_wtd_ens_longterm, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_errorbarh(aes(xmin=clim_wtd_ens_longterm+clim_wtd_ens_longterm_sd, xmax=clim_wtd_ens_longterm-clim_wtd_ens_longterm_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("Climate (1980-2010)") + 
   #xlim(0.7,2.05) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
 ggplot2::ggsave("Figures/Lambda_vs_WtdClimateENM_8010.png", width=8, height=8)
 
 plot_lam_suit2 <- ggplot(dat, aes(clim_wtd_ens_shortterm, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_errorbarh(aes(xmin=clim_wtd_ens_shortterm+clim_wtd_ens_shortterm_sd, xmax=clim_wtd_ens_shortterm-clim_wtd_ens_shortterm_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("Climate (2014-15)") + 
   #xlim(1.5,3.1) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
 ggplot2::ggsave("Figures/Lambda_vs_WtdClimateENM_1415.png", width=8, height=8)
 
 plot_lam_suit3 <- ggplot(dat, aes(stream_wtd_ens, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_errorbarh(aes(xmin=stream_wtd_ens+stream_wtd_ens_sd, xmax=stream_wtd_ens-stream_wtd_ens_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("Physical habitat") + 
   #xlim(0.1,1.0) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt")) 
 ggplot2::ggsave("Figures/Lambda_vs_WtdStreamENM.png", width=8, height=8)
@@ -725,32 +719,30 @@ lamsuit3 <- ggdraw(lamsuit2) + draw_label(bottom_label, angle=0, y=0.05, size=24
 save_plot("Figures/Lambda_vs_WtdSuitability_3Panel.png", lamsuit3, base_width=11, base_height=5)
 
 plot_lam_suit4 <- ggplot(dat, aes(joint_wtd_ens_longterm, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_errorbarh(aes(xmin=joint_wtd_ens_longterm+joint_wtd_ens_longterm_sd, xmax=joint_wtd_ens_longterm-joint_wtd_ens_longterm_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("Climate + habitat ensemble") + 
   #xlim(0.1,1.0) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,30), "pt"))
 
 plot_lam_suit5 <- ggplot(dat, aes(joint_wtd_ens_shortterm, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_errorbarh(aes(xmin=joint_wtd_ens_shortterm+joint_wtd_ens_shortterm_sd, xmax=joint_wtd_ens_shortterm-joint_wtd_ens_shortterm_sd),height=0)+
   geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("Climate + habitat ensemble") + 
   #xlim(0.1,1.0) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(1.85)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(6,6,40,6), "pt"))
 
@@ -769,72 +761,71 @@ save_plot("Figures/Lambda_vs_WtdSuitability_4Panel.png", lamsuit5, base_width=10
 
 # plot lambda vs individual models
 LRlam <- ggplot(dat, aes(LRavg, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("LR") + 
   xlab("") + 
   xlim(0.1,0.7) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("Climate 1980") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,100), "pt"))
+
 GAMlam <- ggplot(dat, aes(GAMavg, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("GAM") + 
   xlab("") + 
   xlim(0.1,0.7) +
   #ylab("Climate 1980-2010") +
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
+
 RFlam <- ggplot(dat, aes(RFavg, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("RF") + 
   xlab("") + 
   xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
+
 BRTlam <- ggplot(dat, aes(BRTavg, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("BRT") + 
   xlab("") + 
   #xlim(0,0.85) +
   scale_x_continuous(limits=c(0, 0.85), breaks=c(0.1, 0.4, 0.7)) + 
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
+
 MAXlam <- ggplot(dat, aes(MAXavg, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("MAX") + 
   xlab("") + 
   #xlim(0.27,0.5) +
   scale_x_continuous(limits=c(0.27, 0.5), breaks=c(0.3, 0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 
@@ -851,10 +842,10 @@ suitlam_long_ind3 <- ggdraw(suitlam_long_ind2) + draw_label(bottom_label, angle=
 save_plot("Figures/Lambda_vs_ClimateENM_8010_IndModels.png", suitlam_long_ind3, base_width=11, base_height=5)
 
 LRlam2 <- ggplot(dat, aes(glm_climate, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("LR") + 
   xlab("") + 
   #xlim(0.7, 0.95) +
@@ -862,14 +853,14 @@ LRlam2 <- ggplot(dat, aes(glm_climate, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("Climate 2014") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,100), "pt"))
+
 GAMlam2 <- ggplot(dat, aes(gam_climate, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("GAM") + 
   xlab("") + 
   #xlim(0.7, 0.95) +
@@ -877,48 +868,47 @@ GAMlam2 <- ggplot(dat, aes(gam_climate, lambda)) +
   ylab("") +
   #ylab("Climate 2014-15") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
+
 RFlam2 <- ggplot(dat, aes(rf_climate, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("RF") + 
   xlab("") + 
   xlim(0.2,0.85) +
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
+
 BRTlam2 <- ggplot(dat, aes(brt_climate, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("BRT") + 
   xlab("") + 
   #xlim(0.1,0.85) +
   #scale_x_continuous(limits=c(0, 0.85), breaks=c(0.1, 0.4, 0.7)) + 
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
+
 MAXlam2 <- ggplot(dat, aes(max_climate, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   #xlab("MAX") + 
   xlab("") + 
   xlim(0.37,0.55) +
   #scale_x_continuous(limits=c(0.37, 0.55), breaks=c(0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,0,0), "pt")) 
 
@@ -935,69 +925,68 @@ suitlam_short_ind3 <- ggdraw(suitlam_short_ind2) + draw_label(bottom_label, angl
 save_plot("Figures/Lambda_vs_ClimateENM_1415_IndModels.png", suitlam_short_ind3, base_width=11, base_height=5)
 
 LRlam3 <- ggplot(dat, aes(glm_stream, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("LR") + 
   xlim(0, 0.07) +
   #scale_x_continuous(limits=c(0.7, 0.95), breaks=c(0.7, 0.8, 0.9)) + 
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("Habitat") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,80,100), "pt"))
+
 GAMlam3 <- ggplot(dat, aes(gam_stream, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("GAM") + 
   xlim(0, 0.07) +
   #scale_x_continuous(limits=c(0.7, 0.95), breaks=c(0.7, 0.8, 0.9)) + 
   ylab("") +
   #ylab("Physical habitat") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
+
 RFlam3 <- ggplot(dat, aes(rf_stream, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("RF") + 
   xlim(0,0.7) +
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
+
 BRTlam3 <- ggplot(dat, aes(brt_stream, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("BRT") + 
   #xlim(0.1,0.85) +
   #scale_x_continuous(limits=c(0, 0.85), breaks=c(0.1, 0.4, 0.7)) + 
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
+
 MAXlam3 <- ggplot(dat, aes(max_stream, lambda)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_grey() +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("MAX") + 
   #xlim(0.37,0.55) +
   #scale_x_continuous(limits=c(0.37, 0.55), breaks=c(0.4, 0.5)) + 
   ylab("") +
   ylim(0,3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", plot.margin = unit(c(0,0,80,0), "pt")) 
 
@@ -1084,51 +1073,47 @@ summary(fruit.reg)
 
 # plot vitals ~ latitude
 survlat <- ggplot(dat, aes(lat, surv.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("Survival") +
   ylim(-2.8, 1.5) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,6,0,40), "pt")) 
 
 growthlat <- ggplot(dat, aes(lat, growth.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("Growth") +
   ylim(-2, 1.5) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", plot.margin = unit(c(0,6,0,40), "pt"))
 
 flowerlat <- ggplot(dat, aes(lat, flowering.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(43,45.5) +
   ylab("Flowering") +
   ylim(-4, 1) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", plot.margin = unit(c(0,6,0,40), "pt"))
 
 fruitlat <- ggplot(dat, aes(lat, fruits.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab(expression(paste("Latitude (", degree, "N)"))) + 
   xlim(43,45.5) +
   ylab("Fruits") +
   ylim(-1, 0.3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", plot.margin = unit(c(0,6,0,40), "pt"))
 
@@ -1187,59 +1172,55 @@ summary(fruit.suit.stream)
 
 # plot vitals ~ suitability
 survsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, surv.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(0.15, 0.45) +
   #ylab("Survival") +
   ylab("") +
   ylim(-3, 1.5) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,0,0,0), "pt"))
 
 growthsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, growth.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(0.15, 0.45) +
   #ylab("Growth") +
   ylab("") +
   ylim(-2, 1.5) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
 
 flowersuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, flowering.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   xlim(0.15, 0.45) +
   #ylab("Flowering") +
   ylab("") +
   ylim(-4, 1) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
 
 fruitsuit.amy <- ggplot(dat, aes(clim_wtd_ens_longterm, fruits.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("Climatic suitability \n(1980-2010)") + 
   xlim(0.15, 0.45) +
   ylab("") +
   #ylab("Fruits") +
   #ylim(-1, 0.3) + 
   scale_y_continuous(limit=c(-1.5,0.5), breaks=c(-1,0)) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,0), "pt"))
 
@@ -1255,55 +1236,51 @@ vitalsuit_long3 <- ggdraw(vitalsuit_long2) + draw_label(left_label, angle=90, x=
 save_plot("Figures/Vitals_vs_WtdSuit_Clim8010.png", vitalsuit_long3, base_width=5, base_height=11)
 
 survsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, surv.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Survival") +
   ylim(-3, 1.5) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,0,0,40), "pt"))
 
 growthsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, growth.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, linetype="dashed", colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Growth") +
   ylim(-2, 1.5) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
 
 flowersuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, flowering.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Flowering") +
   ylim(-4, 1) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
 
 fruitsuit.matt <- ggplot(dat, aes(clim_wtd_ens_shortterm, fruits.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("Climatic suitability \n(2014-2015)") + 
   #scale_x_continuous(limits=c(1.7, 2.8), breaks=seq(1.7, 2.8, by=0.5)) + 
   ylab("Fruits") +
   #ylim(-1, 0.3) + 
   scale_y_continuous(limit=c(-1.5,0.5), breaks=c(-1,0)) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,0,0,40), "pt"))
 
@@ -1332,50 +1309,46 @@ vitalsuit_clim2 <- ggdraw(vitalsuit_clim) + draw_label(left_label, angle=90, siz
 save_plot("Figures/Vitals_vs_WtdSuit_Clim.png", vitalsuit_clim2, base_width=8.5, base_height=11)
 
 survsuit.stream <- ggplot(dat, aes(stream_wtd_ens, surv.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   ylab("Survival") +
   #ylim(-2.5, 1.5) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(1.8)), plot.margin = unit(c(0,10,0,40), "pt"))
 
 growthsuit.stream <- ggplot(dat, aes(stream_wtd_ens, growth.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, linetype="dashed", colour="black") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   ylab("Growth") +
   ylim(-2, 1.5) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,0,40), "pt"))
 
 flowersuit.stream <- ggplot(dat, aes(stream_wtd_ens, flowering.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method="lm", se=FALSE, colour="black", linetype="dashed") +
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("") + 
   ylab("Flowering") +
   ylim(-4, 1) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,0,40), "pt"))
 
 fruitsuit.stream <- ggplot(dat, aes(stream_wtd_ens, fruits.siteint)) +
-  geom_point(aes(colour=region), size=5) +
-  scale_color_manual(values=c("black", "grey")) +
-  geom_point(shape=1, size=5, colour="black") +
   geom_smooth(method=lm, se=FALSE, linetype="dashed", color="black") + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
   xlab("Physical habitat suitability") + 
   ylab("Fruits") +
   ylim(-1, 0.3) + 
-  geom_text(aes(label=X1), size=6, nudge_x=0.01, nudge_y=0.01) + 
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="none", plot.margin = unit(c(0,10,40,40), "pt"))
 
