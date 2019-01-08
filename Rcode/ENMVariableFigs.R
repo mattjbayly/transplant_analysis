@@ -185,23 +185,10 @@ save_plot("Figures/Lambda_vs_ENMVars2.png", lamclim4, base_width=22, base_height
 
 ### SITES IN MULTIVARIATE ENVIRO SPACE -------------------------
 
-PC <- prcomp(dat[,c(9:21)], center=TRUE, scale=TRUE)
-summary(pcall)
-biplot(pcall)
-
-pcclim <- prcomp(dat[,c(9:16)], center=TRUE, scale=TRUE)
-summary(pcclim)
-biplot(pcclim)
-
-pcstream <- prcomp(dat[,c(17:21)], center=TRUE, scale=TRUE)
-summary(pcstream)
-biplot(pcstream)
-
-
 PCbiplot <- function(PC, x="PC1", y="PC2") {
   # PC being a prcomp object
-  data <- data.frame(obsnames=row.names(PC$x), PC$x)
-  plot <- ggplot(data, aes_string(x=x, y=y)) + geom_text(alpha=.4, size=3, aes(label=obsnames))
+  data <- data.frame(obsnames=row.names(as.data.frame(PC$x)), PC$x)
+  plot <- ggplot(data, aes_string(x=x, y=y)) + geom_text(size=6, aes(label=obsnames))
   #plot <- plot + geom_hline(aes(0), size=.2) + geom_vline(aes(0), size=.2)
   datapc <- data.frame(varnames=rownames(PC$rotation), PC$rotation)
   mult <- min(
@@ -212,13 +199,44 @@ PCbiplot <- function(PC, x="PC1", y="PC2") {
                       v1 = .7 * mult * (get(x)),
                       v2 = .7 * mult * (get(y))
   )
-  plot <- plot + coord_equal() + geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, vjust=1, color="red")
-  plot <- plot + geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="red")
+  plot <- plot + coord_equal() + geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, vjust=1, color="grey")
+  plot <- plot + geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey")
   plot
 }
 
-fit <- prcomp(USArrests, scale=T)
-PCbiplot(fit)
+clim.dat <- dat %>% 
+  select(ppt_seasonal=bio15_clim, 
+         ppt_drimonth=bio14_clim, 
+         ann_ppt=bio12_clim, 
+         temp_coldquart=bio11_clim, 
+         temp_warmquart=bio10_clim, 
+         temp_seasonal=bio4_clim, 
+         isotherm=bio3_clim,
+         diurn_range=bio2_clim) 
+  
+stream.dat <- dat %>% 
+  select(ann_discharge=logbio12_stream, 
+         discharge_seasonal=bio15_stream, 
+         slope=SLOPE_stream, 
+         drain_area=logDrainAre_stream, 
+         roughness=terrough20C_stream) 
 
-PCbiplot(pcclim)
+all.dat <- cbind(stream.dat, clim.dat)
+  
+pcclim <- prcomp(clim.dat, center=TRUE, scale=TRUE)
+summary(pcclim)
+biplot(pcclim)
+plotclim <- PCbiplot(pcclim)
+
+pcstream <- prcomp(stream.dat, center=TRUE, scale=TRUE)
+summary(pcstream)
+biplot(pcstream)
+plotstream <- PCbiplot(pcstream)
+
+pcall <- prcomp(all.dat, center=TRUE, scale=TRUE)
+summary(pcall)
+biplot(pcall)
+plotall <- PCbiplot(pcall)
+
+pc_plots <- plot_grid(plotclim, plotstream, plotall, ncol=1)
 
