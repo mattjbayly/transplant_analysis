@@ -185,25 +185,6 @@ save_plot("Figures/Lambda_vs_ENMVars2.png", lamclim4, base_width=22, base_height
 
 ### SITES IN MULTIVARIATE ENVIRO SPACE -------------------------
 
-PCbiplot <- function(PC, x="PC1", y="PC2") {
-  # PC being a prcomp object
-  data <- data.frame(obsnames=row.names(as.data.frame(PC$x)), PC$x)
-  plot <- ggplot(data, aes_string(x=x, y=y)) + geom_text(size=6, aes(label=obsnames))
-  #plot <- plot + geom_hline(aes(0), size=.2) + geom_vline(aes(0), size=.2)
-  datapc <- data.frame(varnames=rownames(PC$rotation), PC$rotation)
-  mult <- min(
-    (max(data[,y]) - min(data[,y])/(max(datapc[,y])-min(datapc[,y]))),
-    (max(data[,x]) - min(data[,x])/(max(datapc[,x])-min(datapc[,x])))
-  )
-  datapc <- transform(datapc,
-                      v1 = .7 * mult * (get(x)),
-                      v2 = .7 * mult * (get(y))
-  )
-  plot <- plot + coord_equal() + geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, vjust=1, color="grey")
-  plot <- plot + geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey")
-  plot
-}
-
 clim.dat <- dat %>% 
   select(ppt_seasonal=bio15_clim, 
          ppt_drimonth=bio14_clim, 
@@ -213,7 +194,7 @@ clim.dat <- dat %>%
          temp_seasonal=bio4_clim, 
          isotherm=bio3_clim,
          diurn_range=bio2_clim) 
-  
+
 stream.dat <- dat %>% 
   select(ann_discharge=logbio12_stream, 
          discharge_seasonal=bio15_stream, 
@@ -222,7 +203,31 @@ stream.dat <- dat %>%
          roughness=terrough20C_stream) 
 
 all.dat <- cbind(stream.dat, clim.dat)
-  
+
+PCbiplot <- function(PC, x="PC1", y="PC2") {
+  # PC being a prcomp object
+  region <- c(rep("in",4),rep("out",4))
+  data <- cbind(data.frame(obsnames=row.names(as.data.frame(PC$x)), PC$x),region)
+  datapc <- data.frame(varnames=rownames(PC$rotation), PC$rotation)
+  mult <- min(
+    (max(data[,y]) - min(data[,y])/(max(datapc[,y])-min(datapc[,y]))),
+    (max(data[,x]) - min(data[,x])/(max(datapc[,x])-min(datapc[,x])))
+  )
+  datapc <- transform(datapc,
+                      v1 = .7 * mult * (get(x)),
+                      v2 = .7 * mult * (get(y))
+  )
+  plot <- ggplot(data, aes_string(x=x, y=y)) + 
+    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, vjust=1, color="grey") + 
+    geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey") + 
+    geom_point(aes(fill=region), size=6, shape=21) + 
+    scale_fill_manual(values=c("grey", "white")) +
+    geom_text(size=6, aes(label=obsnames))
+  theme_classic() + 
+    theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  plot
+}
+
 pcclim <- prcomp(clim.dat, center=TRUE, scale=TRUE)
 summary(pcclim)
 biplot(pcclim)
@@ -238,5 +243,11 @@ summary(pcall)
 biplot(pcall)
 plotall <- PCbiplot(pcall)
 
-pc_plots <- plot_grid(plotclim, plotstream, plotall, ncol=1)
+pc_plots <- plot_grid(plotclim + theme(legend.position = "none"),
+                      plotstream + theme(legend.position = "none"),
+                      plotall + theme(legend.position = "none"),
+                      nrow=3, labels="AUTO", label_x=0.9)
+legend <- get_legend(plotclim)
+pc_plots2 <- plot_grid(pc_plots, legend, rel_widths = c(3, 1))
+save_plot("Figures/PCA_ENMVars.png", pc_plots2, base_width=8, base_height=11)
 
