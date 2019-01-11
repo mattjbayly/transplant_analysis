@@ -17,8 +17,49 @@ dat <- left_join(dat,streamvars,by=c("Site"="site", "ID1"="ID1", "lat"="lat", "l
 dat <- dat %>% 
   select(X1, Site, region, lat, long, lambda, upper, lower, bio15_clim, bio14_clim, bio12_clim, bio11_clim, bio10_clim, bio4_clim, bio3_clim, bio2_clim, logbio12_stream, bio15_stream, SLOPE_stream, logDrainAre_stream, terrough20C_stream)
 
+### UNIVARIATE MODELS OF LAM ~ ENM VARS -------------------------
+moda <- lm(lambda ~ bio15_clim, data=dat)
+summary(moda)
+
+modb <- lm(lambda ~ bio14_clim, data=dat)
+summary(modb)
+
+modc <- lm(lambda ~ bio12_clim, data=dat)
+summary(modc)
+
+modd <- lm(lambda ~ bio11_clim, data=dat)
+summary(modd)
+
+mode <- lm(lambda ~ bio10_clim, data=dat)
+summary(mode)
+
+modf <- lm(lambda ~ bio4_clim, data=dat)
+summary(modf)
+
+modg <- lm(lambda ~ bio3_clim, data=dat)
+summary(modg)
+
+modh <- lm(lambda ~ bio2_clim, data=dat)
+summary(modh)
+
+modi <- lm(lambda ~ logbio12_stream, data=dat)
+summary(modi)
+
+modj <- lm(lambda ~ bio15_stream, data=dat)
+summary(modj)
+
+modk <- lm(lambda ~ SLOPE_stream, data=dat)
+summary(modk)
+
+modl <- lm(lambda ~ logDrainAre_stream, data=dat)
+summary(modl)
+
+modm <- lm(lambda ~ terrough20C_stream, data=dat)
+summary(modm)
+
 ### UNIVARIATE PLOTS OF LAM ~ ENM VARS -------------------------
 a <- ggplot(dat, aes(bio15_clim, lambda)) +
+  geom_smooth(method=lm, se=FALSE, color="black") + 
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -28,9 +69,10 @@ a <- ggplot(dat, aes(bio15_clim, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,80), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
 b <- ggplot(dat, aes(bio14_clim, lambda)) +
+  geom_smooth(method=lm, se=FALSE, color="black") + 
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -40,9 +82,10 @@ b <- ggplot(dat, aes(bio14_clim, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
 c <- ggplot(dat, aes(bio12_clim, lambda)) +
+  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -52,9 +95,10 @@ c <- ggplot(dat, aes(bio12_clim, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
 d <- ggplot(dat, aes(bio11_clim, lambda)) +
+  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -64,9 +108,10 @@ d <- ggplot(dat, aes(bio11_clim, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
 e <- ggplot(dat, aes(bio10_clim, lambda)) +
+  geom_smooth(method=lm, se=FALSE, color="black") + 
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -76,7 +121,7 @@ e <- ggplot(dat, aes(bio10_clim, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,80), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
 f <- ggplot(dat, aes(bio4_clim, lambda)) +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
@@ -88,9 +133,10 @@ f <- ggplot(dat, aes(bio4_clim, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
 g <- ggplot(dat, aes(bio3_clim, lambda)) +
+  geom_smooth(method=lm, se=FALSE, color="black") + 
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -100,9 +146,22 @@ g <- ggplot(dat, aes(bio3_clim, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
-h <- ggplot(dat, aes(logbio12_stream, lambda)) +
+h <- ggplot(dat, aes(bio2_clim, lambda)) +
+  geom_smooth(method=lm, se=FALSE, color="black") + 
+  geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
+  geom_point(aes(fill=region), size=6, shape=21) +
+  scale_fill_manual(values=c("grey", "white")) +
+  geom_text(aes(label=X1), size=4) + 
+  xlab("Diurnal Range") + #clim bio2
+  #xlim() +
+  #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
+  ylab("") +
+  theme_classic() + 
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
+  
+i <- ggplot(dat, aes(logbio12_stream, lambda)) +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -112,9 +171,10 @@ h <- ggplot(dat, aes(logbio12_stream, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
-i <- ggplot(dat, aes(bio15_stream, lambda)) +
+j <- ggplot(dat, aes(bio15_stream, lambda)) +
+  geom_smooth(method=lm, se=FALSE, color="black", linetype="dashed") + 
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -124,9 +184,9 @@ i <- ggplot(dat, aes(bio15_stream, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,80,80), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
-j <- ggplot(dat, aes(SLOPE_stream, lambda)) +
+k <- ggplot(dat, aes(SLOPE_stream, lambda)) +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -136,9 +196,9 @@ j <- ggplot(dat, aes(SLOPE_stream, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,80,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
-k <- ggplot(dat, aes(logDrainAre_stream, lambda)) +
+l <- ggplot(dat, aes(logDrainAre_stream, lambda)) +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -148,9 +208,9 @@ k <- ggplot(dat, aes(logDrainAre_stream, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,80,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
-l <- ggplot(dat, aes(terrough20C_stream, lambda)) +
+m <- ggplot(dat, aes(terrough20C_stream, lambda)) +
   geom_errorbar(aes(ymax=upper, ymin=lower), width=0) + 
   geom_point(aes(fill=region), size=6, shape=21) +
   scale_fill_manual(values=c("grey", "white")) +
@@ -160,7 +220,7 @@ l <- ggplot(dat, aes(terrough20C_stream, lambda)) +
   #ylab(expression(paste("Population growth rate (", lambda, ")"))) +
   ylab("") +
   theme_classic() + 
-  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,80,0), "pt"))
+  theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,60,70), "pt"))
 
 lamclim <- plot_grid(a + theme(legend.position = "none"), 
                      b + theme(legend.position = "none"), 
@@ -170,18 +230,30 @@ lamclim <- plot_grid(a + theme(legend.position = "none"),
                      f + theme(legend.position = "none"), 
                      g + theme(legend.position = "none"),
                      h + theme(legend.position = "none"),
-                     i + theme(legend.position = "none"),
+                     nrow=2, labels="AUTO", label_x=0.9)
+
+lamstream <- plot_grid(i + theme(legend.position = "none"),
                      j + theme(legend.position = "none"),
                      k + theme(legend.position = "none"),
                      l + theme(legend.position = "none"),
-                     nrow=3, labels="AUTO", label_x=0.9)
+                     m + theme(legend.position = "none"),
+                     nrow=2, ncol=3, labels="AUTO", label_x=0.9)
+
 legend <- get_legend(a)
-lamclim2 <- plot_grid(lamclim, legend, rel_widths = c(5, 0.5))
 left_label <- expression(paste("Population growth rate (", lambda, ")"))
+bottom_label1 <- "Climate ENM variables"
+bottom_label2 <- "Stream ENM variables"
+
+lamclim2 <- plot_grid(lamclim, legend, rel_widths = c(5, 0.5))
 lamclim3 <- ggdraw(lamclim2) + draw_label(left_label, angle=90, x=0.05, size=24)
-bottom_label <- "ENM variables"
-lamclim4 <- ggdraw(lamclim3) + draw_label(bottom_label, angle=0, y=0.05, size=24)
-save_plot("Figures/Lambda_vs_ENMVars2.png", lamclim4, base_width=22, base_height=11)
+lamclim4 <- ggdraw(lamclim3) + draw_label(bottom_label1, angle=0, y=0.05, size=24)
+save_plot("Figures/Lambda_vs_ClimENMVars.png", lamclim4, base_width=22, base_height=11)
+
+lamstream2 <- plot_grid(lamstream, legend, rel_widths = c(5, 0.5))
+lamstream3 <- ggdraw(lamstream2) + draw_label(left_label, angle=90, x=0.05, size=24)
+lamstream4 <- ggdraw(lamstream3) + draw_label(bottom_label2, angle=0, y=0.05, size=24)
+save_plot("Figures/Lambda_vs_StreamENMVars.png", lamstream4, base_width=22, base_height=11)
+
 
 ### SITES IN MULTIVARIATE ENVIRO SPACE -------------------------
 
