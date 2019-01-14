@@ -3,12 +3,15 @@ library(tidyverse)
 library(cowplot)
 
 ### LOAD AND PREP DATA FRAMES -------------------------
-climvars <- read_csv("Data/climate_enm_variables.csv")
-streamvars <- read_csv("Data/stream_enm_variables.csv")
+climvars_sites <- read_csv("Data/climate_enm_variables.csv")
+streamvars_sites <- read_csv("Data/stream_enm_variables.csv")
+#climvars_presabs <- read_csv("Data/climate_enm_presabs_records.csv") #this file has bad values for bio12 and bio14 (mostly NAs, bio14 wrong scale)
+climvars_presabs <- read_csv("Data/pres.records.aug.31.csv")
+streamvars_presabs <- read_csv("Data/stream_enm_presabs_records.csv")
 lams <- read_csv("Robjects/site.lambdas.bootstrap.csv")
 
-dat <- left_join(lams,climvars, by=c("Site"="site", "ID1"="ID1", "lat"="lat", "long"="long", "el"="elev_m", "region"="region"))
-dat <- left_join(dat,streamvars,by=c("Site"="site", "ID1"="ID1", "lat"="lat", "long"="long", "el"="elev_m", "region"="region", "site_label"="site_label"))
+dat <- left_join(lams,climvars_sites, by=c("Site"="site", "ID1"="ID1", "lat"="lat", "long"="long", "el"="elev_m", "region"="region"))
+dat <- left_join(dat,streamvars_sites,by=c("Site"="site", "ID1"="ID1", "lat"="lat", "long"="long", "el"="elev_m", "region"="region", "site_label"="site_label"))
 
 # variables used in climate ENM: precip seasonality (bio15), log precip driest month (log bio14), log annual precip (log bio12), mean temp coldest quarter (bio11), log mean temp warmest quarter (log bio10), temperature seasonality (bio4), log isothermality (log bio3), mean diurnal range (bio2); these are already log-transformed as needed in input file
 
@@ -16,6 +19,15 @@ dat <- left_join(dat,streamvars,by=c("Site"="site", "ID1"="ID1", "lat"="lat", "l
 
 dat <- dat %>% 
   select(X1, Site, region, lat, long, lambda, upper, lower, bio15_clim, bio14_clim, bio12_clim, bio11_clim, bio10_clim, bio4_clim, bio3_clim, bio2_clim, logbio12_stream, bio15_stream, SLOPE_stream, logDrainAre_stream, terrough20C_stream)
+
+dat2 <- climvars_presabs %>% 
+  filter(DATASET=="herb") %>% 
+  select(Latitude, Longitude, Elevation, bio15, bio14, bio12, bio11, bio10, bio4, bio3, bio2)
+
+dat3 <- streamvars_presabs %>% 
+  filter(presabs==1) %>% 
+  select(-modeldataset, -presabs, -id, -bio12_stream)
+
 
 ### UNIVARIATE MODELS OF LAM ~ ENM VARS -------------------------
 moda <- lm(lambda ~ bio15_clim, data=dat)
@@ -257,22 +269,24 @@ save_plot("Figures/Lambda_vs_StreamENMVars.png", lamstream4, base_width=22, base
 
 ### SITES IN MULTIVARIATE ENVIRO SPACE -------------------------
 
+##PCA with transplant sites only
+
 clim.dat <- dat %>% 
-  select(ppt_seasonal=bio15_clim, 
-         ppt_drimonth=bio14_clim, 
-         ann_ppt=bio12_clim, 
-         temp_coldquart=bio11_clim, 
-         temp_warmquart=bio10_clim, 
-         temp_seasonal=bio4_clim, 
-         isotherm=bio3_clim,
-         diurn_range=bio2_clim) 
+  select(Pseas=bio15_clim, 
+         Pdri=bio14_clim, 
+         Pann=bio12_clim, 
+         Tcold=bio11_clim, 
+         Twarm=bio10_clim, 
+         Tseas=bio4_clim, 
+         Tiso=bio3_clim,
+         Tdiurn=bio2_clim) 
 
 stream.dat <- dat %>% 
-  select(ann_discharge=logbio12_stream, 
-         discharge_seasonal=bio15_stream, 
-         slope=SLOPE_stream, 
-         drain_area=logDrainAre_stream, 
-         roughness=terrough20C_stream) 
+  select(Dann=logbio12_stream, 
+         Dseas=bio15_stream, 
+         Wslope=SLOPE_stream, 
+         Warea=logDrainAre_stream, 
+         Wrough=terrough20C_stream) 
 
 all.dat <- cbind(stream.dat, clim.dat)
 
@@ -290,7 +304,7 @@ PCbiplot <- function(PC, x="PC1", y="PC2") {
                       v2 = .7 * mult * (get(y))
   )
   plot <- ggplot(data, aes_string(x=x, y=y)) + 
-    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, vjust=1, color="grey") + 
+    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, hjust="outward", vjust="outward", color="grey") + 
     geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey") + 
     geom_point(aes(fill=region), size=6, shape=21) + 
     scale_fill_manual(values=c("grey", "white")) +
@@ -301,18 +315,18 @@ PCbiplot <- function(PC, x="PC1", y="PC2") {
 }
 
 pcclim <- prcomp(clim.dat, center=TRUE, scale=TRUE)
-summary(pcclim)
-biplot(pcclim)
+#summary(pcclim)
+#biplot(pcclim)
 plotclim <- PCbiplot(pcclim)
 
 pcstream <- prcomp(stream.dat, center=TRUE, scale=TRUE)
-summary(pcstream)
-biplot(pcstream)
+#summary(pcstream)
+#biplot(pcstream)
 plotstream <- PCbiplot(pcstream)
 
 pcall <- prcomp(all.dat, center=TRUE, scale=TRUE)
-summary(pcall)
-biplot(pcall)
+#summary(pcall)
+#biplot(pcall)
 plotall <- PCbiplot(pcall)
 
 pc_plots <- plot_grid(plotclim + theme(legend.position = "none"),
@@ -320,6 +334,107 @@ pc_plots <- plot_grid(plotclim + theme(legend.position = "none"),
                       plotall + theme(legend.position = "none"),
                       nrow=3, labels="AUTO", label_x=0.9)
 legend <- get_legend(plotclim)
-pc_plots2 <- plot_grid(pc_plots, legend, rel_widths = c(3, 1))
+pc_plots2 <- plot_grid(legend, pc_plots, nrow=2, rel_heights = c(1,5,5))
 save_plot("Figures/PCA_ENMVars.png", pc_plots2, base_width=8, base_height=11)
 
+
+## PCA with presence records
+
+clim.pres <- dat2 %>% 
+  select(-Latitude, -Longitude, -Elevation, 
+         ppt_seasonal=bio15, 
+         ppt_drimonth=bio14, 
+         ann_ppt=bio12, 
+         temp_coldquart=bio11, 
+         temp_warmquart=bio10, 
+         temp_seasonal=bio4, 
+         isotherm=bio3,
+         diurn_range=bio2) 
+
+clim.all <- bind_rows(clim.dat, clim.pres)
+
+PC <- prcomp(clim.all, center=TRUE, scale=TRUE)
+#summary(pcclim2)
+#biplot(pcclim2)
+plotclim2 <- PCbiplot(pcclim2)
+
+PCbiplot.climall <- function(PC, x="PC1", y="PC2") {
+  # PC being a prcomp object
+  region <- c(rep("in",4),rep("out",4),rep(NA,431))
+  data <- cbind(data.frame(obsnames=row.names(as.data.frame(PC$x)), PC$x),region)
+  data.sites <- data %>% filter(region=="in" | region=="out")
+  datapc <- data.frame(varnames=rownames(PC$rotation), PC$rotation)
+  mult <- min(
+    (max(data[,y]) - min(data[,y])/(max(datapc[,y])-min(datapc[,y]))),
+    (max(data[,x]) - min(data[,x])/(max(datapc[,x])-min(datapc[,x])))
+  )
+  datapc <- transform(datapc,
+                      v1 = .7 * mult * (get(x)),
+                      v2 = .7 * mult * (get(y))
+  )
+  plot <- ggplot(data, aes_string(x=x, y=y)) + 
+    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, hjust="outward", vjust="outward", color="black") +  
+    geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey") + 
+    geom_point(color="grey") + 
+    geom_point(data=data.sites, aes(fill=region), size=6, shape=21) + 
+    scale_fill_manual(values=c("grey", "white")) +
+    geom_text(data=data.sites, size=6, aes(label=obsnames)) + 
+    xlim(-4.5,4.5) + 
+    ylim(-4.5,4.5) +
+    theme_classic() + 
+    theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  plot
+}
+plotclim2 <- PCbiplot.climall(pcclim2)
+
+
+stream.pres <- dat3 %>% 
+  select(-lat, -long, -elev_m,
+         ann_discharge=logbio12_stream, 
+         discharge_seasonal=bio15_stream, 
+         slope=SLOPE_stream, 
+         drain_area=logDrainAre_stream, 
+         roughness=terrough20C_stream) %>% 
+  na.omit()
+
+stream.all <- bind_rows(stream.dat, stream.pres)
+
+pcstream2 <- prcomp(stream.all, center=TRUE, scale=TRUE)
+#summary(pcstream2)
+#biplot(pcstream2)
+
+PCbiplot.streamall <- function(PC, x="PC1", y="PC2") {
+  # PC being a prcomp object
+  region <- c(rep("in",4),rep("out",4),rep(NA,243))
+  data <- cbind(data.frame(obsnames=row.names(as.data.frame(PC$x)), PC$x),region)
+  data.sites <- data %>% filter(region=="in" | region=="out")
+  datapc <- data.frame(varnames=rownames(PC$rotation), PC$rotation)
+  mult <- min(
+    (max(data[,y]) - min(data[,y])/(max(datapc[,y])-min(datapc[,y]))),
+    (max(data[,x]) - min(data[,x])/(max(datapc[,x])-min(datapc[,x])))
+  )
+  datapc <- transform(datapc,
+                      v1 = .7 * mult * (get(x)),
+                      v2 = .7 * mult * (get(y))
+  )
+  plot <- ggplot(data, aes_string(x=x, y=y)) + 
+    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, vjust="outward", hjust="outward", color="grey") + 
+    geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey") + 
+    geom_point(color="grey") + 
+    geom_point(data=data.sites, aes(fill=region), size=6, shape=21) + 
+    scale_fill_manual(values=c("grey", "white")) +
+    geom_text(data=data.sites, size=6, aes(label=obsnames)) + 
+    xlim(-4,6) + 
+    ylim(-3,3) +
+  theme_classic() + 
+    theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
+  plot
+}
+plotstream2 <- PCbiplot.streamall(pcstream2)
+
+pc_plots_pres <- plot_grid(plotclim2 + theme(legend.position = "none"),
+                      plotstream2 + theme(legend.position = "none"),
+                      nrow=1, labels="AUTO", label_x=0.9)
+legend <- get_legend(plotclim2)
+pc_plots_pres2 <- plot_grid( legend, pc_plots_pres, nrow=2, rel_heights = c(1,5))
+save_plot("Figures/PCA_ENMVars_Presences.png", pc_plots_pres2, base_width=8, base_height=5)
