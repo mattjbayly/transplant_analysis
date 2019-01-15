@@ -1,6 +1,7 @@
 ### LOAD LIBRARIES ---------------------------
 library(tidyverse)
 library(cowplot)
+library(ggrepel)
 
 ### LOAD AND PREP DATA FRAMES -------------------------
 climvars_sites <- read_csv("Data/climate_enm_variables.csv")
@@ -279,7 +280,7 @@ clim.dat <- dat %>%
          Twarm=bio10_clim, 
          Tseas=bio4_clim, 
          Tiso=bio3_clim,
-         Tdiurn=bio2_clim) 
+         Tdiur=bio2_clim) 
 
 stream.dat <- dat %>% 
   select(Dann=logbio12_stream, 
@@ -304,12 +305,14 @@ PCbiplot <- function(PC, x="PC1", y="PC2") {
                       v2 = .7 * mult * (get(y))
   )
   plot <- ggplot(data, aes_string(x=x, y=y)) + 
-    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, hjust="outward", vjust="outward", color="grey") + 
+    geom_text_repel(data=datapc, aes(x=v1, y=v2, label=varnames), hjust="outward", vjust="outward", size = 5, color="grey") +  
     geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey") + 
     geom_point(aes(fill=region), size=6, shape=21) + 
     scale_fill_manual(values=c("grey", "white")) +
-    geom_text(size=6, aes(label=obsnames))
-  theme_classic() + 
+    geom_text_repel(size=6, aes(label=obsnames)) + 
+    xlim(min(data$PC1)-1, max(data$PC1)+1) +
+    ylim(min(data$PC2)-1, max(data$PC2)+1) +
+    theme_classic() + 
     theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
   plot
 }
@@ -342,25 +345,25 @@ save_plot("Figures/PCA_ENMVars.png", pc_plots2, base_width=8, base_height=11)
 
 clim.pres <- dat2 %>% 
   select(-Latitude, -Longitude, -Elevation, 
-         ppt_seasonal=bio15, 
-         ppt_drimonth=bio14, 
-         ann_ppt=bio12, 
-         temp_coldquart=bio11, 
-         temp_warmquart=bio10, 
-         temp_seasonal=bio4, 
-         isotherm=bio3,
-         diurn_range=bio2) 
+         Pseas=bio15, 
+         Pdri=bio14, 
+         Pann=bio12, 
+         Tcold=bio11, 
+         Twarm=bio10, 
+         Tseas=bio4, 
+         Tiso=bio3,
+         Tdiur=bio2) 
 
 clim.all <- bind_rows(clim.dat, clim.pres)
 
-PC <- prcomp(clim.all, center=TRUE, scale=TRUE)
+pcclim2 <- prcomp(clim.all, center=TRUE, scale=TRUE)
 #summary(pcclim2)
 #biplot(pcclim2)
 plotclim2 <- PCbiplot(pcclim2)
 
 PCbiplot.climall <- function(PC, x="PC1", y="PC2") {
   # PC being a prcomp object
-  region <- c(rep("in",4),rep("out",4),rep(NA,431))
+  region <- c(rep("in",4),rep("out",4),rep(NA,length(PC$x)-8)) #rep(NA,431)
   data <- cbind(data.frame(obsnames=row.names(as.data.frame(PC$x)), PC$x),region)
   data.sites <- data %>% filter(region=="in" | region=="out")
   datapc <- data.frame(varnames=rownames(PC$rotation), PC$rotation)
@@ -373,14 +376,14 @@ PCbiplot.climall <- function(PC, x="PC1", y="PC2") {
                       v2 = .7 * mult * (get(y))
   )
   plot <- ggplot(data, aes_string(x=x, y=y)) + 
-    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, hjust="outward", vjust="outward", color="black") +  
-    geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey") + 
     geom_point(color="grey") + 
+    geom_text_repel(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, hjust="outward", vjust="outward", color="black") +  
+    geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75) + 
     geom_point(data=data.sites, aes(fill=region), size=6, shape=21) + 
     scale_fill_manual(values=c("grey", "white")) +
-    geom_text(data=data.sites, size=6, aes(label=obsnames)) + 
-    xlim(-4.5,4.5) + 
-    ylim(-4.5,4.5) +
+    geom_text_repel(data=data.sites, size=6, aes(label=obsnames)) + 
+    xlim(min(data$PC1)-1, max(data$PC1)+1) + 
+    ylim(min(data$PC2)-1, max(data$PC2)+1) +
     theme_classic() + 
     theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
   plot
@@ -390,11 +393,11 @@ plotclim2 <- PCbiplot.climall(pcclim2)
 
 stream.pres <- dat3 %>% 
   select(-lat, -long, -elev_m,
-         ann_discharge=logbio12_stream, 
-         discharge_seasonal=bio15_stream, 
-         slope=SLOPE_stream, 
-         drain_area=logDrainAre_stream, 
-         roughness=terrough20C_stream) %>% 
+         Dann=logbio12_stream, 
+         Dseas=bio15_stream, 
+         Wslope=SLOPE_stream, 
+         Warea=logDrainAre_stream, 
+         Wrough=terrough20C_stream) %>% 
   na.omit()
 
 stream.all <- bind_rows(stream.dat, stream.pres)
@@ -405,7 +408,7 @@ pcstream2 <- prcomp(stream.all, center=TRUE, scale=TRUE)
 
 PCbiplot.streamall <- function(PC, x="PC1", y="PC2") {
   # PC being a prcomp object
-  region <- c(rep("in",4),rep("out",4),rep(NA,243))
+  region <- c(rep("in",4),rep("out",4),rep(NA,length(PC$x)-8)) #rep(NA,243)
   data <- cbind(data.frame(obsnames=row.names(as.data.frame(PC$x)), PC$x),region)
   data.sites <- data %>% filter(region=="in" | region=="out")
   datapc <- data.frame(varnames=rownames(PC$rotation), PC$rotation)
@@ -418,14 +421,14 @@ PCbiplot.streamall <- function(PC, x="PC1", y="PC2") {
                       v2 = .7 * mult * (get(y))
   )
   plot <- ggplot(data, aes_string(x=x, y=y)) + 
-    geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, vjust="outward", hjust="outward", color="grey") + 
-    geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="grey") + 
     geom_point(color="grey") + 
+    geom_text_repel(data=datapc, aes(x=v1, y=v2, label=varnames), size = 5, vjust="outward", hjust="outward") + 
+    geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75) + 
     geom_point(data=data.sites, aes(fill=region), size=6, shape=21) + 
     scale_fill_manual(values=c("grey", "white")) +
-    geom_text(data=data.sites, size=6, aes(label=obsnames)) + 
-    xlim(-4,6) + 
-    ylim(-3,3) +
+    geom_text_repel(data=data.sites, size=6, aes(label=obsnames)) + 
+    xlim(min(data$PC1)-1, max(data$PC1)+1) + 
+    ylim(min(data$PC2)-1, max(data$PC2)+1) +
   theme_classic() + 
     theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="top", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2)), plot.margin = unit(c(0,0,0,0), "pt"))
   plot
