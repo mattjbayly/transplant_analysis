@@ -550,6 +550,7 @@ latlam <- ggplot(dat, aes(lat, lambda)) +
   theme_classic() + 
   theme(axis.text=element_text(size=rel(1.5)), axis.title=element_text(size=rel(2)), legend.position="right", legend.text=element_text(size=rel(1.5)), legend.title=element_text(size=rel(2))) 
 ggsave("Figures/Lambda_vs_Latitude.png", width=8, height=8)
+ggsave("Figures/Lambda_vs_Latitude.pdf", width=8, height=8, dpi=300)
 
 
 ### LAMBDA ~ SUITABILITY ------------------------
@@ -758,6 +759,7 @@ lamsuit4 <- ggdraw(lamsuit3) + draw_label(bottom_label, angle=0, y=0.05, size=24
 left_label <- expression(paste("Population growth rate (", lambda, ")"))
 lamsuit5 <- ggdraw(lamsuit4) + draw_label(left_label, angle=90, x=0.05, size=24)
 save_plot("Figures/Lambda_vs_WtdSuitability_4Panel.png", lamsuit5, base_width=10, base_height=8)
+save_plot("Figures/Lambda_vs_WtdSuitability_4Panel.pdf", lamsuit5, base_width=10, base_height=8, dpi=300)
 
 # plot lambda vs individual models
 LRlam <- ggplot(dat, aes(LRavg, lambda)) +
